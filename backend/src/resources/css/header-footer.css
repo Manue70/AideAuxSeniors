@@ -1,0 +1,193 @@
+/* ======================= */
+/* RESET GLOBAL             */
+/* ======================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* ======================= */
+/* HERO                     */
+/* ======================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Image entière, naturelle */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ======================= */
+/* BOUTONS HERO / HEADER / FOOTER */
+/* ======================= */
+.btn,
+.menu-btn,
+.burger-btn,
+.settings-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 0.9rem;
+}
+
+/* ======================= */
+/* HEADER                   */
+/* ======================= */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.header .logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.header-center h1 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+/* Mobile / Desktop buttons */
+.burger-btn { display: none; }
+.menu-btn.desktop { display: inline-block; }
+
+@media (max-width: 768px) {
+    .burger-btn { display: inline-block; }
+    .menu-btn.desktop { display: none; }
+    .header .logo { height: 40px; }
+    .header-center h1 { font-size: 1.5rem; }
+}
+
+
+/* FOOTER  */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #fff;
+    flex-wrap: nowrap; /* empêche tout passage à la ligne */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Footer gauche: logo + mail */
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espace entre logo et mail */
+    min-width: 0; /* pour que le flex shrink fonctionne */
+}
+
+/* Footer centre */
+.footer-center {
+    flex-grow: 1;
+    text-align: center;
+    min-width: 0; /* pour éviter débordement texte */
+    white-space: nowrap; /* texte ne se coupe pas sur plusieurs lignes */
+}
+
+/* Footer droite: bouton paramètres */
+.footer-right {
+    margin-left: 10px;
+    flex-shrink: 0; /* bouton ne se réduit pas */
+}
+
+/* Logo et texte */
+.footer .logo {
+    height: 40px;
+    flex-shrink: 0; /* ne rétrécit pas */
+}
+
+.footer-left p {
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+/* Bouton paramètres */
+.settings-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .footer {
+        flex-wrap: nowrap; /* toujours sur la même ligne */
+        justify-content: space-between;
+    }
+
+    .footer .logo {
+        height: 35px; /* un peu plus petit pour tenir */
+    }
+
+    .footer-left p {
+        font-size: 0.4rem; /* réduire texte pour tenir */
+    }
+
+    .settings-btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
+    .footer-center {
+        font-size: 0.8rem;
+    }
+}
+
+
+
+/* ======================= */
+/* THEMES DYNAMIQUES        */
+/* ======================= */
+/* Theme Clair (vert) */
+body.clair .header,
+body.clair .footer {
+    background-color: #0080FF; /* bleu pour theme vert */
+}
+
+/* Theme Bleu (dragon) */
+body.bleu .header,
+body.bleu .footer {
+    background-color: #6BAF92; /* vert pour theme bleu */
+}

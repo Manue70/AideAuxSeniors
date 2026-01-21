@@ -1,0 +1,222 @@
+/* ===========================
+   CONTENEUR GÉNÉRAL
+=========================== */
+.onboarding-content {
+    min-height: calc(100vh - 140px);
+    padding: 40px 20px;
+
+    display: grid;
+    grid-template-rows: auto auto auto;
+    row-gap: 1.5rem;
+    text-align: center;
+    position: relative;
+
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+/* ===========================
+   TITRE
+=========================== */
+.onboarding-content h1 {
+    margin-top: 40px;
+    
+    font-size: 3rem;
+}
+
+/* ===========================
+   QUESTION (centre de page)
+=========================== */
+.onboarding-question {
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+
+    /* Reset des pièges */
+    height: auto;
+    min-height: unset;
+    padding: 0;
+
+    /* Texte */
+    font-size: 1.8rem;
+    line-height: 1.4;
+    text-align: center;
+
+    /* IMPORTANT : ne pas être un conteneur flex */
+    display: block;
+}
+
+/* ===========================
+   THÈMES
+=========================== */
+body.clair .onboarding-content {
+    background-color: rgba(136, 231, 136, 0.6);
+}
+
+body.bleu .onboarding-content {
+    background-color: rgba(0, 128, 255, 0.5);
+}
+
+/* ===========================
+   BARRE DE PROGRESSION
+=========================== */
+.onboarding-progress {
+    position: absolute;
+    top: 120px;
+    left: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.progress-bar {
+    width: 35px;
+    height: 6px;
+    background-color: rgb(185, 168, 168);
+    border-radius: 10px;
+}
+
+.progress-bar.active {
+    background-color: #146341;
+}
+
+/* ===========================
+   BOUTONS OUI / NON
+=========================== */
+/* Conteneur des boutons */
+.onboarding-buttons {
+    display: flex;
+    justify-content: center;  /* centre horizontalement */
+    gap: 100px;                /* espace entre les boutons */
+    margin-bottom: 40px;
+}
+
+/* Style des boutons Oui / Non */
+.onboarding-buttons .btn-primary,
+.onboarding-buttons .btn-secondary {
+    font-size: 1.3rem;
+    width: 15rem;        /* largeur fixe / proportionnée */
+    height: 3rem;     /* hauteur fixe */
+    border-radius: 8px;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;         /* padding nul, tout est dans width/height */
+}
+
+@media (max-width: 480px) {
+    .onboarding-buttons {
+        flex-direction: column; /* empile verticalement */
+        gap: 15px;
+        align-items: center;    /* centre horizontalement les boutons */
+    }
+
+    .onboarding-buttons .btn-primary,
+    .onboarding-buttons .btn-secondary {
+        width: 60%;             /* presque toute la largeur */
+        max-width: 300px;       /* limite la largeur */
+        height: 2.2rem;         /* hauteur adaptée */
+    }
+}
+
+
+
+/* ===========================
+   BOUTON CONTINUER (FIX)
+=========================== */
+/* ===========================
+   FIX BOUTON CONTINUER (FORCE)
+=========================== */
+.onboarding-continue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.onboarding-continue .btn-primary {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    width: 250px;        /* largeur fixe pour un bouton plus long */
+    height: 45px;        /* hauteur proportionnée */
+    padding: 0;          /* padding nul, tout est dans width/height */
+    font-size: 1.3rem;
+
+    border-radius: 8px;
+}
+
+/* ===========================
+   FORMULAIRE (PAGE 4)
+=========================== */
+.onboarding-form {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 14px;
+    padding: 30px 25px;
+    width: 100%;
+    max-width: 420px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    margin:-10px auto 30px ;
+}
+
+/* Champs */
+.onboarding-form .field {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.onboarding-form label {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.onboarding-form input {
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Bouton Ajouter */
+.onboarding-form button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 26px;
+    font-size: 1.2rem;
+}
+
+/* themes du formulaire*/
+body.bleu .onboarding-form {
+    background-color: rgba(240, 248, 255, 0.95);
+}
+
+body.clair .onboarding-form {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.onboarding-header {
+    margin-bottom: 4rem; /* espace sous le titre */
+}
+
+
+
+/* ===========================
+   BOUTONS GÉNÉRAUX
+=========================== */
+.btn-primary,
+.btn-secondary {
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background-color: #6BAF92;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    opacity: 0.9;
+}

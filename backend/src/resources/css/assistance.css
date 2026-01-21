@@ -1,0 +1,222 @@
+.assistant-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: none; /* laisse le body gérer le thème clair/bleu */
+    overflow: hidden;
+}
+
+/* Thèmes */
+body.clair .assistant-hero {
+    background-color: rgba(136, 231, 136, 0.6);
+}
+
+body.bleu .assistant-hero {
+    background-color: rgba(0, 128, 255, 0.5);
+}
+
+/* Overlay */
+.assistant-hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.2);
+    z-index: 0;
+}
+
+/* Avatar central en fond */
+.assistant-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-width: 80%;
+    opacity: 0.5;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    z-index: 0;
+}
+
+/* Conteneur chat (scrollable) */
+.assistant-content {
+    position: relative;
+    z-index: 1; /* par-dessus avatar fond */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Titre */
+.assistant-content h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Bulles assistant (gauche) */
+.chat-message.assistant {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    justify-content: flex-start;
+    animation: fadeInUp 0.3s forwards;
+}
+
+.chat-message.assistant .chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.chat-message.assistant .chat-bubble {
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 15px 15px 15px 0;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    max-width: 75%;
+    text-align: left;
+}
+
+
+.chat-message.assistant .chat-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; 
+    flex-shrink: 0;  
+}
+
+ /* Bulles utilisateur à droite */
+.chat-message.user {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-direction: row-reverse; /* avatar à droite */
+    animation: fadeInUp 0.3s forwards;
+    align-self: flex-end; /* <-- IMPORTANT pour pousser toute la bulle à droite */
+}
+
+.chat-message.user .chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.chat-message.user .chat-bubble {
+    background-color: rgba(0,128,255,0.9);
+    color: white;
+    border-radius: 15px 15px 15px 0;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    max-width: 75%;
+    text-align: right; /* texte aligné à droite */
+}
+
+.chat-message.user .chat-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; 
+    flex-shrink: 0;  
+}
+
+
+/* Input utilisateur fixe en bas */
+.chat-input {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    z-index: 2;
+    background: rgba(255,255,255,0.3); /* semi-transparent */
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 0 auto 10px auto;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.chat-input button {
+    padding: 12px 16px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #45a049;
+}
+
+/* Conteneur des boutons */
+.chat-actions {
+    position: fixed;        /* fixe à l'écran */
+    bottom: 80px;           /* légèrement au-dessus du footer */
+    right: 20px;            /* à droite de l'écran */
+    display: flex;
+    flex-direction: column; /* empile les boutons verticalement */
+    gap: 10px;              /* espace entre les boutons */
+    z-index: 1000;          /* au-dessus du chat */
+}
+
+/* Style des boutons */
+.chat-actions button {
+    background-color: #e48023; 
+    color: #fff;              
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(160, 6, 6, 0.2);
+    transition: background-color 0.2s;
+}
+
+/* Hover léger */
+.chat-actions button:hover {
+    background-color: #0056b3; /* bleu plus foncé au survol */
+}
+
+
+/* Animation apparition bulles */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive mobile */
+@media (max-width: 480px) {
+    .assistant-bg {
+        width: 220px;
+    }
+    .chat-message .chat-avatar {
+        width: 35px;
+        height: 35px;
+    }
+    .chat-message .chat-bubble,
+    .chat-input input,
+    .chat-input button {
+        font-size: 1rem;
+        padding: 10px 14px;
+    }
+}
+

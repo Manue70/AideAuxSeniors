@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: senioraide_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/var/www/html/src
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: senioraide
+      DB_USERNAME: user
+      DB_PASSWORD: password
+
+  db:
+    image: postgres:15
+    container_name: pg_senioraide
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: senioraide
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:

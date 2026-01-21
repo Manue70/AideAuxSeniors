@@ -1,0 +1,468 @@
+/* ============================= */
+/* PAGES INFO : Info légales / Confidentialité / Cookies /Contacts */
+/* ============================= */
+
+
+.info-page {
+    padding: 50px 20px;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* TITRE */
+.info-title {
+    font-size: 2.4rem;  /* un peu plus grand */
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* CONTAINER TEXTE */
+.info-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 18px;
+    max-width: 650px;
+    width: 90%;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    margin-bottom: 40px;
+    line-height: 1.9;
+    font-size: 1.3rem; /* texte plus lisible */
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Effet hover léger sur le container */
+.info-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.25);
+}
+
+/* BOUTONS */
+
+.info-buttons {
+    display: flex;
+    gap: 25px;
+    justify-content: center;  /* centre horizontalement */
+    align-items: center;      /* centre verticalement */
+    height: auto;             /* laisse le conteneur s’adapter à la hauteur des boutons */
+    flex-wrap: nowrap;        /* tous les boutons sur la même ligne */
+    margin-bottom: 40px;
+}
+
+.info-buttons .btn {
+    width: 250px;
+    height: 80px;
+    display: flex;
+    align-items: center;      /* centre le texte verticalement */
+    justify-content: center;  /* centre le texte horizontalement */
+    font-size: 1.3rem;
+    border-radius: 12px;
+    margin: 0;                /* aucun margin qui décale */
+}
+
+
+
+/* Bouton primaire */
+.info-buttons .btn-primary {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.info-buttons .btn-primary:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Bouton secondaire */
+.info-buttons .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.info-buttons .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  
+}
+
+/* MODALE SUPPRESSION */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-danger {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #b71c1c;
+}
+
+/* MESSAGE DE CONFIRMATION */
+.delete-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d32f2f;
+    color: white;
+    padding: 25px 40px;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+/* THEME DYNAMIQUE */
+.info-page.clair {
+    background-color: rgba(136, 231, 136, 0.6);
+}
+
+.info-page.bleu {
+    background-color: rgba(0, 128, 255, 0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .info-container {
+        width: 95%;
+        padding: 25px;
+        font-size: 1.2rem;
+    }
+
+    .info-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* TITRE */
+.info-title {
+    font-size: 2.4rem;  /* un peu plus grand */
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* CONTAINER TEXTE */
+.info-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 18px;
+    max-width: 650px;
+    width: 100%;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    margin-bottom: 40px;
+    margin-top: 40px;
+    line-height: 1.9;
+    font-size: 1.3rem; /* texte plus lisible */
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Effet hover léger sur le container */
+.info-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.25);
+}
+
+/* BOUTONS */
+.info-buttons {
+    display: flex;
+    gap: 25px;
+    justify-content: center;  /* centre les boutons horizontalement */
+    align-items: center;      /* centre les boutons verticalement */
+    flex-wrap: wrap;          /* si l’écran est petit, les boutons passent en ligne dessous */
+    margin-bottom: 40px;
+}
+
+.info-buttons .btn {
+    flex: 1 1 250px;       /* les boutons prennent la même largeur */
+    max-width: 250px;      /* largeur max */
+    height: 80px;          /* même hauteur pour tous */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+/* Bouton primaire */
+.info-buttons .btn-primary {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.info-buttons .btn-primary:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Bouton secondaire */
+.info-buttons .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.info-buttons .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  
+}
+
+.info-contacts {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 18px;
+    max-width: 650px;
+    width: 90%;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    margin-bottom: 60px;
+    line-height: 1.9;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+/* TABLE CONTACTS D'URGENCE */
+.contacts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.25rem;
+}
+
+.contacts-table thead {
+    background-color: rgba(76, 175, 80, 0.85);
+    color: white;
+}
+
+.contacts-table th,
+.contacts-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.contacts-table th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.contacts-table tbody tr:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* Coins arrondis */
+.contacts-table thead th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.contacts-table thead th:last-child {
+    border-top-right-radius: 12px;
+}
+
+/* Liens de contact */
+.contact-link {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+/* URGENCE 112 */
+.contact-link.urgent {
+    color: #d32f2f;
+    font-weight: 700;
+    font-size: 1.35rem;
+}
+
+.contacts-table tbody tr:first-child {
+    background-color: rgba(211, 47, 47, 0.08);
+}
+
+
+@media (max-width: 768px) {
+    .contacts-table,
+    .contacts-table thead,
+    .contacts-table tbody,
+    .contacts-table th,
+    .contacts-table td,
+    .contacts-table tr {
+        display: block;
+    }
+
+    .contacts-table thead {
+        display: none;
+    }
+
+    .contacts-table tr {
+        margin-bottom: 20px;
+        background: rgba(255,255,255,0.95);
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    .contacts-table td {
+        border: none;
+        padding: 10px 0;
+        font-size: 1.2rem;
+    }
+
+    .contacts-table td::before {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        color: #4CAF50;
+    }
+
+    .contacts-table td:nth-child(1)::before {
+        content: "Nom";
+    }
+
+    .contacts-table td:nth-child(2)::before {
+        content: "Contact";
+    }
+}
+/* MODALE suppression compte */
+.modal {
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* cachée par défaut */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    
+}
+
+.modal-content {
+    background-color:rgba(6, 124, 6, 1);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: solid 8px red;
+}
+
+/* Conteneur des boutons dans la modale */
+.modal .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 20px; /* espace entre les boutons */
+}
+
+/* Boutons uniquement dans la modale */
+.modal .btn-danger,
+.modal .btn-secondary {
+    width: 120px; /* largeur fixe pour uniformiser */
+    padding: 12px 0; /* hauteur uniforme */
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Danger */
+.modal .btn-danger {
+    background-color: #d32f2f;
+    color: #fff;
+}
+.modal .btn-danger:hover {
+    background-color: #b71c1c;
+}
+
+/* Secondaire */
+.modal .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+.modal .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Si tu veux que le bouton "Supprimer mon compte" principal soit un peu plus haut que les autres boutons */
+.delete-account-container {
+    margin-bottom: 40px; /* augmente l’espace sous le bouton */
+}
+
+
+/* THEME DYNAMIQUE */
+.info-page.clair {
+    background-color: rgba(136, 231, 136, 0.6);
+}
+
+.info-page.bleu {
+    background-color: rgba(0, 128, 255, 0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .info-container {
+        width: 95%;
+        padding: 25px;
+        font-size: 1.2rem;
+    }
+
+    .info-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

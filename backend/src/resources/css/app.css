@@ -1,0 +1,498 @@
+@import "./header-footer.css" ;
+@import "./admin.css" ;
+@import "./assistance.css" ;
+@import "./dashboard.css" ;
+@import "./info-pages.css" ;
+@import "./login-page.css" ;
+@import "./onboarding.css" ;
+@import "./reminders.css" ;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main content {
+    flex: 1;
+}
+/* HERO */
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* IMAGE */
+.hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* IMPORTANT pour desktop */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* OVERLAY COMMUN */
+.hero .overlay {
+    position: absolute;
+    inset: 0;
+   
+}
+
+/* THEME VERT */
+.hero.clair .overlay {
+    background: rgba(136, 231, 136, 0.6); /* #88E788 à 60% */
+}
+
+/* THEME BLEU */
+.hero.bleu .overlay {
+    background: rgba(0, 128, 255, 0.5); /* #0080FF à 50% */
+}
+
+/* CONTENU */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* BOUTONS */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+/* ============================= */
+/* MODALE MENU */
+/* ============================= */
+.menu-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center; /* centre horizontalement */
+    align-items: flex-start; /* commence en haut */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5000;
+    transition: opacity 0.3s ease;
+}
+
+.menu-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+.menu-panel {
+    position: relative;
+    background-color: #6BAF92; /* couleur inchangée */
+    border-radius: 12px;
+    padding: 30px; /* un peu plus de padding pour respirer */
+    width: 500px;  /* largeur augmentée */
+    max-width: 90%; /* responsive sur petit écran */
+    margin-top: 80px; /* conserve le décalage depuis le haut */
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* plus d’espace entre les éléments */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Optionnel : responsive pour mobile */
+@media (max-width: 600px) {
+    .menu-panel {
+        width: 90%;  /* prend presque tout l’écran */
+        padding: 20px;
+    }
+}
+
+
+/* ============================= */
+/* PAGE PARAMÈTRES - LAYOUT & THEME */
+/* ============================= */
+
+.settings-page {
+    padding: 40px 20px;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* TITRE */
+.settings-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+}
+
+/* GRID pour les 2 premières cartes */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne desktop */
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+    justify-items: center;
+    margin:auto;
+}
+
+/* DIV pour la 3ème carte centrée */
+.settings-grid-single {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+/* CARDS */
+.settings-card {
+    background-color: rgba(234, 248, 234, 0.95);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 350px;
+
+    width: 400px;       /* largeur confortable desktop */
+    max-width: 90%;     /* responsive mobile */
+}
+
+/* Troisième card */
+.settings-card.full-width {
+    width: 400px;       /* même largeur que les autres */
+}
+
+/* TITRES DES CARDS */
+.settings-card h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* CHAMPS INPUT */
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.field input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+}
+
+/* OPTIONS (Oui / Non / Boutons) */
+.option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.toggle button,
+.option button,
+.option a.btn {
+    padding: 10px 16px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* BOUTON DECONNEXION EN BAS */
+.settings-logout {
+    margin-top: 40px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    background-color: #c0392b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* MODALE */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    /* 1 carte par ligne */
+    .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .settings-grid-single {
+        justify-content: center;
+    }
+
+    .settings-card {
+        width: 90%;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
+/* THEMES DYNAMIQUES */
+.settings-page.clair {
+    background-color: rgba(136, 231, 136, 0.6);
+}
+
+.settings-page.bleu {
+    background-color: rgba(0, 128, 255, 0.5);
+}
+
+
+
+
+/* ================================= */
+/*MODALE MEDICAMENT */
+
+/* Fond de la modale */
+#modal-medicament {
+   
+    display: none; /* caché par défaut */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6); 
+    display: flex;
+    justify-content: center;
+    align-items: center; /* centre verticalement */
+    padding: 20px;
+}
+
+/* Contenu de la modale */
+#modal-medicament .modal-content {
+
+    background-color: #6BAF92;
+    width: 100%;
+    max-width: 650px; /* plus large pour personnes âgées */
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    position: relative;
+    max-height: 90%;
+    overflow-y: auto;
+    font-size: 1.3rem; /* plus lisible */
+}
+
+/* Croix pour fermer */
+#modal-medicament .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: black;
+}
+
+/* Inputs texte */
+#modal-medicament input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Ligne des prises */
+/* Ligne horaire */
+#modal-medicament .ligne-prise {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+#modal-medicament .ligne-prise label {
+    font-size: 1.2rem;
+    flex: 1;
+}
+
+#modal-medicament .ligne-prise input[type="time"] {
+    width: 120px;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Boutons Oui/Non */
+#modal-medicament .btn-prise {
+    width: 120px;
+    height: 50px;
+    font-size: 1.5rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+#modal-medicament .btn-prise[data-value="oui"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#modal-medicament .btn-prise[data-value="non"] {
+    background-color: #F44336;
+    color: white;
+}
+
+#modal-medicament .btn-prise.active {
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.2);
+}
+
+/* Boutons du bas */
+#modal-medicament .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+    border-radius: 15px;
+}
+
+#modal-medicament .modal-buttons .btn {
+    width: 48%;
+    height: 55px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+}
+
+#modal-medicament .modal-buttons {
+    display: flex;
+    justify-content: center; /* centre horizontalement */
+    gap: 20px;               /* espace entre les boutons */
+    flex-wrap: wrap;          /* sur mobile, ils peuvent passer à la ligne */
+    margin-top: 30px;
+}
+
+/* Boutons */
+#modal-medicament .modal-buttons .btn-primary,
+#modal-medicament .modal-buttons .btn-secondary {
+    width: 200px;       /* largeur fixe pour harmoniser */
+    height: 65px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background-color:rgba(0, 128, 255, 0.9) ;
+}
+
+.alert {
+    padding: 12px 16px;
+    margin: 16px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.alert-success {
+    background-color: #e6f8ed;
+    color: #1f7a3f;
+    border: 1px solid #9adbb7;
+}
+
+.alert-error {
+    background-color: #fdecea;
+    color: #a61b1b;
+    border: 1px solid #f5a3a3;
+}
+
