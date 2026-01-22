@@ -18,7 +18,7 @@ RUN a2enmod rewrite
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
-COPY src/ .
+COPY backend/src/ .
 
 # Dépendances Laravel
 RUN composer install --no-dev --optimize-autoloader
@@ -34,4 +34,5 @@ RUN php artisan view:clear
 
 EXPOSE 80
 CMD ["apache2-foreground"]
+
 
