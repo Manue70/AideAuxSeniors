@@ -1,6 +1,18 @@
 import './bootstrap';
+import '../css/app.css';
+import '../css/login-page.css';
+import '../css/onboarding.css';
+import '../css/dashboard.css';
+import '../css/info-pages.css';
+import '../css/reminders.css';
+import '../css/assistance.css';
+import '../css/admin.css';
+import '../css/header-footer.css';
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
+
 
     // =========================
     // MENU MODAL
