@@ -23,6 +23,10 @@ COPY backend/src/ .
 # Dépendances Laravel
 RUN composer install --no-dev --optimize-autoloader
 
+# Installer Node modules et build frontend
+RUN npm install
+RUN npm run build
+
 # Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
