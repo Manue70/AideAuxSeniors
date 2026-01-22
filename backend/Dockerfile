@@ -1,3 +1,12 @@
+# Étape 1 : builder frontend
+FROM node:20 AS node-builder
+WORKDIR /app
+COPY backend/src/package*.json ./
+RUN npm install
+COPY backend/src/resources ./resources
+RUN npm run build
+
+# Étape 2 : container PHP + Laravel
 FROM php:8.4-apache
 
 # Extensions système
@@ -23,9 +32,8 @@ COPY backend/src/ .
 # Dépendances Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Installer Node modules et build frontend
-RUN npm install
-RUN npm run build
+# Copier le build frontend déjà créé
+COPY --from=node-builder /app/public/build /var/www/html/public/build
 
 # Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache \
