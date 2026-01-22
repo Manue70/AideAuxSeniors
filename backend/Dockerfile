@@ -48,6 +48,9 @@ RUN composer install --no-dev --optimize-autoloader
 # Copier le build frontend déjà créé
 COPY --from=node-builder /app/public/build /var/www/html/public/build
 
+# Copier le reste du public (images, logos, avatars)
+COPY backend/src/public/images /var/www/html/public/images
+
 # Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
