@@ -1,9 +1,22 @@
 # Étape 1 : builder frontend
 FROM node:20 AS node-builder
 WORKDIR /app
+
+# Copier package.json + package-lock.json
 COPY backend/src/package*.json ./
+
+# Copier configs nécessaires pour Vite/Tailwind/PostCSS
+COPY backend/src/vite.config.js ./
+COPY backend/src/postcss.config.js ./
+COPY backend/src/tailwind.config.js ./
+
+# Installer dépendances
 RUN npm install
+
+# Copier les fichiers sources (CSS/JS)
 COPY backend/src/resources ./resources
+
+# Builder frontend
 RUN npm run build
 
 # Étape 2 : container PHP + Laravel
