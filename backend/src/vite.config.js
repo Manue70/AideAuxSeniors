@@ -21,6 +21,12 @@ export default defineConfig({
         }),
     ],
 
+    build: {
+        outDir: 'public/build',
+        emptyOutDir: true,
+    }, 
+
+
      build: {
         rollupOptions: {
             external: ['fsevents'], // <-- ignore fsevents sur Windows

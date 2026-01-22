@@ -1,6 +1,6 @@
 <header class="header clair">
     <div class="header-left">
-        <img src="/images/logo/logo.png" class="logo">
+        <img src='{{ asset("/images/logo/logo.png") }}' class="logo">
     </div>
 
     <div class="header-center">

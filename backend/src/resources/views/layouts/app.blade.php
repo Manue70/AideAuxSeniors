@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    <link rel="icon" type="image/png" href="{{ asset('images/logo/logo.png') }}">
+
+    <meta name="description" content="SeniorAide est une application d’assistance dédiée aux seniors : rappels, contacts d’urgence, accompagnement et aide numérique.">
+    <meta name="author" content="SeniorAide">
+    <meta name="application-name" content="SeniorAide">
+
+    <meta property="og:title" content="SeniorAide">
+    <meta property="og:description" content="Une application simple et sécurisée pour accompagner les seniors au quotidien.">
+    <meta property="og:image" content="{{ asset('images/logo/logo.png') }}">
+    <meta property="og:type" content="website">
+
 
 @if (request()->routeIs('home'))
     {{-- Preload Desktop --}}
@@ -25,26 +33,9 @@
     >
 @endif
 
-@if (auth()->check() && auth()->user()->is_admin)
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-@endif
 
+    @vite('resources/js/app.js')
 
-
-
-
-    {{-- CSS compilés par Vite --}}
-    @vite([
-        'resources/css/app.css',
-        'resources/css/login-page.css',
-        'resources/css/header-footer.css',
-        'resources/css/onboarding.css',
-        'resources/css/dashboard.css',
-        'resources/css/info-pages.css',
-        'resources/css/reminders.css',
-        'resources/css/assistance.css',
-        'resources/css/admin.css',
-    ])
 
     <title>@yield('title', 'SeniorAide')</title>
 </head>
@@ -95,8 +86,6 @@
     </div>
 
 
-{{-- JS à la fin pour DOM ready --}}
-@vite('resources/js/app.js')
 
 
 
