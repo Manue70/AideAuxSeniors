@@ -43,19 +43,19 @@
                 </div>
             </div>
 
-            <div style="margin-top:1rem;">
-                <label style="display:flex; align-items:center; gap:0.5rem;">
-                    <input type="checkbox" name="is_daily" value="1">
-                        Rappel quotidien
-                </label>
-            </div>
+            
 
 
             <button type="button" class="btn btn-secondary" id="add-hour" style="margin-top:0.5rem;">
                 + Ajouter une heure
             </button>
 
-
+            <div style="margin-top:1rem;">
+                <label style="display:flex; align-items:center; gap:0.5rem;">
+                    <input type="checkbox" name="is_daily" value="1">
+                        Rappel quotidien
+                </label>
+            </div>
 
             <button class="btn btn-primary">
                 Ajouter le rappel

@@ -42,12 +42,15 @@ class ReminderController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info('Reminder POST:', $request->all());
+
+
         $request->validate([
             'type' => 'required|string|max:50',
             'message' => 'required|string|max:255',
             'heure' => 'required|array',
             'heure.*' => 'required|date_format:H:i',
-            'is_daily' => 'sometimes|boolean',
+        
         ]);
         foreach ($request->heure as $h) {
             Reminder::create([
@@ -56,7 +59,7 @@ class ReminderController extends Controller
                 'message' => $request->message,
                 'heure' => $h,
                 'est_effectue' => false,
-                'is_daily'     => $request->has('is_daily'), 
+                'is_daily'     => $request->boolean('is_daily'), 
             ]);
         }
         
