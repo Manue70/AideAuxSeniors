@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Medication extends Model
 {
-    protected $fillable = ['nom', 'dosage', 'user_id'];
+    protected $fillable = ['nom', 'dosage', 'user_id', 'is_daily'];
 
     public function user(): BelongsTo
     {

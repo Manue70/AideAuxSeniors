@@ -33,6 +33,8 @@ class MedicationController extends Controller
             'soir'  => '19:00:00',
         ];
 
+        $isDaily = $request->has('is_daily');
+        
         foreach (['matin', 'midi', 'soir'] as $moment) {
             if ($request->input($moment) === 'oui') {
                 Reminder::create([

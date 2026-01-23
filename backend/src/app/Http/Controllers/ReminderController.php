@@ -47,6 +47,7 @@ class ReminderController extends Controller
             'message' => 'required|string|max:255',
             'heure' => 'required|array',
             'heure.*' => 'required|date_format:H:i',
+            'is_daily' => 'sometimes|boolean',
         ]);
         foreach ($request->heure as $h) {
             Reminder::create([
@@ -55,7 +56,7 @@ class ReminderController extends Controller
                 'message' => $request->message,
                 'heure' => $h,
                 'est_effectue' => false,
-                'is_daily'     => $request->boolean('is_daily'), 
+                'is_daily'     => $request->has('is_daily'), 
             ]);
         }
         

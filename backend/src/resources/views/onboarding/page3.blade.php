@@ -23,8 +23,6 @@
         <!-- Bouton Non : redirige vers page 4 -->
         <a href="{{ route('onboarding.4') }}" class="btn btn-secondary">Non</a>
     </div>
-
-
       
     <div class="onboarding-continue">
         <a href="{{ route('onboarding.4') }}" class="btn btn-primary">
@@ -74,6 +72,13 @@
                     <label for="soir_time">Soir :</label>
                     <input type="time" name="soir_time" id="soir_time" value="19:00">
                 </div>
+            </div>
+
+             <div style="margin-top:1rem;">
+                <label style="display:flex; align-items:center; gap:0.5rem;">
+                    <input type="checkbox" name="is_daily" value="1">
+                        Traitement quotidien
+                </label>
             </div>
 
             <!-- Boutons du bas -->
