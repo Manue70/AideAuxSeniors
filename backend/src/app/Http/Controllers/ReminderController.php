@@ -72,9 +72,12 @@ class ReminderController extends Controller
      */
     public function toggle($id)
     {
-        $reminder = Reminder::where('id', $id)
-            ->where('user_id', Auth::id())
-            ->firstOrFail();
+
+
+        $reminders = Reminder::where('user_id', $userId)
+            ->whereDate('created_at', $today)
+            ->orderBy('heure')
+            ->get();
 
         $reminder->est_effectue = !$reminder->est_effectue;
         $reminder->save();
