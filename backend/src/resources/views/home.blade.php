@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Accueil – SeniorAide')
+@section('title', 'Accueil – Aide aux seniors')
 
 @section('content')
 

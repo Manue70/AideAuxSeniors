@@ -21,7 +21,10 @@ class ReminderController extends Controller
 
         // Base query pour les rappels du jour de l'utilisateur
         $query = Reminder::where('user_id', $userId)
-            ->whereDate('created_at', $today);
+            ->where(function ($q) use ($today) {
+                $q->whereDate('created_at', $today)
+                ->orWhere('is_daily', true);
+            });
 
         // Filtrage optionnel (ex : uniquement les tâches "À faire")
         if ($request->input('filter') === 'todo') {
@@ -52,6 +55,7 @@ class ReminderController extends Controller
                 'message' => $request->message,
                 'heure' => $h,
                 'est_effectue' => false,
+                'is_daily'     => $request->boolean('is_daily'), 
             ]);
         }
         

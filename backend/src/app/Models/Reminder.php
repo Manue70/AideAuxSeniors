@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reminder extends Model
 {
-    protected $fillable = ['message', 'type', 'heure', 'est_effectue', 'user_id'];
+    protected $fillable = ['message', 'type', 'heure', 'est_effectue', 'user_id' , 'is_daily'];
 
     public function user(): BelongsTo
     {

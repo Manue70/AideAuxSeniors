@@ -42,6 +42,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY backend/src/ .
 
+RUN mkdir -p public
+
 # Dépendances Laravel
 RUN composer install --no-dev --optimize-autoloader
 

@@ -4,7 +4,7 @@
     </div>
 
     <div class="header-center">
-        <h1>SeniorAide</h1>
+        <h1>Aide Aux Seniors</h1>
     </div>
 
     <div class="header-right">

@@ -41,6 +41,7 @@ class MedicationController extends Controller
                     'message'      => "Prendre {$medication->nom} ({$medication->dosage})",
                     'heure'        => $heures[$moment],
                     'est_effectue' => false,
+                    'is_daily'     => $request->boolean('is_daily'),
                 ]);
             }
         }

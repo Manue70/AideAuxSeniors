@@ -28,7 +28,13 @@
         </a>
     </div>
 
-    
+    <div style="margin-top:1rem;">
+        <label style="display:flex; align-items:center; gap:0.5rem;">
+            <input type="checkbox" name="is_daily" value="1">
+                Traitement quotidien
+        </label>
+    </div>
+
 
     
     <div class="onboarding-continue">
