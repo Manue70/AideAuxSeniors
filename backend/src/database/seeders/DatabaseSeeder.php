@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password123'), // mot de passe admin
+            'password' => Hash::make('admin123'), 
             'is_admin' => true,
             'onboarding_completed' => false,
         ]);
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'User One',
             'email' => 'user1@example.com',
-            'password' => Hash::make('password1234'), // mot de passe user1
+            'password' => Hash::make('password123'), 
             'is_admin' => false,
             'onboarding_completed' => false,
         ]);

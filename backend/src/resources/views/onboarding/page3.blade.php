@@ -41,6 +41,8 @@
         <form method="POST" action="{{ route('medicaments.store') }}" id="medicament-form">
             @csrf
 
+            <input type="hidden" name="redirect_after" id="redirect_medication">
+
 
             <label for="nom">Nom du médicament :</label>
             <input type="text" name="nom" id="nom" required>
@@ -95,6 +97,35 @@
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const modal = document.getElementById('modal-medicament');
+    const redirectInput = document.getElementById('redirect_medication');
+
+    document.querySelectorAll('#btn-new-medication').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+
+            redirectInput.value = btn.dataset.redirect || '';
+        });
+    });
+
+    modal.querySelector('.close').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', e => {
+        if (!modal.querySelector('.modal-content').contains(e.target)) {
+            modal.style.display = 'none';
+        }
+    });
+
+});
+</script>
+
 
         
 

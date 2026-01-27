@@ -10,8 +10,11 @@
         </span>
 
 
-        <form method="POST" action="{{ route('rappels.store') }}">
+        <form method="POST" action="{{ route('rappels.store') }}" id="reminderForm"> >
             @csrf
+
+            <!-- redirect dynamique -->
+            <input type="hidden" name="redirect_after" id="redirect_after">
 
             <label for="type">Type</label>
             <select name="type" id="type" required>
@@ -71,60 +74,55 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     const modal = document.getElementById('modal-reminder');
-    const hoursContainer = document.getElementById('hours-container');
+    const form = document.getElementById('reminderForm');
+    const redirectInput = document.getElementById('redirect_after');
     const addHourBtn = document.getElementById('add-hour');
+    const hoursContainer = document.getElementById('hours-container');
 
-    if (!modal || !hoursContainer || !addHourBtn) return;
+    // ouvrir modale
+    document.querySelectorAll('#btn-new-reminder').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            modal.style.display = 'flex';
 
-    /* =========================
-       SUPPRESSION D’UNE HEURE
-    ========================= */
-    hoursContainer.addEventListener('click', function (e) {
-
-        const removeBtn = e.target.closest('.remove-hour');
-        if (!removeBtn) return;
-
-        e.preventDefault();
-        e.stopPropagation();
-
-        const hourInput = removeBtn.closest('.hour-input');
-        if (!hourInput) return;
-
-        // Empêche de supprimer la dernière heure
-        if (hoursContainer.querySelectorAll('.hour-input').length <= 1) {
-            alert("Au moins une heure est nécessaire.");
-            return;
-        }
-
-        hourInput.remove();
+            // stocke redirect
+            redirectInput.value = btn.dataset.redirect || '';
+        });
     });
 
-    /* =========================
-       AJOUT D’UNE HEURE
-    ========================= */
-    addHourBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // fermer
+    modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 
-        const hourDiv = document.createElement('div');
-        hourDiv.className = 'hour-input';
-        hourDiv.innerHTML = `
+    modal.addEventListener('click', e => {
+        if (!modal.querySelector('.modal-content').contains(e.target)) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // ajouter heure
+    addHourBtn.addEventListener('click', e => {
+        e.preventDefault();
+        const div = document.createElement('div');
+        div.className = 'hour-input';
+        div.innerHTML = `
             <input type="time" name="heure[]" required>
             <button type="button" class="remove-hour btn btn-danger btn-sm">×</button>
         `;
-
-        hoursContainer.appendChild(hourDiv);
+        hoursContainer.appendChild(div);
     });
 
-    /* =========================
-       SUBMIT FORM (sécurisé)
-    ========================= */
-    const form = modal.querySelector('form');
-    form.addEventListener('submit', function (e) {
-        e.stopPropagation(); // empêche la modale de manger le submit
-        // PAS de preventDefault ici → Laravel reçoit bien le POST
+    // supprimer heure
+    hoursContainer.addEventListener('click', e => {
+        if (e.target.classList.contains('remove-hour')) {
+            if (hoursContainer.children.length > 1) {
+                e.target.closest('.hour-input').remove();
+            }
+        }
     });
 
 });
 </script>
+
 

@@ -48,7 +48,9 @@ class MedicationController extends Controller
             }
         }
 
-        return redirect()->route('onboarding.3')
+        $redirect = $request->redirect_after ?? route('onboarding.3');
+
+        return redirect($redirect)
             ->with('success', 'Médicament et rappels ajoutés !');
-    }
+        }
 }

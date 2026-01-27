@@ -68,9 +68,10 @@ class ReminderController extends Controller
 
             Notification::send($user, new ReminderCreated($reminder));
         }
-        
+    
+         $redirect = $request->redirect_after ?? route('rappels.index');
 
-    return redirect()->route('rappels')->with('success', 'Rappel créé avec succès.');
+        return redirect()->route('rappels')->with('success', 'Rappel créé avec succès.');
     }
 
     /**

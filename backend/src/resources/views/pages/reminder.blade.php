@@ -69,6 +69,12 @@
         </button>
     </div>
 
+    <button id="btn-new-medication" data-redirect="{{ route('rappels.index') }}" class="btn btn-secondary">
+        Ajouter un médicament
+    </button>
+
+
+
     {{-- Retour au dashboard --}}
     <div class="info-buttons">
         <a href="{{ route('dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
