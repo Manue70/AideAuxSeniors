@@ -24,9 +24,10 @@ class ContactController extends Controller
             Contact::create([
                 'nom' => $nom,
                 'telephone' => $telephones[$index] ?? '',
+                'user_id' => auth()->id(),
             ]);
         }
 
-        return redirect()->route('onboarding.5')->with('success', 'Contacts enregistrés !');
+        return redirect()->route('contacts')->with('success', 'Contacts enregistrés !');
     }
 }

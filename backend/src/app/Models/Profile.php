@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    use HasFactory; 
     protected $fillable = [
         'user_id',
         'prenom',
         'telephone',
+        'birthday',
+        'gender' ,
         'theme_accueil',
         'accessibilite',
     ];

@@ -49,11 +49,19 @@
         </table>
     </div>
 
+
+
     <div class="info-buttons">
         
             <a href="{{ route('parametres') }}" class="btn btn-primary">Retour aux paramètres</a>
         
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
+
+            @auth
+                <a href="{{ route('contacts.create') }}" class="btn btn-success">
+                    Ajouter un contact
+                </a>
+            @endauth
         
     </div>
 

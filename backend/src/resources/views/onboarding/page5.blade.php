@@ -30,5 +30,17 @@
 
 </div>
 
+@auth
+@if(auth()->user()->onboarding_completed)
+<script>
+    // Redirection automatique après 5 secondes
+    setTimeout(() => {
+        window.location.href = "{{ route('dashboard') }}";
+    }, 8000); // 8000ms = 8 secondes
+</script>
+@endif
+@endauth
+
+
 @endsection
 

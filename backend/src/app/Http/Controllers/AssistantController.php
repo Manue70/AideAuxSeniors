@@ -12,7 +12,7 @@ class AssistantController extends Controller
     public function ask(Request $request)
     {
         $request->validate([
-            'message' => 'required|string',
+            'message' => 'required|string|max:255',
         ]);
 
         $userId = Auth::id();

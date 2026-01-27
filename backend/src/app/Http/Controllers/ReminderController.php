@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reminder;
+use App\Notifications\ReminderCreated;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use App\Models\Medication;
 
 
@@ -52,19 +54,23 @@ class ReminderController extends Controller
             'heure.*' => 'required|date_format:H:i',
         
         ]);
+        $user = Auth::user();
+
         foreach ($request->heure as $h) {
-            Reminder::create([
-                'user_id' => Auth::id(),
+             $reminder = Reminder::create([
+                'user_id' => $user->id,
                 'type' => $request->type,
                 'message' => $request->message,
                 'heure' => $h,
                 'est_effectue' => false,
                 'is_daily'     => $request->boolean('is_daily'), 
             ]);
+
+            Notification::send($user, new ReminderCreated($reminder));
         }
         
 
-    return redirect()->back()->with('success', 'Rappel(s) ajouté(s) avec succès.');
+    return redirect()->route('rappels')->with('success', 'Rappel créé avec succès.');
     }
 
     /**
@@ -72,16 +78,19 @@ class ReminderController extends Controller
      */
     public function toggle($id)
     {
+        $user = auth()->user(); // récupère l'utilisateur connecté
 
+        // Cherche le rappel par ID et par utilisateur
+        $reminder = Reminder::where('id', $id)
+                            ->where('user_id', $user->id)
+                            ->firstOrFail(); // lève une 404 si pas trouvé
 
-        $reminders = Reminder::where('user_id', $userId)
-            ->whereDate('created_at', $today)
-            ->orderBy('heure')
-            ->get();
-
+        // Bascule l'état
         $reminder->est_effectue = !$reminder->est_effectue;
         $reminder->save();
 
-        return redirect()->back()->with('success', 'Statut du rappel mis à jour.');
+        return redirect()->route('rappels')->with('success', 'Statut du rappel mis à jour.');
     }
+
+    
 }

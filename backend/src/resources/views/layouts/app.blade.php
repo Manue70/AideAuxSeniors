@@ -73,7 +73,10 @@
             <a href="{{ route('rappels') }}" class="btn btn-light">Mes rappels</a>
             <a href="{{ route('contacts') }}" class="btn btn-dark">Contacts d'urgence</a>
             <a href="{{ route('assistance') }}" class="btn btn-light">Assistance / Chat</a>
+            <a href="{{ route('confidentialite') }}" class="btn btn-light">Confidentialité</a>
             <a href="{{ route('parametres') }}" class="btn btn-dark">Paramètres</a>
+            <a href="{{ route('info-legales') }}" class="btn btn-light">Mentions légales</a>
+            <a href="{{ route('cookies') }}" class="btn btn-light">Cookies</a>
 
             {{-- Déconnexion --}}
             <form method="POST" action="{{ route('logout') }}">
@@ -87,9 +90,7 @@
             <a href="{{ route('home') }}" class="btn btn-dark">Accueil</a>
             <a href="{{ route('login') }}" class="btn btn-light">Connexion</a>
             <a href="{{ route('register') }}" class="btn btn-dark">Inscription</a>
-            <a href="{{ route('info-legales') }}" class="btn btn-light">Mentions légales</a>
-            <a href="{{ route('confidentialite') }}" class="btn btn-light">Confidentialité</a>
-            <a href="{{ route('cookies') }}" class="btn btn-light">Cookies</a>
+            
         @endguest
     </div>
 </div>

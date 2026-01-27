@@ -14,7 +14,8 @@ use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\ConfidentialiteController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileController ;
+use App\Http\Controllers\OnboardingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +95,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/complete', function(Request $request) {
             $user = Auth::user();
             $user->onboarding_completed = true;
-            $user->save(); // Obligatoire pour enregistrer dans la DB
+            $user->save(); 
             return redirect()->route('dashboard');
         })->name('onboarding.complete');
     });
@@ -106,12 +107,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/assistant', [AssistantController::class, 'ask']) ->name('assistant') ->middleware('auth');
     Route::get('/info-legales', fn() => view('pages.info-legales'))->name('info-legales');
     Route::get('/confidentialite', fn() => view('pages.confidentialite'))->name('confidentialite');
+    
     //supprimer le compte
     Route::delete('/profil', [ProfileController::class, 'destroy'])
         ->name('profile.destroy')
         ->middleware('auth');
     Route::get('/cookies', fn() => view('pages.cookies'))->name('cookies');
     Route::get('/parametres', fn() => view('pages.parametres'))->name('parametres');
+
     Route::get('/profil', [ProfileController::class, 'edit'])
         ->name('profile.edit')
         ->middleware('auth');
@@ -119,13 +122,19 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profil', [ProfileController::class, 'update'])
         ->name('profile.update')
         ->middleware('auth');
-    // Delete Account
-    Route::post('/delete-account', [ConfidentialiteController::class, 'destroy'])->name('delete.account');
+    
 
     // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-});
+    // Afficher le formulaire de création de contact
+    Route::get('/contacts/create', function() {
+        return view('pages.create_contact'); 
+    })->middleware('auth')->name('contacts.create');
+
+    // Enregistrer le contact (déjà existant)
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store')->middleware('auth');
+
     /*
     |--------------------------------------------------------------------------
     | Zone protégée : administrateurs
@@ -133,7 +142,25 @@ Route::middleware(['auth'])->group(function () {
     */
     Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    });
+
+    Route::middleware(['auth' ,'check.onboarding'])->prefix('onboarding')->group(function () {
+
+        Route::get('/1', fn() => view('onboarding.page1'))->name('onboarding.1');
+        Route::get('/2', fn() => view('onboarding.page2'))->name('onboarding.2');
+        Route::get('/3', fn() => view('onboarding.page3'))->name('onboarding.3');
+        Route::get('/4', fn() => view('onboarding.page4'))->name('onboarding.4');
+        Route::get('/5', fn() => view('onboarding.page5'))->name('onboarding.5');
+
+        Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+
+        Route::post('/complete', function(Request $request) {
+            $user = Auth::user();
+            $user->onboarding_completed = true;
+            $user->save();
+
+            return redirect()->route('dashboard');
+        })->name('onboarding.complete');
+
+    });
 });
-
-
-

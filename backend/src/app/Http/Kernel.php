@@ -37,8 +37,9 @@ class Kernel extends HttpKernel
         ],
     ];
 
-    protected $routeMiddleware = [
+    protected $middlewareAliases = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'is_admin' => \App\Http\Middleware\IsAdmin::class,
+        'check.onboarding' => \App\Http\Middleware\CheckOnboarding::class,
     ];
 }
