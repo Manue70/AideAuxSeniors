@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Modale médicaments
-    setupModal('modal-medicament', '#btn-oui-medicament', '.close', () => {
+    setupModal('modal-medicament', 'btn-oui-medicament', '.close', () => {
         const modal = document.getElementById('modal-medicament');
         const horaires = modal.querySelector('.prise-horaires');
         const btnOui = modal.querySelector('.btn-oui');

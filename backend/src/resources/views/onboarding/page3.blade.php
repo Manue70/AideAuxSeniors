@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal-medicament');
     const redirectInput = document.getElementById('redirect_medication');
 
-    document.querySelectorAll('#btn-new-medication').forEach(btn => {
+    document.querySelectorAll('.btn-new-medication').forEach(btn => {
         btn.addEventListener('click', e => {
             e.preventDefault();
             modal.style.display = 'flex';

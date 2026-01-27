@@ -26,5 +26,6 @@
 @endsection
 
 @section('scripts')
+    @vite('resources/css/info-pages.css')
     @vite('resources/js/app.js') 
 @endsection
