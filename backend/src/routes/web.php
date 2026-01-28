@@ -73,6 +73,24 @@ Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])
     ->name('rappels.toggle');
 
 
+//*Routes CONTACTS
+
+// Liste des contacts (GET)
+Route::get('/contacts', [ContactController::class, 'index'])
+    ->name('contacts.index')
+    ->middleware('auth');
+
+// Formulaire création (GET)
+Route::get('/contacts/create', [ContactController::class, 'create'])
+    ->name('contacts.create')
+    ->middleware('auth');
+
+// Enregistrement (POST)
+Route::post('/contacts', [ContactController::class, 'store'])
+    ->name('contacts.store')
+    ->middleware('auth');
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -143,20 +161,7 @@ Route::middleware(['auth'])->group(function () {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // Liste des contacts (GET)
-    Route::get('/contacts', [ContactController::class, 'index'])
-        ->name('contacts.index')
-        ->middleware('auth');
-
-    // Formulaire création (GET)
-    Route::get('/contacts/create', [ContactController::class, 'create'])
-        ->name('contacts.create')
-        ->middleware('auth');
-
-    // Enregistrement (POST)
-    Route::post('/contacts', [ContactController::class, 'store'])
-        ->name('contacts.store')
-        ->middleware('auth');
+   
 
     /*
     |--------------------------------------------------------------------------
