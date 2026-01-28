@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Modale médicaments
-    setupModal('modal-medicament', 'btn-oui-medicament', '.close', () => {
+    setupModal('modal-medicament', '#btn-oui-medicament', '.close', () => {
         const modal = document.getElementById('modal-medicament');
         const horaires = modal.querySelector('.prise-horaires');
         const btnOui = modal.querySelector('.btn-oui');
@@ -103,6 +103,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Modale rappels
     setupModal('modal-reminder', '#btn-oui-reminder, #btn-new-reminder', '.modal-close');
+        const reminderForm = document.getElementById('reminderForm');
+        const hoursContainer = document.getElementById('hours-container');
+        const addHourBtn = document.getElementById('add-hour');
+        const redirectInput = document.getElementById('redirect_after');
+
+        document.querySelectorAll('#btn-new-reminder').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (redirectInput) {
+                    redirectInput.value = btn.dataset.redirect || '';
+                }
+            });
+        });
+
+        addHourBtn?.addEventListener('click', e => {
+            e.preventDefault();
+
+        const div = document.createElement('div');
+        div.className = 'hour-input';
+        div.innerHTML = `
+            <input type="time" name="heure[]" required>
+            <button type="button" class="remove-hour btn btn-danger btn-sm">×</button>
+        `;
+        hoursContainer.appendChild(div);
+    });
+
+    hoursContainer?.addEventListener('click', e => {
+        if (e.target.classList.contains('remove-hour')) {
+            if (hoursContainer.children.length > 1) {
+                e.target.closest('.hour-input').remove();
+            }
+        }
+    });
+
 
 
     // Modale notifications
@@ -147,11 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     // =========================
-    // Contacts dynamiques
+    // Contacts dynamiques + redirect
     // =========================
+
     const contactsContainer = document.getElementById('contacts-container');
     const addContactBtn = document.getElementById('add-contact');
+    const redirectContactInput = document.getElementById('contact_redirect_after');
 
     const createContactLine = () => {
         const div = document.createElement('div');
@@ -160,38 +196,30 @@ document.addEventListener('DOMContentLoaded', () => {
         div.style.gap = '0.5rem';
         div.style.marginBottom = '0.5rem';
 
-        const nom = document.createElement('input');
-        nom.type = 'text';
-        nom.name = 'nom[]';
-        nom.placeholder = 'Nom';
-        nom.required = true;
+        div.innerHTML = `
+            <input type="text" name="nom[]" placeholder="Nom" required>
+            <input type="text" name="telephone[]" placeholder="Téléphone" required>
+            <button type="button" class="btn btn-danger btn-remove-contact">×</button>
+        `;
 
-        const tel = document.createElement('input');
-        tel.type = 'text';
-        tel.name = 'telephone[]';
-        tel.placeholder = 'Téléphone';
-        tel.required = true;
-
-        const remove = document.createElement('button');
-        remove.type = 'button';
-        remove.className = 'btn btn-danger btn-remove-contact';
-        remove.textContent = '×';
-        remove.addEventListener('click', () => div.remove());
-
-        div.append(nom, tel, remove);
         return div;
     };
 
-    addContactBtn?.addEventListener('click', () => {
-        contactsContainer.appendChild(createContactLine());
+    addContactBtn?.addEventListener('click', e => {
+        if (redirectContactInput) {
+            redirectContactInput.value = addContactBtn.dataset.redirect || '';
+        }
+
+        contactsContainer?.appendChild(createContactLine());    
+        });
+
+    contactsContainer?.addEventListener('click', e => {
+        if (e.target.classList.contains('btn-remove-contact')) {
+            e.target.closest('.contact-line').remove();
+        }
     });
 
-    contactsContainer?.querySelectorAll('.btn-remove-contact').forEach(btn => {
-        btn.addEventListener('click', e => {
-            e.preventDefault();
-            btn.closest('.contact-line').remove();
-        });
-    });
+
 
     // =========================
     // Assistant / Chatbot

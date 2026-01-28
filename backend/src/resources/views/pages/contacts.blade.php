@@ -58,9 +58,14 @@
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
 
             @auth
-                <a href="{{ route('contacts.create') }}" class="btn btn-success">
-                    Ajouter un contact
-                </a>
+               <button
+                     id="add-contact"
+                    class="btn btn-success"
+                    data-redirect="{{ route('contacts.index') }}"
+                >
+                        Ajouter un contact
+                </button>
+ 
             @endauth
         
     </div>

@@ -70,59 +70,6 @@
 
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
 
-    const modal = document.getElementById('modal-reminder');
-    const form = document.getElementById('reminderForm');
-    const redirectInput = document.getElementById('redirect_after');
-    const addHourBtn = document.getElementById('add-hour');
-    const hoursContainer = document.getElementById('hours-container');
-
-    // ouvrir modale
-    document.querySelectorAll('#btn-new-reminder').forEach(btn => {
-        btn.addEventListener('click', e => {
-            e.preventDefault();
-            modal.style.display = 'flex';
-
-            // stocke redirect
-            redirectInput.value = btn.dataset.redirect || '';
-        });
-    });
-
-    // fermer
-    modal.querySelector('.modal-close').addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    modal.addEventListener('click', e => {
-        if (!modal.querySelector('.modal-content').contains(e.target)) {
-            modal.style.display = 'none';
-        }
-    });
-
-    // ajouter heure
-    addHourBtn.addEventListener('click', e => {
-        e.preventDefault();
-        const div = document.createElement('div');
-        div.className = 'hour-input';
-        div.innerHTML = `
-            <input type="time" name="heure[]" required>
-            <button type="button" class="remove-hour btn btn-danger btn-sm">×</button>
-        `;
-        hoursContainer.appendChild(div);
-    });
-
-    // supprimer heure
-    hoursContainer.addEventListener('click', e => {
-        if (e.target.classList.contains('remove-hour')) {
-            if (hoursContainer.children.length > 1) {
-                e.target.closest('.hour-input').remove();
-            }
-        }
-    });
-
-});
-</script>
 
 

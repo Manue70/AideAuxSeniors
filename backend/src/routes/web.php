@@ -122,6 +122,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profil', [ProfileController::class, 'update'])
         ->name('profile.update')
         ->middleware('auth');
+
+    Route::delete('/admin/users/{user}', [AdminController::class, 'destroy'])
+        ->name('admin.users.destroy');
+
     
 
     // Logout

@@ -54,7 +54,7 @@
                             <p><strong>Créé le :</strong> {{ $user->created_at->format('d/m/Y') }}</p>
                             <p><strong>Dernière connexion :</strong> {{ $user->last_login_at ?? '—' }}</p>
                             <p><strong>Compte actif :</strong> {{ $user->active ? 'Oui' : 'Non' }}</p>
-                            <p><strong>Nombre de rappels :</strong> {{ $user->reminders_count }}</p>
+                            <p><strong>Nombre de rappels :</strong> {{ $user->reminders_count ?? 0 }}</p>
 
 
                         </div>
@@ -63,6 +63,16 @@
             </tbody>
         </table>
     </div>
+
+    <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+        @csrf
+        @method('DELETE')
+
+        <button class="btn btn-danger" onclick="return confirm('Supprimer cet utilisateur ?')">
+            Supprimer l'utilisateur
+        </button>
+    </form>
+
 
 </div>
 

@@ -17,11 +17,12 @@
     </div>
     
     <div class="onboarding-form">
-        <form method="POST" action="{{ route('contacts.store') }}">
+       <form method="POST" action="{{ route('contacts.store') }}">
             @csrf
 
+            <input type="hidden" name="redirect_after" id="contact_redirect_after">
+
             <div id="contacts-container">
-                <!-- Ligne initiale de contact -->
                 <div class="contact-line" style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
                     <input type="text" name="nom[]" placeholder="Nom" required>
                     <input type="text" name="telephone[]" placeholder="Téléphone" required>
@@ -29,14 +30,20 @@
                 </div>
             </div>
 
-            <button type="button" id="add-contact" class="btn btn-secondary">
-                Ajouter un contact
+            <button
+                type="button"
+                id="add-contact"
+                class="btn btn-secondary"
+                data-redirect="{{ route('onboarding.5') }}"
+            >
+                 Ajouter un contact
             </button>
 
             <button type="submit" class="btn btn-primary">
                 Enregistrer
             </button>
         </form>
+
     </div>
 
     <div class="onboarding-continue">

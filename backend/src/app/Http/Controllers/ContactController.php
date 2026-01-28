@@ -28,6 +28,9 @@ class ContactController extends Controller
             ]);
         }
 
-        return redirect()->route('contacts')->with('success', 'Contacts enregistrés !');
+        return redirect(
+            $request->redirect_after ?? route('contacts.index')
+                )->with('success', 'Contacts enregistrés !');
+
     }
 }
