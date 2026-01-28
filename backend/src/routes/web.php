@@ -57,6 +57,23 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('/register', [RegisterController::class, 'show'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
+
+
+//* RAPPELS
+Route::get('/rappels', [ReminderController::class, 'index'])
+    ->middleware('auth')
+    ->name('rappels');
+
+Route::post('/rappels', [ReminderController::class, 'store'])
+    ->middleware('auth')
+    ->name('rappels.store');
+
+Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('rappels.toggle');
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Zone protégée : utilisateurs connectés
@@ -76,11 +93,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/medicaments/{medicament}', [MedicationController::class, 'destroy'])
         ->name('medicaments.destroy');
 
-
-    // Rappels
-    Route::get('/rappels', [ReminderController::class, 'rappels.index'])->name('rappels.index')->middleware('auth');
-    Route::post('/rappels', [ReminderController::class, 'rappels.store'])->name('rappels.store')->middleware('auth');
-    Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])->name('rappels.toggle') ->middleware('auth');
 
     // Onboarding
     Route::prefix('onboarding')->group(function () {
