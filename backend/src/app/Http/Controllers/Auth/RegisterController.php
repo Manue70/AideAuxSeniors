@@ -17,22 +17,11 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul style="margin:0; padding-left:1rem;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-
+        // Validation
         $request->validate(
             [
                 'email' => 'required|email|unique:users',
-                'password' => 'required|min:6|confirmed',
+                'password' => 'required|min:6|confirmed', // nécessite password_confirmation
             ],
             [
                 'password.confirmed' => 'Les mots de passe ne correspondent pas.',
@@ -40,17 +29,16 @@ class RegisterController extends Controller
             ]
         );
 
+        // Création de l'utilisateur
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'onboarding_completed' => false,
         ]);
 
+        // Connexion automatique
         Auth::login($user);
-
-    
 
         return redirect()->route('onboarding.1');
     }
 }
-
