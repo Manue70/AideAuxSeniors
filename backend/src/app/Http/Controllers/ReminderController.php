@@ -40,8 +40,13 @@ class ReminderController extends Controller
         }
 
         // Récupération des rappels triés par heure
-        $reminders = $query->orderBy('heure')->get();
-        return view('pages.reminder', compact('reminders'));
+            $reminders = $query->orderBy('heure')->get()->map(function ($reminder) {
+            $reminder->heure = $reminder->heure ?? '08:00'; // valeur par défaut
+            $reminder->message = $reminder->message ?? '—';
+            $reminder->type = $reminder->type ?? 'autre';
+            return $reminder;
+        });
+
     }
 
 
