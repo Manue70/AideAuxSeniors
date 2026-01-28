@@ -1,0 +1,100 @@
+{
+  "resources/css/admin.css": {
+    "file": "assets/admin-p9ecQnQd.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true,
+    "name": "admin",
+    "names": [
+      "admin.css"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BLi86U7L.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/assistance.css": {
+    "file": "assets/assistance-CxZt4oc9.css",
+    "src": "resources/css/assistance.css",
+    "isEntry": true,
+    "name": "assistance",
+    "names": [
+      "assistance.css"
+    ]
+  },
+  "resources/css/dashboard.css": {
+    "file": "assets/dashboard-bN9AH7Ft.css",
+    "src": "resources/css/dashboard.css",
+    "isEntry": true,
+    "name": "dashboard",
+    "names": [
+      "dashboard.css"
+    ]
+  },
+  "resources/css/header-footer.css": {
+    "file": "assets/header-footer-B_ti-7a8.css",
+    "src": "resources/css/header-footer.css",
+    "isEntry": true,
+    "name": "header-footer",
+    "names": [
+      "header-footer.css"
+    ]
+  },
+  "resources/css/info-pages.css": {
+    "file": "assets/info-pages-B7D5iHce.css",
+    "src": "resources/css/info-pages.css",
+    "isEntry": true,
+    "name": "info-pages",
+    "names": [
+      "info-pages.css"
+    ]
+  },
+  "resources/css/login-page.css": {
+    "file": "assets/login-page-BKSXkBL6.css",
+    "src": "resources/css/login-page.css",
+    "isEntry": true,
+    "name": "login-page",
+    "names": [
+      "login-page.css"
+    ]
+  },
+  "resources/css/onboarding.css": {
+    "file": "assets/onboarding-Bt6GM9_G.css",
+    "src": "resources/css/onboarding.css",
+    "isEntry": true,
+    "name": "onboarding",
+    "names": [
+      "onboarding.css"
+    ]
+  },
+  "resources/css/reminders.css": {
+    "file": "assets/reminders-BfafK5u6.css",
+    "src": "resources/css/reminders.css",
+    "isEntry": true,
+    "name": "reminders",
+    "names": [
+      "reminders.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Cb9R6i8e.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-BLi86U7L.css",
+      "assets/login-page-BKSXkBL6.css",
+      "assets/onboarding-Bt6GM9_G.css",
+      "assets/dashboard-bN9AH7Ft.css",
+      "assets/info-pages-B7D5iHce.css",
+      "assets/reminders-BfafK5u6.css",
+      "assets/assistance-CxZt4oc9.css",
+      "assets/admin-p9ecQnQd.css",
+      "assets/header-footer-B_ti-7a8.css"
+    ]
+  }
+}
