@@ -78,9 +78,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Rappels
-    Route::get('/rappels', [ReminderController::class, 'index'])->name('rappels');
-    Route::post('/rappels', [ReminderController::class, 'store'])->name('rappels.store');
-    Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])->name('rappels.toggle');
+    Route::get('/rappels', [ReminderController::class, 'rappels.index'])->name('rappels.index')->middleware('auth');
+    Route::post('/rappels', [ReminderController::class, 'rappels.store'])->name('rappels.store')->middleware('auth');
+    Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])->name('rappels.toggle') ->middleware('auth');
 
     // Onboarding
     Route::prefix('onboarding')->group(function () {
@@ -89,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/3', fn() => view('onboarding.page3'))->name('onboarding.3');
         Route::get('/4', fn() => view('onboarding.page4'))->name('onboarding.4');
         Route::get('/5', fn() => view('onboarding.page5'))->name('onboarding.5');
-        Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+        Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.index');
 
 
         Route::post('/complete', function(Request $request) {
@@ -131,13 +131,20 @@ Route::middleware(['auth'])->group(function () {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // Afficher le formulaire de création de contact
-    Route::get('/contacts/create', function() {
-        return view('pages.create_contact'); 
-    })->middleware('auth')->name('contacts.create');
+    // Liste des contacts (GET)
+    Route::get('/contacts', [ContactController::class, 'index'])
+        ->name('contacts.index')
+        ->middleware('auth');
 
-    // Enregistrer le contact (déjà existant)
-    Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store')->middleware('auth');
+    // Formulaire création (GET)
+    Route::get('/contacts/create', [ContactController::class, 'create'])
+        ->name('contacts.create')
+        ->middleware('auth');
+
+    // Enregistrement (POST)
+    Route::post('/contacts', [ContactController::class, 'store'])
+        ->name('contacts.store')
+        ->middleware('auth');
 
     /*
     |--------------------------------------------------------------------------
