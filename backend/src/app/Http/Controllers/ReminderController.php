@@ -71,7 +71,7 @@ class ReminderController extends Controller
     
          $redirect = $request->redirect_after ?? route('rappels.index');
 
-        return redirect()->route('rappels')->with('success', 'Rappel créé avec succès.');
+        return redirect($redirect)->with('success', 'Rappel créé avec succès.');
     }
 
     /**
@@ -90,7 +90,7 @@ class ReminderController extends Controller
         $reminder->est_effectue = !$reminder->est_effectue;
         $reminder->save();
 
-        return redirect()->route('rappels')->with('success', 'Statut du rappel mis à jour.');
+        return redirect()->route('rappels.index')->with('success', 'Statut du rappel mis à jour.');
     }
 
     
