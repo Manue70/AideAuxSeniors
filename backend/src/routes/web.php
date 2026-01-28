@@ -146,6 +146,7 @@ Route::middleware(['auth'])->group(function () {
     */
     Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
     });
 
     Route::middleware(['auth' ,'check.onboarding'])->prefix('onboarding')->group(function () {

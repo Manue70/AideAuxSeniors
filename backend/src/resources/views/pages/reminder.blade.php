@@ -65,7 +65,7 @@
     </div>
     {{--bouteau nouveau rappel--}}
     <div> {{-- Bouton Nouveau Rappel --}}
-        <button id="btn-oui-reminder" class="btn btn-primary">Ajouter un rappel
+        <button id="btn-new-reminder" class="btn btn-primary">Ajouter un rappel
         </button>
     </div>
 

@@ -18,11 +18,17 @@ class ReminderController extends Controller
      */
     public function index(Request $request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+
+        // Redirige vers login si utilisateur non connecté
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Veuillez vous connecter pour accéder à vos rappels.');
+        }
+
         $today = Carbon::today()->toDateString(); // format 'YYYY-MM-DD'
 
-        // Base query pour les rappels du jour de l'utilisateur
-        $query = Reminder::where('user_id', $userId)
+        // Base query pour les rappels du jour ou quotidiens
+        $query = Reminder::where('user_id', $user->id)
             ->where(function ($q) use ($today) {
                 $q->whereDate('created_at', $today)
                 ->orWhere('is_daily', true);
@@ -35,9 +41,9 @@ class ReminderController extends Controller
 
         // Récupération des rappels triés par heure
         $reminders = $query->orderBy('heure')->get();
-
         return view('pages.reminder', compact('reminders'));
     }
+
 
     /**
      * Ajoute un nouveau rappel

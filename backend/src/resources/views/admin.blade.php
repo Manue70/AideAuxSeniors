@@ -32,8 +32,6 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-
-
     <div class="admin-table-wrapper">
         <table class="admin-table">
             <thead>
@@ -45,49 +43,47 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    <tr onclick="openUserModal({{ $user->id }})">
-                        <td class="user-link">{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->is_admin ? 'Oui' : 'Non' }}</td>
-                    </tr>
+                <tr onclick="openUserModal({{ $user->id }})">
+                    <td class="user-link">{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->is_admin ? 'Oui' : 'Non' }}</td>
+                </tr>
 
-                    {{-- MODALE USER --}}
-                    <div id="user-modal-{{ $user->id }}" class="admin-modal">
-                        <div class="admin-modal-content">
-                            <span class="close" onclick="closeUserModal({{ $user->id }})">&times;</span>
+                {{-- MODALE USER --}}
+                <div id="user-modal-{{ $user->id }}" class="admin-modal">
+                    <div class="admin-modal-content">
+                        <span class="close" onclick="closeUserModal({{ $user->id }})">&times;</span>
 
-                            <h3>Profil utilisateur</h3>
+                        <h3>Profil utilisateur</h3>
 
-                            <p><strong>Nom :</strong> {{ $user->name }}</p>
-                            <p><strong>Email :</strong> {{ $user->email }}</p>
-                            <p><strong>Admin :</strong> {{ $user->is_admin ? 'Oui' : 'Non' }}</p>
-                            <p><strong>Créé le :</strong> {{ $user->created_at->format('d/m/Y') }}</p>
-                            <p><strong>Dernière connexion :</strong> {{ $user->last_login_at ?? '—' }}</p>
-                            <p><strong>Compte actif :</strong> {{ $user->active ? 'Oui' : 'Non' }}</p>
-                            <p><strong>Nombre de rappels :</strong> {{ $user->reminders_count ?? 0 }}</p>
+                        <p><strong>Nom :</strong> {{ $user->name }}</p>
+                        <p><strong>Email :</strong> {{ $user->email }}</p>
+                        <p><strong>Admin :</strong> {{ $user->is_admin ? 'Oui' : 'Non' }}</p>
+                        <p><strong>Créé le :</strong> {{ $user->created_at->format('d/m/Y') }}</p>
+                        <p><strong>Dernière connexion :</strong> {{ $user->last_login_at ? $user->last_login_at->format('d/m/Y H:i') : '—' }}</p>
+                        <p><strong>Compte actif :</strong> {{ $user->active ? 'Oui' : 'Non' }}</p>
+                        <p><strong>Nombre de rappels :</strong> {{ $user->reminders_count ?? 0 }}</p>
 
-
-                        </div>
+                        {{-- Formulaire suppression (sécurisé) --}}
+                        @if(auth()->id() !== $user->id)
+                        <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" style="margin-top:1rem;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" onclick="return confirm('Supprimer cet utilisateur ?')">
+                                Supprimer l'utilisateur
+                            </button>
+                        </form>
+                        @endif
                     </div>
+                </div>
                 @endforeach
             </tbody>
         </table>
     </div>
 
-    <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
-        @csrf
-        @method('DELETE')
-
-        <button class="btn btn-danger" onclick="return confirm('Supprimer cet utilisateur ?')">
-            Supprimer l'utilisateur
-        </button>
-    </form>
-
-
 </div>
 
 @vite('resources/css/admin.css')
-
 
 <script>
 function openUserModal(id) {

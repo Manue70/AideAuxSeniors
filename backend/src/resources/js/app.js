@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const addHourBtn = document.getElementById('add-hour');
         const redirectInput = document.getElementById('redirect_after');
 
-        document.querySelectorAll('#btn-new-reminder').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (redirectInput) {
-                    redirectInput.value = btn.dataset.redirect || '';
-                }
+        document.querySelectorAll('.btn-open-reminder').forEach(btn => {
+            btn.addEventListener('click', e => {
+            e.preventDefault();
+                document.getElementById('modal-reminder').style.display = 'flex';
+                document.getElementById('redirect_after').value = btn.dataset.redirect || '';
             });
         });
 
