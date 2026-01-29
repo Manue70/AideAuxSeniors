@@ -27,7 +27,7 @@
         <div class="card">
             <h3>Médicaments</h3>
             <p>Modification du matin</p>
-            <a href="{{ route('onboarding.3') }}" class="btn-primary">VOIR / Modifier</a>
+            <a href="{{ route('rappels') }}" class="btn-primary">VOIR / Modifier</a>
 
         </div>
 
