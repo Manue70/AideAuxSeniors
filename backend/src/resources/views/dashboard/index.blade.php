@@ -27,7 +27,13 @@
         <div class="card">
             <h3>Médicaments</h3>
             <p>Modification du matin</p>
-            <a href="{{ route('rappels') }}" class="btn-primary">VOIR / Modifier</a>
+            <button
+                 id="btn-oui-medicament"
+                type="button"
+                class="btn-primary"
+            >
+                 VOIR / Modifier
+            </button>
 
         </div>
 

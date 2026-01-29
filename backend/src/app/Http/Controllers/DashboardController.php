@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reminder;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index'); // ou index.blade.php
+        $reminders = Reminder::where('user_id', auth()->id())->get();
+
+        return view('dashboard.index', compact('reminders'));
     }
 
-    public function markDone(Request $request)
+    public function markDone($id)
     {
-        // DEBUG : vérifier si la requête arrive
-        // dd($request->all());
+        $reminder = Reminder::where('user_id', auth()->id())
+            ->where('id', $id)
+            ->firstOrFail();
 
-        $task = $request->input('task');
+        $reminder->est_effectue = true;
+        $reminder->save();
 
-        
-
-        // Redirection avec message
-        return redirect()->route('dashboard')->with('success', "La tâche '$task' a été enregistrée !");
+        return redirect()->back()->with('success', 'Rappel validé');
     }
 }
+

@@ -101,7 +101,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/dashboard/mark-done', [DashboardController::class, 'markDone'])->name('dashboard.markDone');
+    Route::post('/dashboard/reminder/{id}', [DashboardController::class, 'markDone'])
+        ->name('dashboard.markDone');
+
 
 
     // Création d’un médicament (POST)
