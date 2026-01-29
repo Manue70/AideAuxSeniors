@@ -68,7 +68,7 @@
         </button>
     </div>
 
-    <button id="btn-new-medication" data-redirect="{{ route('rappels.index') }}" class="btn btn-secondary">
+    <button id="btn-new-medication" data-redirect="{{ route('rappels') }}" class="btn btn-secondary">
         Ajouter un médicament
     </button>
 
