@@ -51,9 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+
     // ==============================================
-    // MODALES  Medicaments, Rappels , Notifications
+    // MODALES Medicaments / Rappels / Notifications
     // ==============================================
+
     function setupModal(modalId, openBtnsSelector) {
 
         const modal = document.getElementById(modalId);
@@ -95,28 +98,78 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================
-    // INIT APRÈS LOAD
+    // INIT UNIQUE
     // ==========================
 
     document.addEventListener('DOMContentLoaded', () => {
 
         setupModal('modal-reminder', '.btn-open-reminder');
         setupModal('modal-medicament', '.btn-open-medicament');
+        setupModal('modal-notif', '.btn-notif');
 
     });
-        // RAPPELS
-        setupModal('modal-reminder', '.btn-open-reminder');
 
-        // MEDICAMENTS
-        setupModal('modal-medicament', '.btn-open-medicament');
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const hoursContainer = document.getElementById('hours-container');
+        const addHourBtn = document.getElementById('add-hour');
+
+        if (!hoursContainer || !addHourBtn) return;
+
+        addHourBtn.addEventListener('click', e => {
+            e.preventDefault();
+
+            const div = document.createElement('div');
+            div.className = 'hour-input';
+            div.innerHTML = `
+                <input type="time" name="heure[]" required>
+                <button type="button" class="remove-hour btn btn-danger btn-sm">×</button>
+            `;
+
+            hoursContainer.appendChild(div);
+        });
+
+        hoursContainer.addEventListener('click', e => {
+            if (e.target.classList.contains('remove-hour')) {
+                if (hoursContainer.children.length > 1) {
+                    e.target.closest('.hour-input').remove();
+                }
+            }
+        });
+
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const modal = document.getElementById('modal-medicament');
+        if (!modal) return;
+
+        const btnOui = modal.querySelector('.btn-oui');
+        const btnNon = modal.querySelector('.btn-non');
+        const horaires = modal.querySelector('.prise-horaires');
+        const inputMatin = modal.querySelector('#input-matin');
+
+        horaires.style.display = 'none';
+
+        btnOui?.addEventListener('click', () => {
+            btnOui.classList.add('active');
+            btnNon.classList.remove('active');
+            horaires.style.display = 'block';
+            inputMatin.value = 'oui';
+        });
+
+        btnNon?.addEventListener('click', () => {
+            btnNon.classList.add('active');
+            btnOui.classList.remove('active');
+            horaires.style.display = 'none';
+            inputMatin.value = 'non';
+        });
+
+    });
 
     
-
-          
-    
-    // Modale notifications
-    setupModal('modal-notif', '.btn-notif', '.close');
-
     // =========================
     // ACCESSIBILITÉ
     // =========================
