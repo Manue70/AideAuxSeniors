@@ -54,9 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==============================================
     // MODALES  Medicaments, Rappels , Notifications
     // ==============================================
-    document.addEventListener('DOMContentLoaded', () => {
-
-    const setupModal = (modalId, openBtnsSelector) => {
+    function setupModal(modalId, openBtnsSelector) {
 
         const modal = document.getElementById(modalId);
         if (!modal) return;
@@ -93,15 +91,26 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') modal.style.display = 'none';
         });
-    };
+    }
 
-    // RAPPELS
-    setupModal('modal-reminder', '.btn-open-reminder');
 
-    // MEDICAMENTS
-    setupModal('modal-medicament', '.btn-open-medicament');
+    // ==========================
+    // INIT APRÈS LOAD
+    // ==========================
 
-});
+    document.addEventListener('DOMContentLoaded', () => {
+
+        setupModal('modal-reminder', '.btn-open-reminder');
+        setupModal('modal-medicament', '.btn-open-medicament');
+
+    });
+        // RAPPELS
+        setupModal('modal-reminder', '.btn-open-reminder');
+
+        // MEDICAMENTS
+        setupModal('modal-medicament', '.btn-open-medicament');
+
+    
 
           
     
@@ -439,7 +448,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('call-voice')?.addEventListener('click', () => {
     // Simple appel téléphonique sur mobile
     window.location.href = "tel:+33xxxxxxxxx";
-    
-    // Pour WebRTC VOIP, tu pourrais ouvrir un modal avec un appel WebRTC
     });
-});
+});    
