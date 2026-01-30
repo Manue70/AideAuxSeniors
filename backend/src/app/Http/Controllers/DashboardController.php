@@ -11,6 +11,11 @@ class DashboardController extends Controller
     {
         $reminders = Reminder::where('user_id', auth()->id())->get();
 
+            ->where('est_effectue', false)
+            ->orderBy('heure')
+            ->get();
+
+
         return view('dashboard.index', compact('reminders'));
     }
 

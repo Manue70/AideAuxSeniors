@@ -9,9 +9,9 @@
     <div class="dashboard-cards">
         <!-- Carte Rappels du jour -->
         <div class="card">
-            <h3>Rappels du jour</h3>
-            <p>Prendre le médicament du matin</p>
-            <form action="{{ route('dashboard.markDone') }}" method="POST">
+            <h3>{{ ucfirst($reminder->type) }} Rappels du jour</h3>
+            <p> {{ $reminder->message }} – {{ $reminder->heure }} Prendre le médicament du matin</p>
+            <form action="{{ route('dashboard.markDone',$reminder->id ) }}" method="POST">
                 @csrf
                 <input type="hidden" name="task" value="medicament_matin">
                 <button type="submit" class="btn-primary">FAIT</button>
