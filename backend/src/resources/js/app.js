@@ -93,7 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
     });
+    setupModal(
+        'modal-medicament',  // ID de la modale
+        '#btn-open-medicament',  // bouton qui ouvre la modale
+        '.modal-close',
+        null
+    );
+
 
 
     // =========================
@@ -166,6 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modale notifications
     setupModal('modal-notif', '.btn-notif', '.close');
 
+    setupModal(
+        'modal-reminder',          // ID de la modale
+        '#btn-open-reminder',       // sélecteur des boutons qui ouvrent la modale
+        '.modal-close',            // bouton de fermeture dans la modale
+        null                       // logique supplémentaire si nécessaire
+    );
 
     // =========================
     // ACCESSIBILITÉ
