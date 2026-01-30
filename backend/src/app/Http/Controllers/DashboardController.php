@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $reminders = Reminder::where('user_id', auth()->id())->get();
+        $reminders = Reminder::where('user_id', auth()->id())
 
             ->where('est_effectue', false)
             ->orderBy('heure')
