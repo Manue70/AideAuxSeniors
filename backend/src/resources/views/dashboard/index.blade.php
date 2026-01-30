@@ -4,7 +4,34 @@
 
 @section('content')
 <div class="dashboard-content {{ session('theme', 'clair') }}">
-    <h2>Bonjour, [Prénom]</h2>
+    @php
+        $user = auth()->user();
+        $prenom = $user ? ucfirst(explode(' ', $user->name)[0]) : 'invité';
+
+        // Heure locale Paris
+        $heure = now()->setTimezone('Europe/Paris')->format('H');
+
+        // Définir greeting et emoji
+        if ($heure >= 5 && $heure < 12) {
+            $greeting = 'Bonjour';
+            $emoji = '🌞';
+            $message = 'Commencez bien la journée !';
+        } elseif ($heure >= 12 && $heure < 18) {
+            $greeting = 'Bonjour';
+            $emoji = '☀️';
+            $message = 'N’oubliez pas de rester hydraté(e) !';
+        } else {
+            $greeting = 'Bonsoir';
+            $emoji = '🌙';
+            $message = 'Finissez bien la journée !';
+        }
+    @endphp
+
+    <div class="dashboard-greeting" style="margin-bottom:1rem;">
+        <h2>{{ $greeting }}, {{ $prenom }} {{ $emoji }}</h2>
+        <p style="font-size:0.9rem; color:#555;">{{ $message }}</p>
+    </div>
+        
 
     <div class="dashboard-cards">
         <!-- Carte Rappels du jour -->

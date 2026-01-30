@@ -20,6 +20,8 @@ class ReminderController extends Controller
     {
         $user = Auth::user();
 
+
+
         // Redirige vers login si utilisateur non connecté
         if (!$user) {
             return redirect()->route('login')->with('error', 'Veuillez vous connecter pour accéder à vos rappels.');
@@ -102,6 +104,10 @@ class ReminderController extends Controller
         // Bascule l'état
         $reminder->est_effectue = !$reminder->est_effectue;
         $reminder->save();
+
+        if ($request->from_onboarding) {
+        return redirect()->route('onboarding.2')->with('success', 'Rappel enregistré');
+    }
 
         return redirect()->route('rappels')->with('success', 'Statut du rappel mis à jour.');
     }

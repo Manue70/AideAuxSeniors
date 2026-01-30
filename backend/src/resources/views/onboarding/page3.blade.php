@@ -62,17 +62,20 @@
 
             <!-- Tableau des horaires, caché par défaut -->
             <div class="prise-horaires" style="display:none; margin-top:20px;">
-                <div class="ligne-prise">
+                <div class="hour-input">
                     <label for="matin_time">Matin :</label>
                     <input type="time" name="matin_time" id="matin_time" value="08:00">
+                    <button type="button" class="remove-hour">×</button>
                 </div>
-                <div class="ligne-prise">
+                <div class="hour-input">
                     <label for="midi_time">Midi :</label>
                     <input type="time" name="midi_time" id="midi_time" value="12:00">
+                    <button type="button" class="remove-hour">×</button>
                 </div>
-                <div class="ligne-prise">
+                <div class="hour-input">
                     <label for="soir_time">Soir :</label>
                     <input type="time" name="soir_time" id="soir_time" value="19:00">
+                    <button type="button" class="remove-hour">×</button>
                 </div>
             </div>
 

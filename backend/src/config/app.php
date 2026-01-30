@@ -7,7 +7,7 @@ return [
     'env' => getenv('APP_ENV') ?: 'production',
     'debug' => getenv('APP_DEBUG') === 'true' ? true : false,
     'url' => getenv('APP_URL') ?: 'http://localhost',
-    'timezone' => 'UTC',
+    'timezone' => 'Europes/Paris',
     'locale' => getenv('APP_LOCALE') ?: 'en',
     'fallback_locale' => getenv('APP_FALLBACK_LOCALE') ?: 'en',
     'faker_locale' => getenv('APP_FAKER_LOCALE') ?: 'en_US',

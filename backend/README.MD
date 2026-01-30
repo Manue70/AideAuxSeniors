@@ -1,7 +1,7 @@
-# SENIORAIDE – Application d’assistance pour seniors
+# AideAuxSeniors – Application d’assistance pour seniors
 
 ## Description
-SeniorAide est une application web destinée aux seniors. Elle permet de :
+AideAuxSeniors est une application web destinée aux seniors. Elle permet de :
 - Recevoir de l’aide via un assistant virtuel (chat basé sur OpenAI)
 - Gérer ses rappels et ses médicaments
 - Maintenir un profil personnalisé
@@ -23,7 +23,7 @@ SeniorAide est une application web destinée aux seniors. Elle permet de :
 
 ## Technologies utilisées
 - PHP 8.4, Laravel 12.44
-- MySQL
+- PostgreSQL
 - React (intégré dans le backend, compilé avec Vite)
 - Tailwind / Bootstrap pour le design
 - OpenAI API pour l’assistant virtuel
@@ -47,34 +47,30 @@ npm run dev
 # Lancer le serveur Laravel
 php artisan serve
 
+Configuration .env
+DB_CONNECTION=pgsql
+DB_HOST=<host>
+DB_PORT=5432
+DB_DATABASE=<db>
+DB_USERNAME=<user>
+DB_PASSWORD=<password>
 
+OPENAI_API_KEY=<votre_clé_api_openai>
 
-Configuration
+Structure de la base de données (simplifiée)
+Table	Description	Principaux champs
+users	Utilisateurs de l’application	id, name, email, password, is_admin
+profiles	Profils détaillés par utilisateur	user_id, prenom, telephone, theme_accueil, accessibilite
+reminders	Rappels pour les utilisateurs	user_id, type, message, heure, est_effectue, is_daily
+medications	Médicaments des utilisateurs	user_id, nom, dosage, est_effectue, is_daily
+contacts	Contacts génériques	nom, telephone
+emergency_contacts	Contacts d’urgence liés à un utilisateur	user_id, nom, telephone, lien
+onboarding_answers	Réponses utilisateurs lors de l’onboarding	user_id, question, reponse
+sessions	Sessions utilisateurs (Laravel interne)	user_id, ip_address, user_agent, payload
+cache / cache_locks	Stockage temporaire (Laravel)	key, value, expiration
+migrations	Historique des migrations	migration, batch
 
-.env :
-
-DB_DATABASE, DB_USERNAME, DB_PASSWORD pour MySQL
-
-OPENAI_API_KEY pour l’assistant virtuel
-
-Render ou autre serveur : assure-toi que storage/ et bootstrap/cache/ sont accessibles en écriture
-
-Structure de la base de données (MCD / MLD simplifié)
-Tables principales
-
-
-#Table	                                     Description	                                                               Principaux champs
-users	                             Utilisateurs de l’application	                                               id, name, email, password, is_admin
-profiles	                         Profils détaillés par utilisateur	                                           user_id, prenom, telephone, theme_accueil, accessibilite
-reminders	                         Rappels pour les utilisateurs	                                               user_id, type, message, heure, est_effectue
-medications	                         Médicaments des utilisateurs	                                               user_id, nom, dosage
-contacts	                         Contacts génériques	                                                       nom, telephone
-emergency_contacts	                 Contacts d’urgence liés à un utilisateur	                                   user_id, nom, telephone, lien
-onboarding_answers	                 Réponses des utilisateurs lors de l’onboarding	                               user_id, question, reponse
-sessions	                         Sessions utilisateurs	                                                       user_id, ip_address, user_agent, payload
-cache / cache_locks	                 Stockage temporaire pour Laravel	                                           key, value, expiration
-migrations	                         Historique des migrations	                                                   migration, batch
-
+Note : Les tables sessions, cache et migrations sont internes à Laravel et ne nécessitent pas d’intervention directe.
 
 Relations principales
 
@@ -90,10 +86,7 @@ users 1 → n onboarding_answers
 
 users 1 → n sessions
 
-Les tables cache et migrations sont internes à Laravel et ne contiennent pas de relations directes avec les autres tables.
-
-(voir diagramme dans backend/public/readme/diagramme.png)
-
+(voir diagramme dans backend/public//images/readme/diagramme.png)
 
 Usage
 
@@ -108,23 +101,25 @@ Lancez le chat pour obtenir de l’aide ou des informations
 Consultez vos rappels et marquez-les comme effectués
 
 Tests
+PHPUnit
 
-PHPUnit est installé par défaut (phpunit.xml)
+Exécuter tous les tests Laravel :
 
-Les tests ne sont pas configurés pour le moment
+php artisan test
 
-Vous pouvez lancer php artisan test pour exécuter les tests si vous en ajoutez
 
-Nettoyage avant production
+Exécuter les tests PHPUnit :
 
-Supprimer src/public/hot.txt (utile seulement pour le hot reload en dev)
+vendor/bin/phpunit --testdox
 
-Vider storage/logs/laravel.log pour enlever les erreurs de dev
+Notes importantes ⚠️
 
-Vérifier que .env contient les bonnes clés de production et n’est pas poussé sur GitHub
+Lors de l’onboarding, les rappels et préférences sont enregistrés.
 
+La suppression d’un compte est définitive.
+
+Les notifications et rappels dépendent de la configuration du navigateur.
 
 Licence
 
 MIT
-

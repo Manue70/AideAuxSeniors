@@ -13,6 +13,19 @@ import '../css/header-footer.css';
 
 document.addEventListener('DOMContentLoaded', () => {
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const alert = document.querySelector('.alert-success');
+
+            if (alert) {
+                setTimeout(() => {
+                    alert.style.transition = 'opacity 0.5s';
+                    alert.style.opacity = '0';
+
+                    setTimeout(() => alert.remove(), 500);
+                }, 5000);
+            }
+        });
+
 
     // =========================
     // MENU MODAL
@@ -80,6 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnNon = modal.querySelector('.btn-non');
         const form = document.getElementById('medicament-form');
 
+        
+        const hoursContainer = modal.querySelector('.prise-horaires');
+
         horaires.style.display = 'none';
         btnOui.classList.remove('active');
         btnNon.classList.remove('active');
@@ -98,7 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('input-matin').value = 'non';
         });
 
-       
+        // Suppression d'une heure (minimum 1)
+        hoursContainer?.addEventListener('click', e => {
+            if (e.target.classList.contains('remove-hour')) {
+                const inputs = hoursContainer.querySelectorAll('.hour-input');
+
+                if (inputs.length > 1) {
+                    e.target.closest('.hour-input').remove();
+                }
+            }
+        });
     });
 
     // Modale rappels

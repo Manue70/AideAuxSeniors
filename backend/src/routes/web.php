@@ -113,25 +113,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/medicaments/{medicament}', [MedicationController::class, 'destroy'])
         ->name('medicaments.destroy');
 
-
-    // Onboarding
-    Route::prefix('onboarding')->group(function () {
-        Route::get('/1', fn() => view('onboarding.page1'))->name('onboarding.1');
-        Route::get('/2', fn() => view('onboarding.page2'))->name('onboarding.2');
-        Route::get('/3', fn() => view('onboarding.page3'))->name('onboarding.3');
-        Route::get('/4', fn() => view('onboarding.page4'))->name('onboarding.4');
-        Route::get('/5', fn() => view('onboarding.page5'))->name('onboarding.5');
-        Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.index');
-
-
-        Route::post('/complete', function(Request $request) {
-            $user = Auth::user();
-            $user->onboarding_completed = true;
-            $user->save(); 
-            return redirect()->route('dashboard');
-        })->name('onboarding.complete');
-    });
-
     // Pages protégées supplémentaires
     Route::get('/contacts', fn() => view('pages.contacts'))->name('contacts');
     Route::get('/assistance', fn() => view('pages.assistance'))->name('assistance');
@@ -154,9 +135,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profil', [ProfileController::class, 'update'])
         ->name('profile.update')
         ->middleware('auth');
-
-    Route::delete('/admin/users/{user}', [AdminController::class, 'destroy'])
-        ->name('admin.users.destroy');
 
     
 

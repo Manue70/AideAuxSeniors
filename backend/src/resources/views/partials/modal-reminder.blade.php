@@ -14,7 +14,7 @@
             @csrf
 
             <!-- redirect dynamique -->
-            <input type="hidden" name="redirect_after" id="redirect_after">
+            <input type="hidden" name="from_onboarding" value="{{ request()->is('onboarding/*') ? 1 : 0 }}">
 
             <label for="type">Type</label>
             <select name="type" id="type" required>
