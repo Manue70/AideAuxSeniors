@@ -8,6 +8,7 @@
 
     <div class="dashboard-cards">
         <!-- Carte Rappels du jour -->
+        @foreach($reminders as $reminder) 
         <div class="card">
             <h3>{{ ucfirst($reminder->type) }} Rappels du jour</h3>
             <p> {{ $reminder->message }} – {{ $reminder->heure }} Prendre le médicament du matin</p>
@@ -22,6 +23,7 @@
                 VOIR
             </a>
         </div>
+        @endforeach
 
         <!-- Carte Médicaments -->
         <div class="card">
