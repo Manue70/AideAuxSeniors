@@ -17,19 +17,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================
     // ALERTES
     // =========================
+    const alert = document.querySelector('.alert-success');
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const alert = document.querySelector('.alert-success');
+    if (alert) {
+        setTimeout(() => {
+            alert.style.transition = 'opacity 0.5s';
+            alert.style.opacity = '0';
 
-        if (alert) {
-            setTimeout(() => {
-                alert.style.transition = 'opacity 0.5s';
-                alert.style.opacity = '0';
-
-                setTimeout(() => alert.remove(), 500);
-            }, 5000);
-        }
-    });
+            setTimeout(() => alert.remove(), 500);
+        }, 5000);
+    }
+    
 
 
     // =========================
