@@ -51,69 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =========================
-    // MODALES  Medicaments
-    // =========================
-    // Modale médicaments
-    setupModal('modal-medicament', '#btn-oui-medicament', '.close', () => {
-        const modal = document.getElementById('modal-medicament');
-        const horaires = modal.querySelector('.prise-horaires');
-        const btnOui = modal.querySelector('.btn-oui');
-        const btnNon = modal.querySelector('.btn-non');
-        const form = document.getElementById('medicament-form');
+    // ==============================================
+    // MODALES  Medicaments, Rappels , Notifications
+    // ==============================================
+    document.addEventListener('DOMContentLoaded', () => {
 
-        // IMPORTANT : container LOCAL à la modale
-        const hoursContainer = modal.querySelector('.prise-horaires');
+    const setupModal = (modalId, openBtnsSelector) => {
 
-        horaires.style.display = 'none';
-        btnOui.classList.remove('active');
-        btnNon.classList.remove('active');
-
-        btnOui?.addEventListener('click', () => {
-            btnOui.classList.add('active');
-            btnNon.classList.remove('active');
-            horaires.style.display = 'block';
-            document.getElementById('input-matin').value = 'oui';
-        });
-
-        btnNon?.addEventListener('click', () => {
-            btnNon.classList.add('active');
-            btnOui.classList.remove('active');
-            horaires.style.display = 'none';
-            document.getElementById('input-matin').value = 'non';
-        });
-
-        // Suppression d'une heure (minimum 1)
-        hoursContainer?.addEventListener('click', e => {
-            if (e.target.classList.contains('remove-hour')) {
-                const inputs = hoursContainer.querySelectorAll('.hour-input');
-
-                if (inputs.length > 1) {
-                    e.target.closest('.hour-input').remove();
-                }
-            }
-        });
-
-    });
-    setupModal(
-        'modal-medicament',  // ID de la modale
-        '#btn-open-medicament',  // bouton qui ouvre la modale
-        '.modal-close',
-        null
-    );
-
-
-
-    // =========================
-    // MODALES  RAPPELS, NOTIFICATIONS
-    // =========================
-
-    const setupModal = (modalId, openBtnsSelector, closeSelector, extraOpenLogic) => {
         const modal = document.getElementById(modalId);
         if (!modal) return;
 
         const openBtns = document.querySelectorAll(openBtnsSelector);
-        const closeBtn = modal.querySelector(closeSelector);
+        const closeBtn = modal.querySelector('.modal-close');
         const redirectInput = modal.querySelector('#redirect_after');
 
         modal.style.display = 'none';
@@ -122,16 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
                 modal.style.display = 'flex';
-                extraOpenLogic?.();
 
-                if (window.location.pathname.includes('/onboarding/2')) {
-                    redirectInput.value = '/onboarding/3';
-                } else {
-                    redirectInput.value = '/rappels';
+                if (redirectInput) {
+                    if (window.location.pathname.includes('/onboarding/2')) {
+                        redirectInput.value = '/onboarding/3';
+                    } else {
+                        redirectInput.value = '/rappels';
+                    }
                 }
             });
         });
-
 
         closeBtn?.addEventListener('click', () => modal.style.display = 'none');
 
@@ -146,40 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Ajouter / supprimer heures
-    const reminderForm = document.getElementById('reminderForm');
-    const hoursContainer = document.getElementById('hours-container');
-    const addHourBtn = document.getElementById('add-hour');
+    // RAPPELS
+    setupModal('modal-reminder', '.btn-open-reminder');
 
-    addHourBtn?.addEventListener('click', e => {
-        e.preventDefault();
-        const div = document.createElement('div');
-        div.className = 'hour-input';
-        div.innerHTML = `
-            <input type="time" name="heure[]" required>
-            <button type="button" class="remove-hour btn btn-danger btn-sm">×</button>
-        `;
-        hoursContainer.appendChild(div);
-    });
+    // MEDICAMENTS
+    setupModal('modal-medicament', '.btn-open-medicament');
 
-    hoursContainer?.addEventListener('click', e => {
-        if (e.target.classList.contains('remove-hour')) {
-            if (hoursContainer.children.length > 1) {
-                e.target.closest('.hour-input').remove();
-            }
-        }
-    });
+});
 
-
+          
+    
     // Modale notifications
     setupModal('modal-notif', '.btn-notif', '.close');
-
-    setupModal(
-        'modal-reminder',          // ID de la modale
-        '#btn-open-reminder',       // sélecteur des boutons qui ouvrent la modale
-        '.modal-close',            // bouton de fermeture dans la modale
-        null                       // logique supplémentaire si nécessaire
-    );
 
     // =========================
     // ACCESSIBILITÉ
