@@ -3,7 +3,11 @@
         <span class="modal-close">&times;</span>
         <h2>Ajouter un rappel</h2>
 
-        <form id="reminderForm" action="{{ route('reminders.store') }}" method="POST">
+        @php
+            $routeStore = route('rappels.store');
+        @endphp
+
+        <form id="reminderForm" action="{{ route('rappels.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label>Type :</label>
