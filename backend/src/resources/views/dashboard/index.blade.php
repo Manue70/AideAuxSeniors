@@ -40,10 +40,11 @@
         </div>
 
         <!-- Carte Hydratation -->
+        @foreach($reminders as $reminder)
         <div class="card">
-            <h3>Hydratation</h3>
-            <p>Prendre 6 verres d'eau</p>
-            <form action="{{ route('dashboard.markDone') }}" method="POST">
+            <h3>{{ ucfirst($reminder->type) }}Hydratation</h3>
+            <p> {{ $reminder->message }} – {{ $reminder->heure }}Prendre 6 verres d'eau</p>
+            <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
                 @csrf
                 <input type="hidden" name="task" value="hydration">
                 <button type="submit" class="btn-primary">FAIT</button>
@@ -55,6 +56,7 @@
             </a>
 
         </div>
+        @endforeach
 
         <!-- Carte Contacts d'urgence -->
         <div class="card">
