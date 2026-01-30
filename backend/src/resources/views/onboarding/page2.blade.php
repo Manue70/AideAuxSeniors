@@ -18,7 +18,7 @@
 
     <div class="onboarding-buttons">
         <!-- Bouton Oui : ouvre la modale -->
-        <button class="btn btn-primary btn-open-reminder ">
+        <button class="btn btn-primary btn-open-reminder">
                 Oui
         </button>
 

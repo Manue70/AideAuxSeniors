@@ -59,106 +59,106 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('DOMContentLoaded', () => {
 
-    // =====================
-    // MODALE RAPPELS
-    // =====================
+        // =====================
+        // MODALE RAPPELS
+        // =====================
 
-    const reminderModal = document.getElementById('modal-reminder');
-    const reminderOpenBtns = document.querySelectorAll('.btn-open-reminder');
-    const reminderClose = reminderModal?.querySelector('.modal-close');
+        const reminderModal = document.getElementById('modal-reminder');
+        const reminderOpenBtns = document.querySelectorAll('.btn-open-reminder');
+        const reminderClose = reminderModal?.querySelector('.modal-close');
 
-    if (reminderModal) {
+        if (reminderModal) {
 
-        reminderModal.style.display = 'none';
+            reminderModal.style.display = 'none';
 
-        reminderOpenBtns.forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault();
-                reminderModal.style.display = 'flex';
+            reminderOpenBtns.forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+                    reminderModal.style.display = 'flex';
+                });
             });
-        });
 
-        reminderClose?.addEventListener('click', () => reminderModal.style.display = 'none');
+            reminderClose?.addEventListener('click', () => reminderModal.style.display = 'none');
 
-        reminderModal.addEventListener('click', e => {
-            if (!reminderModal.querySelector('.modal-content').contains(e.target)) {
-                reminderModal.style.display = 'none';
-            }
-        });
-    }
-
-    // Ajouter heure rappel
-
-    const hoursContainer = document.getElementById('hours-container');
-    const addHourBtn = document.getElementById('add-hour');
-
-    if (hoursContainer && addHourBtn) {
-
-        addHourBtn.addEventListener('click', e => {
-            e.preventDefault();
-
-            const div = document.createElement('div');
-            div.className = 'hour-input';
-            div.innerHTML = `
-                <input type="time" name="heure[]" required>
-                <button type="button" class="remove-hour">×</button>
-            `;
-
-            hoursContainer.appendChild(div);
-        });
-
-        hoursContainer.addEventListener('click', e => {
-            if (e.target.classList.contains('remove-hour')) {
-                if (hoursContainer.children.length > 1) {
-                    e.target.closest('.hour-input').remove();
+            reminderModal.addEventListener('click', e => {
+                if (!reminderModal.querySelector('.modal-content').contains(e.target)) {
+                    reminderModal.style.display = 'none';
                 }
-            }
-        });
-    }
-
-    // =====================
-    // MODALE MEDICAMENTS
-    // =====================
-
-    const medicamentModal = document.getElementById('modal-medicament');
-    const medicamentBtns = document.querySelectorAll('.btn-open-medicament');
-    const medicamentClose = medicamentModal?.querySelector('.modal-close');
-
-    if (medicamentModal) {
-
-        medicamentModal.style.display = 'none';
-
-        medicamentBtns.forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault();
-                medicamentModal.style.display = 'flex';
             });
-        });
+        }
 
-        medicamentClose?.addEventListener('click', () => medicamentModal.style.display = 'none');
+        // Ajouter heure rappel
 
-        medicamentModal.addEventListener('click', e => {
-            if (!medicamentModal.querySelector('.modal-content').contains(e.target)) {
-                medicamentModal.style.display = 'none';
-            }
-        });
+        const hoursContainer = document.getElementById('hours-container');
+        const addHourBtn = document.getElementById('add-hour');
 
-        const btnOui = medicamentModal.querySelector('.btn-oui');
-        const btnNon = medicamentModal.querySelector('.btn-non');
-        const horaires = medicamentModal.querySelector('.prise-horaires');
+        if (hoursContainer && addHourBtn) {
 
-        horaires.style.display = 'none';
+            addHourBtn.addEventListener('click', e => {
+                e.preventDefault();
 
-        btnOui?.addEventListener('click', () => {
-            horaires.style.display = 'block';
-        });
+                const div = document.createElement('div');
+                div.className = 'hour-input';
+                div.innerHTML = `
+                    <input type="time" name="heure[]" required>
+                    <button type="button" class="remove-hour">×</button>
+                `;
 
-        btnNon?.addEventListener('click', () => {
+                hoursContainer.appendChild(div);
+            });
+
+            hoursContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('remove-hour')) {
+                    if (hoursContainer.children.length > 1) {
+                        e.target.closest('.hour-input').remove();
+                    }
+                }
+            });
+        }
+
+        // =====================
+        // MODALE MEDICAMENTS
+        // =====================
+
+        const medicamentModal = document.getElementById('modal-medicament');
+        const medicamentBtns = document.querySelectorAll('.btn-open-medicament');
+        const medicamentClose = medicamentModal?.querySelector('.modal-close');
+
+        if (medicamentModal) {
+
+            medicamentModal.style.display = 'none';
+
+            medicamentBtns.forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+                    medicamentModal.style.display = 'flex';
+                });
+            });
+
+            medicamentClose?.addEventListener('click', () => medicamentModal.style.display = 'none');
+
+            medicamentModal.addEventListener('click', e => {
+                if (!medicamentModal.querySelector('.modal-content').contains(e.target)) {
+                    medicamentModal.style.display = 'none';
+                }
+            });
+
+            const btnOui = medicamentModal.querySelector('.btn-oui');
+            const btnNon = medicamentModal.querySelector('.btn-non');
+            const horaires = medicamentModal.querySelector('.prise-horaires');
+
             horaires.style.display = 'none';
-        });
-    }
 
-});
+            btnOui?.addEventListener('click', () => {
+                horaires.style.display = 'block';
+            });
+
+            btnNon?.addEventListener('click', () => {
+                horaires.style.display = 'none';
+            });
+        }
+
+    });
 
 
     
