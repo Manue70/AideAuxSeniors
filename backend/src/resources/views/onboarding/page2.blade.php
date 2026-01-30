@@ -18,9 +18,10 @@
 
     <div class="onboarding-buttons">
         <!-- Bouton Oui : ouvre la modale -->
-        <button id="btn-oui-reminder" class="btn btn-primary" type="button">
-            Oui
+        <button id="btn-oui-reminder" class="btn btn-primary ">
+                Oui
         </button>
+
 
         <!-- Bouton Non : fait comme Continuer -->
         <a href="{{ route('onboarding.3') }}" class="btn btn-secondary">
