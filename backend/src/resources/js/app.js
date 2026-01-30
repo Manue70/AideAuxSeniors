@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Modale médicaments
-    setupModal('modal-medicament', '#btn-oui-medicament', '.close', () => {
+    setupModal('modal-medicament', '#btn-new-medication', '.close', () => {
         const modal = document.getElementById('modal-medicament');
         const horaires = modal.querySelector('.prise-horaires');
         const btnOui = modal.querySelector('.btn-oui');
@@ -127,39 +127,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Modale rappels
-    setupModal('modal-reminder', '#btn-oui-reminder, #btn-new-reminder', '.modal-close');
+    const setupReminderModal = () => {
+        const modal = document.getElementById('modal-reminder');
+        if (!modal) return;
+
+        const closeBtn = modal.querySelector('.modal-close');
         const reminderForm = document.getElementById('reminderForm');
         const hoursContainer = document.getElementById('hours-container');
         const addHourBtn = document.getElementById('add-hour');
         const redirectInput = document.getElementById('redirect_after');
 
-        document.querySelectorAll('.btn-open-reminder').forEach(btn => {
+        // Masquer la modale au départ
+        modal.style.display = 'none';
+
+        // Ouverture via boutons
+        document.querySelectorAll('#btn-oui-reminder, #btn-new-reminder, .btn-open-reminder').forEach(btn => {
             btn.addEventListener('click', e => {
-            e.preventDefault();
-                document.getElementById('modal-reminder').style.display = 'flex';
-                document.getElementById('redirect_after').value = btn.dataset.redirect || '';
+                e.preventDefault();
+                modal.style.display = 'flex';
+                redirectInput.value = btn.dataset.redirect || '';
             });
         });
 
+        // Fermeture avec le bouton "x"
+        closeBtn?.addEventListener('click', e => {
+            e.stopPropagation(); // empêche le clic de remonter au modal
+            modal.style.display = 'none';
+        });
+
+        // Fermeture en cliquant sur le fond
+        modal.addEventListener('click', e => {
+            if (e.target === modal) { // uniquement le fond
+                modal.style.display = 'none';
+            }
+        });
+
+        // Ajouter une nouvelle heure
         addHourBtn?.addEventListener('click', e => {
             e.preventDefault();
+            const div = document.createElement('div');
+            div.className = 'hour-input';
+            div.innerHTML = `
+                <input type="time" name="heure[]" required>
+                <button type="button" class="remove-hour btn btn-danger btn-sm">×</button>
+            `;
+            hoursContainer.appendChild(div);
+        });
 
-        const div = document.createElement('div');
-        div.className = 'hour-input';
-        div.innerHTML = `
-            <input type="time" name="heure[]" required>
-            <button type="button" class="remove-hour btn btn-danger btn-sm">×</button>
-        `;
-        hoursContainer.appendChild(div);
-    });
-
-    hoursContainer?.addEventListener('click', e => {
-        if (e.target.classList.contains('remove-hour')) {
-            if (hoursContainer.children.length > 1) {
-                e.target.closest('.hour-input').remove();
+        // Supprimer une heure (minimum 1)
+        hoursContainer?.addEventListener('click', e => {
+            if (e.target.classList.contains('remove-hour')) {
+                if (hoursContainer.children.length > 1) {
+                    e.target.closest('.hour-input').remove();
+                }
             }
-        }
-    });
+        });
+    };
+
+    // Initialiser la modale
+    setupReminderModal();
 
 
 

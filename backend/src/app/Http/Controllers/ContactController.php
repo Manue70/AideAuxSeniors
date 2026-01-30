@@ -17,6 +17,11 @@ class ContactController extends Controller
             'telephone.*' => 'required|string|max:20',
         ]);
 
+        public function create()
+        {
+            return view('contacts.create'); // si tu as une vue create.blade.php
+        }
+
         $noms = $data['nom'];
         $telephones = $data['telephone'];
 
