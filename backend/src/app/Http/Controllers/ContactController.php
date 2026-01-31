@@ -31,10 +31,17 @@ class ContactController extends Controller
 
     public function index(){
         
+        $user = Auth::user();
         $contacts = Contact::where('user_id', auth()->id())->get();
 
         return view('pages.contacts', compact('contacts'));
     }
 }
+
+public function contacts()
+{
+    return $this->hasMany(Contact::class);
+}
+
 
 

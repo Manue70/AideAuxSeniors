@@ -109,9 +109,13 @@ Route::middleware(['auth'])->group(function () {
     // Création d’un médicament (POST)
     Route::post('/medicaments', [MedicationController::class, 'store'])
         ->name('medicaments.store');
+        ->middleware('auth');
+
 
     Route::delete('/medicaments/{medicament}', [MedicationController::class, 'destroy'])
         ->name('medicaments.destroy');
+        ->middleware('auth');
+
 
     // Pages protégées supplémentaires
     Route::get('/contacts', fn() => view('pages.contacts'))->name('contacts');

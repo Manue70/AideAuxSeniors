@@ -13,6 +13,8 @@ use App\Models\Medication;
 
 class ReminderController extends Controller
 {
+    
+
     /**
      * Affiche les rappels du jour pour l'utilisateur connecté
      */

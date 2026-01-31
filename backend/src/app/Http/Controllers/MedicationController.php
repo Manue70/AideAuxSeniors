@@ -8,49 +8,48 @@ use App\Models\Reminder;
 
 class MedicationController extends Controller
 {
-    // Ajouter un médicament et créer les rappels correspondants
     public function store(Request $request)
     {
         $request->validate([
-            'nom'  => 'required|string|max:255',
-            'dose' => 'required|string|max:255',
-            'matin' => 'nullable|in:oui,non',
-            'midi'  => 'nullable|in:oui,non',
-            'soir'  => 'nullable|in:oui,non',
+            'nom'    => 'required|string|max:255',
+            'dosage' => 'required|string|max:255',
+            'matin'  => 'nullable|in:oui,non',
+            'midi'   => 'nullable|in:oui,non',
+            'soir'   => 'nullable|in:oui,non',
+            'is_daily'=> 'nullable',
         ]);
+
+        $userId = auth()->id();
 
         // Créer le médicament
         $medication = Medication::create([
-            'user_id' => auth()->id(),
+            'user_id' => $userId,
             'nom'     => $request->nom,
-            'dosage'  => $request->dose,
+            'dosage'  => $request->dosage,
         ]);
 
-        // Créer les rappels automatiquement
+        // Créer les rappels
         $heures = [
             'matin' => '08:00:00',
             'midi'  => '12:00:00',
             'soir'  => '19:00:00',
         ];
 
-        $isDaily = $request->has('is_daily');
-        
-        foreach (['matin', 'midi', 'soir'] as $moment) {
+        foreach (['matin','midi','soir'] as $moment) {
             if ($request->input($moment) === 'oui') {
                 Reminder::create([
-                    'user_id'      => auth()->id(),
+                    'user_id'      => $userId,
                     'type'         => 'médicament',
                     'message'      => "Prendre {$medication->nom} ({$medication->dosage})",
                     'heure'        => $heures[$moment],
                     'est_effectue' => false,
-                    'is_daily'     => $request->boolean('is_daily'),
+                    'is_daily'     => $request->has('is_daily'),
                 ]);
             }
         }
 
-        $redirect = $request->redirect_after ?? route('onboarding.3');
+        $redirect = $request->redirect_after ?? url()->previous();
 
-        return redirect($redirect)
-            ->with('success', 'Médicament et rappels ajoutés !');
-        }
+        return redirect($redirect)->with('success', 'Médicament et rappels ajoutés !');
+    }
 }

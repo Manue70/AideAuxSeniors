@@ -118,11 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeBtn = modal.querySelector('.modal-close');
         const btnOui = modal.querySelector('.btn-oui');
         const btnNon = modal.querySelector('.btn-non');
-        const hoursContainer = modal.querySelector('.prise-horaires');
+        const horairesDiv = modal.querySelector('.prise-horaires');
 
         modal.style.display = 'none';
-        if (hoursContainer) hoursContainer.style.display = 'none';
+        if (horairesDiv) horairesDiv.style.display = 'none';
 
+        // ouverture modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
@@ -130,24 +131,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // fermeture modale
         closeBtn?.addEventListener('click', () => modal.style.display = 'none');
         modal.addEventListener('click', e => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
 
-        btnOui?.addEventListener('click', () => hoursContainer.style.display = 'block');
-        btnNon?.addEventListener('click', () => hoursContainer.style.display = 'none');
+        // choix oui/non pour afficher les horaires
+        btnOui?.addEventListener('click', () => horairesDiv.style.display = 'block');
+        btnNon?.addEventListener('click', () => horairesDiv.style.display = 'none');
 
-        if (hoursContainer) {
-            hoursContainer.addEventListener('click', e => {
-                if (e.target.classList.contains('remove-hour')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.target.closest('.hour-input').remove();
-                }
+        // mettre à jour les hidden inputs en fonction des checkbox
+        const form = modal.querySelector('form');
+        form?.addEventListener('submit', e => {
+            ['matin','midi','soir'].forEach(moment => {
+                const checkbox = document.getElementById(`${moment}_checkbox`);
+                const hiddenInput = form.querySelector(`input[name="${moment}"]`);
+                if (checkbox.checked) hiddenInput.value = 'oui';
+                else hiddenInput.value = 'non';
             });
-        }
+        });
     })();
+
 
     // =====================
     // MODALE CONTACTS
@@ -173,6 +178,54 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
     })();
+
+    // ===============================
+    // Notifications (page parametres)
+    // ===============================
+    // MODALE NOTIFICATIONS
+    (() => {
+        const modal = document.getElementById('modal-notif');
+        if (!modal) return;
+
+        const openBtns = document.querySelectorAll('.btn-open-notif'); // bouton qui ouvre la modale
+        const closeBtn = modal.querySelector('.modal-close');
+        const inputEnabled = modal.querySelector('#notif-enabled');
+        const btnOui = modal.querySelector('#notif-oui');
+        const btnNon = modal.querySelector('#notif-non');
+        const form = modal.querySelector('#notif-form');
+
+        modal.style.display = 'none';
+
+        // ouvrir la modale
+        openBtns.forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                modal.style.display = 'flex';
+            });
+        });
+
+        // fermer la modale
+        closeBtn?.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', e => {
+            if (!modal.querySelector('.modal-content').contains(e.target)) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // bouton Oui
+        btnOui?.addEventListener('click', () => {
+            inputEnabled.value = 1;
+            form.submit();
+        });
+
+        // bouton Non
+        btnNon?.addEventListener('click', () => {
+            inputEnabled.value = 0;
+            form.submit();
+        });
+    })();
+
+
 
 
     

@@ -94,21 +94,36 @@
     </div>
 
     <!-- Bouton Déconnexion -->
-    <button class="settings-logout">Déconnexion</button>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="settings-logout btn btn-danger">Déconnexion</button>
+    </form>
+
+
+
+
 </main>
 
 <!-- MODALE NOTIFICATIONS -->
 <div id="modal-notif" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="modal-close">&times;</span>
         <h3>Notifications</h3>
-        <p>Vous recevrez des notifications sur votre numéro de téléphone.</p>
-        <div class="modal-buttons">
-            <button id="notif-oui" class="btn btn-primary">Oui</button>
-            <button id="notif-non" class="btn btn-secondary">Non</button>
-        </div>
+        <p>Voulez-vous recevoir des notifications sur votre numéro de téléphone ?</p>
+
+        <form id="notif-form" method="POST" action="{{ route('notifications.update') }}">
+            @csrf
+
+            <input type="hidden" name="enabled" id="notif-enabled" value="0">
+
+            <div class="modal-buttons">
+                <button type="button" id="notif-oui" class="btn btn-primary">Oui</button>
+                <button type="button" id="notif-non" class="btn btn-secondary">Non</button>
+            </div>
+        </form>
     </div>
 </div>
+
 
 @endsection
 

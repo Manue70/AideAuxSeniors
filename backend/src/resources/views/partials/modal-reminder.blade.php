@@ -38,7 +38,7 @@
             </div>
 
             <!-- Champ caché pour redirection -->
-            <input type="hidden" name="redirect_after" id="redirect_after" value="">
+            <input type="hidden" name="redirect_after" id="redirect_after" value="{{ url()->current() }}">
 
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>
