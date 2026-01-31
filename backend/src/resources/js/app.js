@@ -78,6 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        redirectInput.value = window.location.href;
+
         reminderClose?.addEventListener('click', () => reminderModal.style.display = 'none');
 
         reminderModal.addEventListener('click', e => {
@@ -162,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-        const medHoursContainer = medicamentModal?.querySelector('.hours-container');
+        const medHoursContainer = medicamentModal?.querySelector('.prise-horaires');
 
         if (medHoursContainer) {
             medHoursContainer.addEventListener('click', e => {

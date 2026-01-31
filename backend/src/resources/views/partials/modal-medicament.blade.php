@@ -11,8 +11,8 @@
             <label for="nom">Nom du médicament :</label>
             <input type="text" name="nom" id="nom" required>
 
-            <label for="dose">Dose :</label>
-            <input type="text" name="dose" id="dose" required>
+            <label for="dosage">Dose :</label>
+            <input type="text" name="dosage" id="dosage" required>
 
             <!-- Choix Matin/Midi/Soir -->
             <p>Prise :</p>
