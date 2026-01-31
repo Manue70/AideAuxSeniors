@@ -28,11 +28,11 @@ class ContactController extends Controller
             $request->redirect_after ?? route('contacts.index')
         )->with('success', 'Contact ajouté');
     }
+
     public function index(){
-        // récupère tous les contacts de l'utilisateur connecté
+        
         $contacts = Contact::where('user_id', auth()->id())->get();
 
-        // envoie la variable à la vue
         return view('pages.contacts', compact('contacts'));
     }
 }

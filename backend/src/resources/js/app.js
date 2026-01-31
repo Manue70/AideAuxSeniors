@@ -60,35 +60,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================
     // MODALE RAPPELS
     // =====================
+    (() => {
+        const modal = document.getElementById('modal-reminder');
+        if (!modal) return;
 
-    const reminderModal = document.getElementById('modal-reminder');
-    if (reminderModal) {
-        const reminderOpenBtns = document.querySelectorAll('.btn-open-reminder');
-        const reminderClose = reminderModal.querySelector('.modal-close');
-        const redirectInput = reminderModal.querySelector('input[name="redirect_after"]');
-        const hoursContainer = reminderModal.querySelector('#hours-container');
-        const addHourBtn = reminderModal.querySelector('#add-hour');
+        const openBtns = document.querySelectorAll('.btn-open-reminder');
+        const closeBtn = modal.querySelector('.modal-close');
+        const hoursContainer = modal.querySelector('#hours-container');
+        const addHourBtn = modal.querySelector('#add-hour');
 
-        reminderModal.style.display = 'none';
+        modal.style.display = 'none';
 
-        reminderOpenBtns.forEach(btn => {
+        openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
-                reminderModal.style.display = 'flex';
-                // redirection dynamique
+                modal.style.display = 'flex';
+                const redirectInput = modal.querySelector('input[name="redirect_after"]');
                 if (redirectInput) redirectInput.value = window.location.href;
             });
         });
 
-        reminderClose?.addEventListener('click', () => reminderModal.style.display = 'none');
-
-        reminderModal.addEventListener('click', e => {
-            if (!reminderModal.querySelector('.modal-content').contains(e.target)) {
-                reminderModal.style.display = 'none';
-            }
+        closeBtn?.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', e => {
+            if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
 
-        // Ajout d'heures
         if (hoursContainer && addHourBtn) {
             addHourBtn.addEventListener('click', e => {
                 e.preventDefault();
@@ -109,44 +105,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
-    }
+    })();
 
     // =====================
     // MODALE MEDICAMENTS
     // =====================
+    (() => {
+        const modal = document.getElementById('modal-medicament');
+        if (!modal) return;
 
-    const medicamentModal = document.getElementById('modal-medicament');
-    if (medicamentModal) {
-        const medicamentBtns = document.querySelectorAll('.btn-open-medicament');
-        const medicamentClose = medicamentModal.querySelector('.modal-close');
-        const btnOui = medicamentModal.querySelector('.btn-oui');
-        const btnNon = medicamentModal.querySelector('.btn-non');
-        const medHoursContainer = medicamentModal.querySelector('.prise-horaires');
+        const openBtns = document.querySelectorAll('.btn-open-medicament');
+        const closeBtn = modal.querySelector('.modal-close');
+        const btnOui = modal.querySelector('.btn-oui');
+        const btnNon = modal.querySelector('.btn-non');
+        const hoursContainer = modal.querySelector('.prise-horaires');
 
-        medicamentModal.style.display = 'none';
-        if (medHoursContainer) medHoursContainer.style.display = 'none';
+        modal.style.display = 'none';
+        if (hoursContainer) hoursContainer.style.display = 'none';
 
-        medicamentBtns.forEach(btn => {
+        openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
-                medicamentModal.style.display = 'flex';
+                modal.style.display = 'flex';
             });
         });
 
-        medicamentClose?.addEventListener('click', () => medicamentModal.style.display = 'none');
-
-        medicamentModal.addEventListener('click', e => {
-            if (!medicamentModal.querySelector('.modal-content').contains(e.target)) {
-                medicamentModal.style.display = 'none';
-            }
+        closeBtn?.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', e => {
+            if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
 
-        btnOui?.addEventListener('click', () => medHoursContainer.style.display = 'block');
-        btnNon?.addEventListener('click', () => medHoursContainer.style.display = 'none');
+        btnOui?.addEventListener('click', () => hoursContainer.style.display = 'block');
+        btnNon?.addEventListener('click', () => hoursContainer.style.display = 'none');
 
-        // supprimer une heure
-        if (medHoursContainer) {
-            medHoursContainer.addEventListener('click', e => {
+        if (hoursContainer) {
+            hoursContainer.addEventListener('click', e => {
                 if (e.target.classList.contains('remove-hour')) {
                     e.preventDefault();
                     e.stopPropagation();
@@ -154,37 +147,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
-    }
-
-
+    })();
 
     // =====================
     // MODALE CONTACTS
-    // =====================  
+    // =====================
+    (() => {
+        const modal = document.getElementById('modal-contact');
+        if (!modal) return;
 
-    const contactModal = document.getElementById('modal-contact');
-    const contactBtns = document.querySelectorAll('.btn-open-contact');
-    const contactClose = contactModal?.querySelector('.modal-close');
+        const openBtns = document.querySelectorAll('.btn-open-contact');
+        const closeBtn = modal.querySelector('.modal-close');
 
-    if (contactModal) {
+        modal.style.display = 'none';
 
-        contactModal.style.display = 'none';
-
-        contactBtns.forEach(btn => {
+        openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
-                contactModal.style.display = 'flex';
+                modal.style.display = 'flex';
             });
         });
 
-        contactClose?.addEventListener('click', () => contactModal.style.display = 'none');
-
-        contactModal.addEventListener('click', e => {
-            if (!contactModal.querySelector('.modal-content').contains(e.target)) {
-                contactModal.style.display = 'none';
-            }
+        closeBtn?.addEventListener('click', () => modal.style.display = 'none');
+        modal.addEventListener('click', e => {
+            if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
-    }
+    })();
 
 
     
