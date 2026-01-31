@@ -84,4 +84,5 @@
 @include('partials.modal-medicament')
 @include('partials.modal-reminder')
 
+@endsection
 

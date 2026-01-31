@@ -69,7 +69,7 @@
         <!-- Carte Hydratation -->
         @foreach($reminders as $reminder)
         <div class="card">
-            <h3>{{ ucfirst($reminder->type) }}Hydratation</h3>
+            <h3>Hydratation</h3>
             <p> {{ $reminder->message }} – {{ $reminder->heure }}Prendre 6 verres d'eau</p>
             <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
                 @csrf

@@ -160,13 +160,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-        hoursContainer.addEventListener('click', e => {
-            if (e.target.classList.contains('remove-hour')) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.target.closest('.hour-input').remove();
-            }
-        });   
+
+
+        const medHoursContainer = medicamentModal?.querySelector('.hours-container');
+
+        if (medHoursContainer) {
+            medHoursContainer.addEventListener('click', e => {
+                if (e.target.classList.contains('remove-hour')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.target.closest('.hour-input').remove();
+                }
+            });
+        }
+
 
 
 
