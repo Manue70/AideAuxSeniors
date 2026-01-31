@@ -57,18 +57,19 @@
         
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
 
-            @auth
-               <a href="{{ route('contacts.create') }}" class="btn btn-success">
-                    Ajouter un contact
-                </a>
-
-            @endauth
+           <button class="btn btn-success btn-open-contact">
+                Ajouter un contact
+            </button>
+ 
         
     </div>
 
 
 </main>
 
+@foreach($contacts as $contact)
+
+@include('partials.modal-contacts')
 @vite('resources/css/info-pages.css')
 @endsection
         

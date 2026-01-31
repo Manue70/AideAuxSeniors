@@ -9,33 +9,24 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
-        // Valider les contacts
-        $data = $request->validate([
-            'nom' => 'required|array|min:1',
-            'nom.*' => 'required|string|max:255',
-            'telephone' => 'required|array|min:1',
-            'telephone.*' => 'required|string|max:20',
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'telephone' => 'required|string|max:20',
+            'lien' => 'nullable|string|max:255',
+            'prioritaire' => 'nullable'
         ]);
 
-        public function create()
-        {
-            return view('contacts.create'); // si tu as une vue create.blade.php
-        }
-
-        $noms = $data['nom'];
-        $telephones = $data['telephone'];
-
-        foreach ($noms as $index => $nom) {
-            Contact::create([
-                'nom' => $nom,
-                'telephone' => $telephones[$index] ?? '',
-                'user_id' => auth()->id(),
-            ]);
-        }
+        Contact::create([
+            'user_id' => auth()->id(),
+            'nom' => $request->nom,
+            'telephone' => $request->telephone,
+            'lien' => $request->lien,
+            'prioritaire' => $request->boolean('prioritaire')
+        ]);
 
         return redirect(
             $request->redirect_after ?? route('contacts.index')
-                )->with('success', 'Contacts enregistrés !');
-
+        )->with('success', 'Contact ajouté');
     }
 }
+

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Reminder;
 use Illuminate\Http\Request;
+use App\Models\Contact;
+
 
 class DashboardController extends Controller
 {
@@ -15,8 +17,13 @@ class DashboardController extends Controller
             ->orderBy('heure')
             ->get();
 
+        $contactUrgent = Contact::where('user_id', auth()->id())
+            ->orderByDesc('prioritaire')
+            ->first();
 
-        return view('dashboard.index', compact('reminders'));
+
+
+        return view('dashboard.index', compact('reminders'), compact('contactUrgent') );
     }
 
     public function markDone($id)

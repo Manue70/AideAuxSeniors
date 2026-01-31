@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         hoursContainer.addEventListener('click', e => {
             if (e.target.classList.contains('remove-hour')) {
                 if (hoursContainer.children.length > 1) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     e.target.closest('.hour-input').remove();
                 }
             }
@@ -158,7 +160,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+        hoursContainer.addEventListener('click', e => {
+            if (e.target.classList.contains('remove-hour')) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.target.closest('.hour-input').remove();
+            }
+        });   
 
+
+
+
+
+    // =====================
+    // MODALE CONTACTS
+    // =====================  
+
+    const contactModal = document.getElementById('modal-contact');
+    const contactBtns = document.querySelectorAll('.btn-open-contact');
+    const contactClose = contactModal?.querySelector('.modal-close');
+
+    if (contactModal) {
+
+        contactModal.style.display = 'none';
+
+        contactBtns.forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                contactModal.style.display = 'flex';
+            });
+        });
+
+        contactClose?.addEventListener('click', () => contactModal.style.display = 'none');
+
+        contactModal.addEventListener('click', e => {
+            if (!contactModal.querySelector('.modal-content').contains(e.target)) {
+                contactModal.style.display = 'none';
+            }
+        });
+    }
 
 
     

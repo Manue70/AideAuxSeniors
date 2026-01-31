@@ -72,15 +72,16 @@
         <button class="btn btn-primary btn-open-medicament">Ajouter un médicament</button>
     </div>
 
+    
 
     {{-- Retour au dashboard --}}
     <div class="info-buttons">
         <a href="{{ route('dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
     </div>
-    
+ 
+</main>   
 
 @include('partials.modal-medicament')
-
-</main>
+@include('partials.modal-reminder')
 
 

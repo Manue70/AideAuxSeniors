@@ -37,7 +37,7 @@
         <!-- Carte Rappels du jour -->
         @foreach($reminders as $reminder) 
         <div class="card">
-            <h3>{{ ucfirst($reminder->type) }} Rappels du jour</h3>
+            <h3> Rappels du jour</h3>
             <p> {{ $reminder->message }} – {{ $reminder->heure }} Prendre le médicament du matin</p>
             <form action="{{ route('dashboard.markDone',$reminder->id ) }}" method="POST">
                 @csrf
@@ -88,10 +88,23 @@
         <!-- Carte Contacts d'urgence -->
         <div class="card">
             <h3>Contacts d'urgence</h3>
-            <p>Nom + Téléphone</p>
-            <a href="tel:+33123456789" class="btn-primary">APPELER</a>
+
+            @if($contactUrgent)
+                <p>{{ $contactUrgent->nom }} — {{ $contactUrgent->telephone }}</p>
+
+                <a href="tel:{{ $contactUrgent->telephone }}" class="btn-primary">
+                    APPELER
+                </a>
+            @else
+                <p>Aucun contact enregistré</p>
+            @endif
+
+            <button class="btn-primary btn-open-contact">
+                Modifier
+            </button>
         </div>
+
+            
     </div>
-</div>
 @endsection
 

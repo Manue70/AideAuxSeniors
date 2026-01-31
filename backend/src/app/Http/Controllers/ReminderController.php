@@ -92,7 +92,7 @@ class ReminderController extends Controller
     /**
      * Bascule l'état "fait / à faire" d'un rappel
      */
-    public function toggle($id)
+    public function toggle(Request $request, $id)
     {
         $user = auth()->user(); // récupère l'utilisateur connecté
 

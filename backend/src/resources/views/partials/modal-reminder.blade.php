@@ -9,6 +9,9 @@
 
         <form id="reminderForm" action="{{ route('rappels.store') }}" method="POST">
             @csrf
+
+            <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
+
             <div class="form-group">
                 <label>Type :</label>
                 <input type="text" name="type" required>
