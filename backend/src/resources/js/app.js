@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // fermeture modale
         closeBtn?.addEventListener('click', () => modal.style.display = 'none');
+
         modal.addEventListener('click', e => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
@@ -141,19 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnOui?.addEventListener('click', () => horairesDiv.style.display = 'block');
         btnNon?.addEventListener('click', () => horairesDiv.style.display = 'none');
 
-        // mettre à jour les hidden inputs en fonction des checkbox
-        const form = modal.querySelector('form');
-        form?.addEventListener('submit', e => {
-            ['matin','midi','soir'].forEach(moment => {
-                const checkbox = document.getElementById(`${moment}_checkbox`);
-                const hiddenInput = form.querySelector(`input[name="${moment}"]`);
-                if (checkbox.checked) hiddenInput.value = 'oui';
-                else hiddenInput.value = 'non';
-            });
-        });
     })();
-
-
     // =====================
     // MODALE CONTACTS
     // =====================

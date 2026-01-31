@@ -4,11 +4,8 @@
         <span class="modal-close">&times;</span>
         <h3>Nouveau médicament</h3>
 
-        <form method="POST" action="{{ route('medicaments.store') }}" id="medicament-form">
+        <form method="POST" action="{{ route('medicaments.store') }}">
             @csrf
-
-            <!-- Redirection après enregistrement -->
-            <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
 
             <!-- Nom -->
             <label for="nom">Nom du médicament :</label>
@@ -22,7 +19,7 @@
             <div style="margin-top:1rem;">
                 <label style="display:flex; align-items:center; gap:0.5rem;">
                     <input type="checkbox" name="is_daily" value="1">
-                    Traitement quotidien
+                        Traitement quotidien
                 </label>
             </div>
 
@@ -51,10 +48,15 @@
                 </div>
             </div>
 
+            {{-- Redirection --}}
+            <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
+
             <div class="modal-buttons" style="margin-top:1rem;">
                 <button type="submit" class="btn btn-primary">Enregistrer le médicament</button>
-                
             </div>
+
+
+
         </form>
     </div>
 </div>
