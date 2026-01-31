@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
+    // Affiche les contacts
+    public function index()
+    {
+        $user = Auth::user();
+        $contacts = Contact::where('user_id', $user->id)->get();
+
+        return view('pages.contacts', compact('contacts'));
+    }
+
+    // Enregistre un contact
     public function store(Request $request)
     {
         $request->validate([
@@ -28,20 +39,8 @@ class ContactController extends Controller
             $request->redirect_after ?? route('contacts.index')
         )->with('success', 'Contact ajouté');
     }
-
-    public function index(){
-        
-        $user = Auth::user();
-        $contacts = Contact::where('user_id', auth()->id())->get();
-
-        return view('pages.contacts', compact('contacts'));
-    }
 }
 
-public function contacts()
-{
-    return $this->hasMany(Contact::class);
-}
 
 
 

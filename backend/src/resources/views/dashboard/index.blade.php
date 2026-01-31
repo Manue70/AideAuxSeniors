@@ -38,7 +38,7 @@
         @foreach($reminders as $reminder) 
         <div class="card">
             <h3> Rappels du jour</h3>
-            <p> {{ $reminder->message }} – {{ $reminder->heure }} Prendre le médicament du matin</p>
+            <p> {{ $reminder->message }} – {{ $reminder->heure }} </p>
             <form action="{{ route('dashboard.markDone',$reminder->id ) }}" method="POST">
                 @csrf
                 <input type="hidden" name="task" value="medicament_matin">
@@ -53,18 +53,23 @@
         @endforeach
 
         <!-- Carte Médicaments -->
+         @foreach($reminders as $reminder) 
         <div class="card">
-            <h3>Médicaments</h3>
-            <p>Modification du matin</p>
-            <button
-                 id="btn-oui-medicament"
-                type="button"
-                class="btn-primary"
-            >
-                 VOIR / Modifier
-            </button>
+            <h3>Medicaments</h3>
+            <p> {{ $reminder->message }} – {{ $reminder->heure }} </p>
+            <form action="{{ route('dashboard.markDone',$reminder->id ) }}" method="POST">
+                @csrf
+                <input type="hidden" name="task" value="medicament_matin">
+                <button type="submit" class="btn-primary">FAIT</button>
+            </form>
 
+            
+            <a href="{{ route('rappels') }}" class="btn-primary">
+                VOIR/MODIFIER
+            </a>
         </div>
+        @endforeach
+
 
         <!-- Carte Hydratation -->
         @foreach($reminders as $reminder)

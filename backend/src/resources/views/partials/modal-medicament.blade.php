@@ -53,7 +53,7 @@
 
             <div class="modal-buttons" style="margin-top:1rem;">
                 <button type="submit" class="btn btn-primary">Enregistrer le médicament</button>
-                <button type="button" id="add-medicament" class="btn btn-secondary">Ajouter un autre médicament</button>
+                
             </div>
         </form>
     </div>
