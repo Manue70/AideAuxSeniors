@@ -95,30 +95,38 @@ class ReminderController extends Controller
      * Bascule l'état "fait / à faire" d'un rappel
      */
     public function toggle(Request $request, $id)
+        {
+            $user = auth()->user();
+
+            $reminder = Reminder::where('id', $id)
+                                ->where('user_id', $user->id)
+                                ->firstOrFail();
+
+            $reminder->est_effectue = !$reminder->est_effectue;
+            $reminder->save();
+
+            if ($request->from_onboarding) {
+                return redirect()->route('onboarding.2')
+                                ->with('success', 'Rappel enregistré');
+            }
+
+            // Si pas depuis onboarding
+            return redirect()->route('rappels')
+                            ->with('success', 'Statut du rappel mis à jour.');
+        }
+
+
+    public function clearDone()
     {
-        $user = auth()->user(); // récupère l'utilisateur connecté
+        $userId = auth()->id();
 
-        // Cherche le rappel par ID et par utilisateur
-        $reminder = Reminder::where('id', $id)
-                            ->where('user_id', $user->id)
-                            ->firstOrFail(); // lève une 404 si pas trouvé
-
-        // Bascule l'état
-        $reminder->est_effectue = !$reminder->est_effectue;
-        $reminder->save();
-
-        if ($request->from_onboarding) {
-        return redirect()->route('onboarding.2')->with('success', 'Rappel enregistré');
-    }
-
-        // Supprimer ou reset les rappels déjà faits
-        Reminder::where('user_id', $userId)
+        // Supprime les rappels faits
+         Reminder::where('user_id', $userId)
             ->where('est_effectue', true)
             ->delete(); 
 
+         return redirect()->back()->with('success', 'Rappels effectués nettoyés !');
 
-
-        return redirect()->route('rappels')->with('success', 'Statut du rappel mis à jour.');
     }
 
     

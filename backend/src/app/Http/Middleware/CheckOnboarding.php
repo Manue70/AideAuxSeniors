@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CheckOnboarding
-
+{
     public function handle(Request $request, Closure $next)
     {
         // Si l'utilisateur est connecté mais n'a pas fini le onboarding

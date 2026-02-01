@@ -29,10 +29,11 @@
 
             <div class="form-group">
                 <label>
-                    <input type="checkbox" name="prioritaire" value="1">
+                    <input type="checkbox" name="prioritaire" value="1" {{ old('prioritaire') ? 'checked' : '' }}>
                     Contact prioritaire
                 </label>
             </div>
+
 
             <button class="btn btn-primary">Enregistrer</button>
 

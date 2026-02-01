@@ -79,7 +79,7 @@
         <a href="{{ route('dashboard') }}" class="btn btn-secondary">Retour au tableau de bord</a>
     </div>
 
-    <form method="POST" action="{{ route('rappels.clearDone') }}">
+    <form method="POST" action="{{ route('rappels.clearDone') }}" style="margin-top: 1rem;" >
      @csrf
         <button type="submit" class="btn btn-warning">
             Vider les rappels effectués
