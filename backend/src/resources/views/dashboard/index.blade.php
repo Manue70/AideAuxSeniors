@@ -71,7 +71,7 @@
                 </form>
 
                 <!-- Bouton Voir / Modifier qui ouvre la modale -->
-                @if($med)
+                
                     <button 
                         class="btn btn-primary btn-open-medicament"
                         data-id="{{ $reminder->medication->id ?? '' }}"
@@ -84,7 +84,7 @@
                     >
                            Voir / Modifier
                     </button>
-                @endif
+                
             </div>
         @endforeach
 
