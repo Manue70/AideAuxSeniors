@@ -116,33 +116,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const openBtns = document.querySelectorAll('.btn-open-medicament');
         const closeBtn = modal.querySelector('.modal-close');
-        const btnOui = modal.querySelector('.btn-oui');
-        const btnNon = modal.querySelector('.btn-non');
-        const horairesDiv = modal.querySelector('.prise-horaires');
+        const form = document.getElementById('medication-form');
+        const deleteBtn = document.getElementById('delete-medication');
+
+        const idInput = document.getElementById('medication-id');
+        const nomInput = document.getElementById('medication-nom');
+        const dosageInput = document.getElementById('medication-dosage');
+        const dailyInput = document.getElementById('medication-daily');
+        const matinInput = document.getElementById('medication-matin');
+        const midiInput = document.getElementById('medication-midi');
+        const soirInput = document.getElementById('medication-soir');
+        const methodInput = document.getElementById('form-method');
+        const title = document.getElementById('modal-title');
 
         modal.style.display = 'none';
-        if (horairesDiv) horairesDiv.style.display = 'none';
 
-        // ouverture modale
+        // Ouvre la modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
+                // Si le bouton contient des data (edit)
+                const medication = btn.dataset;
+                if (medication.id) {
+                    title.textContent = "Modifier médicament";
+                    idInput.value = medication.id;
+                    nomInput.value = medication.nom;
+                    dosageInput.value = medication.dosage;
+                    dailyInput.checked = medication.isDaily === "1";
+                    matinInput.checked = medication.matin === "oui";
+                    midiInput.checked = medication.midi === "oui";
+                    soirInput.checked = medication.soir === "oui";
+                    methodInput.value = "PUT";
+                    form.action = `/medicaments/${medication.id}`;
+                    deleteBtn.style.display = "inline-block";
+                } else {
+                    title.textContent = "Nouveau médicament";
+                    form.action = "{{ route('medicaments.store') }}";
+                    methodInput.value = "POST";
+                    idInput.value = "";
+                    nomInput.value = "";
+                    dosageInput.value = "";
+                    dailyInput.checked = false;
+                    matinInput.checked = false;
+                    midiInput.checked = false;
+                    soirInput.checked = false;
+                    deleteBtn.style.display = "none";
+                }
+
                 modal.style.display = 'flex';
             });
         });
 
-        // fermeture modale
+        // Fermer modale
         closeBtn?.addEventListener('click', () => modal.style.display = 'none');
-
         modal.addEventListener('click', e => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
 
-        // choix oui/non pour afficher les horaires
-        btnOui?.addEventListener('click', () => horairesDiv.style.display = 'block');
-        btnNon?.addEventListener('click', () => horairesDiv.style.display = 'none');
-
+        // Supprimer
+        deleteBtn.addEventListener('click', () => {
+            const id = idInput.value;
+            if (!id) return;
+            if (confirm("Voulez-vous vraiment supprimer ce médicament ?")) {
+                fetch(`/medicaments/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json'
+                    }
+                }).then(() => location.reload());
+            }
+        });
     })();
+
+
+
     // =====================
     // MODALE CONTACTS
     // =====================
@@ -151,22 +199,55 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal) return;
 
         const openBtns = document.querySelectorAll('.btn-open-contact');
-        const closeBtn = modal.querySelector('.modal-close');
+        const closeBtns = modal.querySelectorAll('.modal-close, .btn-close-contact');
+        const form = document.getElementById('contact-form');
+        const title = document.getElementById('modal-title');
+        const methodInput = document.getElementById('form-method');
 
-        modal.style.display = 'none';
+        const nomInput = document.getElementById('contact-nom');
+        const telInput = document.getElementById('contact-telephone');
+        const lienInput = document.getElementById('contact-lien');
+        const prioritaireInput = document.getElementById('contact-prioritaire');
 
+        // Ouvrir la modale pour ajouter
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
+
+                if (btn.classList.contains('btn-edit-contact')) {
+                    // Éditer un contact
+                    const id = btn.dataset.id;
+                    title.textContent = "Modifier le contact";
+                    form.action = `/contacts/${id}`;
+                    methodInput.value = 'PUT';
+                    nomInput.value = btn.dataset.nom;
+                    telInput.value = btn.dataset.telephone;
+                    lienInput.value = btn.dataset.lien;
+                    prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true";
+                } else {
+                    // Ajouter un contact
+                    title.textContent = "Ajouter un contact";
+                    form.action = "{{ route('contacts.store') }}";
+                    methodInput.value = 'POST';
+                    nomInput.value = '';
+                    telInput.value = '';
+                    lienInput.value = '';
+                    prioritaireInput.checked = false;
+                }
+
                 modal.style.display = 'flex';
             });
         });
 
-        closeBtn?.addEventListener('click', () => modal.style.display = 'none');
+        // Fermer la modale
+        closeBtns.forEach(btn => btn.addEventListener('click', () => modal.style.display = 'none'));
+
         modal.addEventListener('click', e => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
     })();
+
+        
 
     // ===============================
     // Notifications (page parametres)

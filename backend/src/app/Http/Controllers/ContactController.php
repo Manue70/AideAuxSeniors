@@ -32,13 +32,55 @@ class ContactController extends Controller
             'nom' => $request->nom,
             'telephone' => $request->telephone,
             'lien' => $request->lien,
-            'prioritaire' => $request->has('prioritaire')
+            'prioritaire' => $request->boolean('prioritaire')
         ]);
 
         return redirect(
             $request->redirect_after ?? route('contacts.index')
         )->with('success', 'Contact ajouté');
     }
+
+    // Page édition
+    public function edit(Contact $contact)
+    {
+        $this->authorize('update', $contact); // si tu veux vérifier que c'est bien le user
+        return view('pages.edit-contact', compact('contact'));
+    }
+
+    // Mise à jour
+    public function update(Request $request, Contact $contact)
+    {
+        $this->authorize('update', $contact);
+
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'telephone' => 'required|string|max:20',
+            'lien' => 'nullable|string|max:255',
+            'prioritaire' => 'nullable'
+        ]);
+
+        $contact->update([
+            'nom' => $request->nom,
+            'telephone' => $request->telephone,
+            'lien' => $request->lien,
+            'prioritaire' => $request->boolean('prioritaire')
+        ]);
+
+        return redirect()->route('contacts.index')->with('success', 'Contact modifié');
+    }
+
+    // Supprimer
+    public function destroy(Contact $contact)
+    {
+        $this->authorize('delete', $contact);
+
+        $contact->delete();
+
+        return redirect()->route('contacts.index')->with('success', 'Contact supprimé');
+    }
+
+
+
 }
 
 

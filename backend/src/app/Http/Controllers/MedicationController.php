@@ -52,4 +52,34 @@ class MedicationController extends Controller
 
         return redirect($redirect)->with('success', 'Médicament et rappels ajoutés !');
     }
+
+
+    
+    public function update(Request $request, Medication $medicament)
+    {
+        $request->validate([
+            'nom'    => 'required|string|max:255',
+            'dosage' => 'required|string|max:255',
+            'matin'  => 'nullable|in:oui,non',
+            'midi'   => 'nullable|in:oui,non',
+            'soir'   => 'nullable|in:oui,non',
+            'is_daily'=> 'nullable',
+        ]);
+
+        $medicament->update([
+            'nom' => $request->nom,
+            'dosage' => $request->dosage,
+        ]);
+
+        // Optionnel : gérer la mise à jour des rappels si besoin
+
+        return redirect()->back()->with('success', 'Médicament mis à jour !');
+    }
+
+    public function destroy(Medication $medicament)
+    {
+        $medicament->delete();
+        return redirect()->back()->with('success', 'Médicament supprimé !');
+    }
+
 }

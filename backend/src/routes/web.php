@@ -96,6 +96,18 @@ Route::post('/contacts', [ContactController::class, 'store'])
     ->middleware('auth');
 
 
+// Mise à jour
+Route::put('/contacts/{contact}', [ContactController::class, 'update'])
+    ->name('contacts.update')
+    ->middleware('auth');
+
+// Supprimer
+Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])
+    ->name('contacts.destroy')
+    ->middleware('auth');
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -114,9 +126,11 @@ Route::middleware(['auth'])->group(function () {
     // Création d’un médicament (POST)
     Route::post('/medicaments', [MedicationController::class, 'store'])
         ->name('medicaments.store');
+
+    Route::put('/medicaments/{medicament}', [MedicationController::class, 'update'])
+        ->name('medicaments.update');
+
         
-
-
     Route::delete('/medicaments/{medicament}', [MedicationController::class, 'destroy'])
         ->name('medicaments.destroy');
         
