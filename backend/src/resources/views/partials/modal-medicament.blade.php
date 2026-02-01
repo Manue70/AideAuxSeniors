@@ -25,34 +25,23 @@
 
             <!-- Choix Matin/Midi/Soir -->
             <p>Prise :</p>
-            <div class="prise-buttons">
-                <button type="button" class="btn-prise btn-oui">Oui</button>
-                <button type="button" class="btn-prise btn-non">Non</button>
+            
+            <div class="hour-input">
+                <label>Matin :</label>
+                <input type="hidden" name="matin" value="non">
+                <input type="checkbox" name="matin" value="oui">
             </div>
 
-            <div class="prise-horaires" style="display:none; margin-top:20px;">
-                <div class="hour-input">
-                    <label for="matin">Matin :</label>
-                    <input type="hidden" name="matin" value="non">
-                    <input type="checkbox" id="matin_checkbox" value="oui">
-                </div>
-                <div class="hour-input">
-                    <label for="midi">Midi :</label>
-                    <input type="hidden" name="midi" value="non">
-                    <input type="checkbox" id="midi_checkbox" value="oui">
-                </div>
-                <div class="hour-input">
-                    <label for="soir">Soir :</label>
-                    <input type="hidden" name="soir" value="non">
-                    <input type="checkbox" id="soir_checkbox" value="oui">
-                </div>
+            <div class="hour-input">
+                <label>Midi :</label>
+                <input type="hidden" name="midi" value="non">
+                <input type="checkbox" name="midi" value="oui">
             </div>
 
-            {{-- Redirection --}}
-            <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
-
-            <div class="modal-buttons" style="margin-top:1rem;">
-                <button type="submit" class="btn btn-primary">Enregistrer le médicament</button>
+            <div class="hour-input">
+                <label>Soir :</label>
+                <input type="hidden" name="soir" value="non">
+                <input type="checkbox" name="soir" value="oui">
             </div>
 
 

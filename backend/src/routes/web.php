@@ -117,7 +117,7 @@ Route::middleware(['auth'])->group(function () {
         
 
     // Pages protégées supplémentaires
-    Route::get('/contacts', fn() => view('pages.contacts'))->name('contacts');
+    
     Route::get('/assistance', fn() => view('pages.assistance'))->name('assistance');
     Route::get('/assistant', fn() => redirect()->route('assistance'));
     Route::post('/assistant', [AssistantController::class, 'ask']) ->name('assistant') ->middleware('auth');

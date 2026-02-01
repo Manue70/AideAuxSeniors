@@ -60,7 +60,7 @@
 </main>
 
 @include('partials.modal-contacts')
-
+@vite('resources/css/info-pages.css')
 @endsection
 
         
