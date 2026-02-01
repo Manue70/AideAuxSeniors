@@ -32,7 +32,7 @@ class ContactController extends Controller
             'nom' => $request->nom,
             'telephone' => $request->telephone,
             'lien' => $request->lien,
-            'prioritaire' => $request->boolean('prioritaire')
+            'prioritaire' => $request->has('prioritaire')
         ]);
 
         return redirect(

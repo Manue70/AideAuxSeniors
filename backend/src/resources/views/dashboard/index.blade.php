@@ -104,9 +104,10 @@
                 <p>Aucun contact enregistré</p>
             @endif
 
-            <button class="btn-primary btn-open-contact">
+            <a href="{{ route('contacts.index') }}" class="btn-primary">
                 Modifier
-            </button>
+            </a>
+
         </div>
 
             

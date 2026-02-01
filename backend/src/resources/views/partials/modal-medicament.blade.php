@@ -44,6 +44,9 @@
                 <input type="checkbox" name="soir" value="oui">
             </div>
 
+             <div style="margin-top: 1rem;">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
 
 
         </form>
