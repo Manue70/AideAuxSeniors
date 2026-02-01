@@ -1,6 +1,6 @@
 {
   "resources/css/admin.css": {
-    "file": "assets/admin-p9ecQnQd.css",
+    "file": "assets/admin-CFg4adx1.css",
     "src": "resources/css/admin.css",
     "isEntry": true,
     "name": "admin",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-BLi86U7L.css",
+    "file": "assets/app-DX8xotWS.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -18,7 +18,7 @@
     ]
   },
   "resources/css/assistance.css": {
-    "file": "assets/assistance-CxZt4oc9.css",
+    "file": "assets/assistance-jQOcTABd.css",
     "src": "resources/css/assistance.css",
     "isEntry": true,
     "name": "assistance",
@@ -27,7 +27,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-bN9AH7Ft.css",
+    "file": "assets/dashboard-CfZd1TpX.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "name": "dashboard",
@@ -36,7 +36,7 @@
     ]
   },
   "resources/css/header-footer.css": {
-    "file": "assets/header-footer-B_ti-7a8.css",
+    "file": "assets/header-footer-CZrvonBK.css",
     "src": "resources/css/header-footer.css",
     "isEntry": true,
     "name": "header-footer",
@@ -45,7 +45,7 @@
     ]
   },
   "resources/css/info-pages.css": {
-    "file": "assets/info-pages-B7D5iHce.css",
+    "file": "assets/info-pages-WJJegPTg.css",
     "src": "resources/css/info-pages.css",
     "isEntry": true,
     "name": "info-pages",
@@ -54,7 +54,7 @@
     ]
   },
   "resources/css/login-page.css": {
-    "file": "assets/login-page-BKSXkBL6.css",
+    "file": "assets/login-page-CzHTE-_r.css",
     "src": "resources/css/login-page.css",
     "isEntry": true,
     "name": "login-page",
@@ -63,7 +63,7 @@
     ]
   },
   "resources/css/onboarding.css": {
-    "file": "assets/onboarding-Bt6GM9_G.css",
+    "file": "assets/onboarding-_prW6Th2.css",
     "src": "resources/css/onboarding.css",
     "isEntry": true,
     "name": "onboarding",
@@ -72,7 +72,7 @@
     ]
   },
   "resources/css/reminders.css": {
-    "file": "assets/reminders-BfafK5u6.css",
+    "file": "assets/reminders-D9Yl55bO.css",
     "src": "resources/css/reminders.css",
     "isEntry": true,
     "name": "reminders",
@@ -81,20 +81,20 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-UBheJRBw.js",
+    "file": "assets/app-BqwRWa0c.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-BLi86U7L.css",
-      "assets/login-page-BKSXkBL6.css",
-      "assets/onboarding-Bt6GM9_G.css",
-      "assets/dashboard-bN9AH7Ft.css",
-      "assets/info-pages-B7D5iHce.css",
-      "assets/reminders-BfafK5u6.css",
-      "assets/assistance-CxZt4oc9.css",
-      "assets/admin-p9ecQnQd.css",
-      "assets/header-footer-B_ti-7a8.css"
+      "assets/app-DX8xotWS.css",
+      "assets/login-page-CzHTE-_r.css",
+      "assets/onboarding-_prW6Th2.css",
+      "assets/dashboard-CfZd1TpX.css",
+      "assets/info-pages-WJJegPTg.css",
+      "assets/reminders-D9Yl55bO.css",
+      "assets/assistance-jQOcTABd.css",
+      "assets/admin-CFg4adx1.css",
+      "assets/header-footer-CZrvonBK.css"
     ]
   }
 }

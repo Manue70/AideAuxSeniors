@@ -67,7 +67,7 @@
 
             <div class="option">
                 <span>Notifications</span>
-                <button class="btn btn-primary btn-notif">Configurer</button>
+                <button class="btn btn-primary btn-open-notif">Configurer</button>
             </div>
         </section>
     </div>
