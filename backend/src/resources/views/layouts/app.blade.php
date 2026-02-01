@@ -71,7 +71,7 @@
         @auth
             <a href="{{ route('dashboard') }}" class="btn btn-dark">Tableau de bord</a>
             <a href="{{ route('rappels') }}" class="btn btn-light">Mes rappels</a>
-            <a href="{{ route('contacts') }}" class="btn btn-dark">Contacts d'urgence</a>
+            <a href="{{ route('contacts.index') }}" class="btn btn-dark">Contacts d'urgence</a>
             <a href="{{ route('assistance') }}" class="btn btn-light">Assistance / Chat</a>
             <a href="{{ route('confidentialite') }}" class="btn btn-light">Confidentialité</a>
             <a href="{{ route('parametres') }}" class="btn btn-dark">Paramètres</a>
