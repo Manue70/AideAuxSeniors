@@ -111,6 +111,13 @@ class ReminderController extends Controller
         return redirect()->route('onboarding.2')->with('success', 'Rappel enregistré');
     }
 
+        // Supprimer ou reset les rappels déjà faits
+        Reminder::where('user_id', $userId)
+            ->where('est_effectue', true)
+            ->delete(); 
+
+
+
         return redirect()->route('rappels')->with('success', 'Statut du rappel mis à jour.');
     }
 

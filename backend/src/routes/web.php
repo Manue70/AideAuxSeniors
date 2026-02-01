@@ -72,6 +72,11 @@ Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])
     ->middleware('auth')
     ->name('rappels.toggle');
 
+ Route::post('/rappels/clear-done', [ReminderController::class, 'clearDone'])
+    ->name('rappels.clearDone')
+    ->middleware('auth');
+  
+
 
 //*Routes CONTACTS
 
