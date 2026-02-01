@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     idInput.value = medication.id;
                     nomInput.value = medication.nom;
                     dosageInput.value = medication.dosage;
-                    dailyInput.checked = medication.isDaily === "1";
+                    dailyInput.checked = medication.isDaily === "1" || medication.is_daily === "1";
                     matinInput.checked = medication.matin === "oui";
                     midiInput.checked = medication.midi === "oui";
                     soirInput.checked = medication.soir === "oui";
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Supprimer
-        deleteBtn.addEventListener('click', () => {
+        deleteBtn?.addEventListener('click', () => {
             const id = idInput.value;
             if (!id) return;
             if (confirm("Voulez-vous vraiment supprimer ce médicament ?")) {

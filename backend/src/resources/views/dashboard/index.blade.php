@@ -133,3 +133,8 @@
     </div>
 @endsection
 
+@include('partials.modal-medicament')
+
+<script src="/js/medicament-modal.js"></script>
+
+
