@@ -53,33 +53,42 @@
         @endforeach
 
         <!-- Carte Médicaments -->
-         @foreach($reminders as $reminder) 
-        <div class="card">
-            <h3>Medicaments</h3>
-            <p> {{ $reminder->message }} – {{ $reminder->heure }} </p>
-            <form action="{{ route('dashboard.markDone',$reminder->id ) }}" method="POST">
-                @csrf
-                <input type="hidden" name="task" value="medicament_matin">
-                <button type="submit" class="btn-primary">FAIT</button>
-            </form>
+        @foreach($reminders as $reminder) 
+            @php
+                // Sécurisation de l'objet medication
+                $med = $reminder->medication ?? null;
+            @endphp
 
-            <!-- Bouton Voir/Modifier qui ouvre la modale -->
-            <button 
-                class="btn btn-primary btn-open-medicament"
-                data-id="{{ $reminder->medication->id ?? '' }}"
-                data-nom="{{ $reminder->medication->nom ?? '' }}"
-                data-dosage="{{ $reminder->medication->dosage ?? '' }}"
-                data-is-daily="{{ $reminder->medication->is_daily ? 1 : 0 }}"
-                data-matin="{{ $reminder->medication->matin ? 'oui' : 'non' }}"
-                data-midi="{{ $reminder->medication->midi ? 'oui' : 'non' }}"
-                data-soir="{{ $reminder->medication->soir ? 'oui' : 'non' }}"
-            >
-                Voir / Modifier
-            </button>
-            
-        </div>
+            <div class="card">
+                <h3>Médicaments</h3>
+                <p>{{ $reminder->message }} – {{ $reminder->heure }}</p>
+
+                <!-- Bouton FAIT -->
+                <form action="{{ route('dashboard.markDone', $reminder->id) }}" method="POST" style="display:inline-block;">
+                    @csrf
+                    <input type="hidden" name="task" value="medicament_matin">
+                    <button type="submit" class="btn-primary">FAIT</button>
+                </form>
+
+                <!-- Bouton Voir / Modifier qui ouvre la modale -->
+                @if($med)
+                    <button 
+                        class="btn btn-primary btn-open-medicament"
+                        data-id="{{ $med->id }}"
+                        data-nom="{{ $med->nom }}"
+                        data-dosage="{{ $med->dosage }}"
+                        data-is-daily="{{ $med->is_daily ? 1 : 0 }}"
+                        data-matin="{{ $med->matin ? 'oui' : 'non' }}"
+                        data-midi="{{ $med->midi ? 'oui' : 'non' }}"
+                        data-soir="{{ $med->soir ? 'oui' : 'non' }}"
+                    >
+                        Voir / Modifier
+                    </button>
+                @endif
+            </div>
         @endforeach
 
+       
 
         <!-- Carte Hydratation -->
         @foreach($reminders as $reminder)
