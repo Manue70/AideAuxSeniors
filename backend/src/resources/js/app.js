@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================
     // MODALE MEDICAMENTS
     // =====================
-    (() => {
+     (() => {
         const modal = document.getElementById('modal-medicament');
         if (!modal) return;
 
@@ -135,25 +135,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.style.display = 'none';
 
-        // Ouvre la modale
+        // Ouvrir la modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
                 const med = btn.dataset;
+                const medId = med.id;
 
-                if (med.id) {
+                if (medId && medId !== "") {
                     // Modifier un médicament
                     title.textContent = "Modifier médicament";
-                    idInput.value = med.id;
-                    nomInput.value = med.nom;
-                    dosageInput.value = med.dosage;
+                    idInput.value = medId;
+                    nomInput.value = med.nom ?? '';
+                    dosageInput.value = med.dosage ?? '';
                     dailyInput.checked = med.isDaily === "1" || med.is_daily === "1";
                     matinInput.checked = med.matin === "oui";
                     midiInput.checked = med.midi === "oui";
                     soirInput.checked = med.soir === "oui";
 
+                    form.action = `/medicaments/${medId}`;
                     methodInput.value = "PUT";
-                    form.action = `/medicaments/${med.id}`;
                     deleteBtn.style.display = "inline-block";
 
                     // Affiche les horaires si au moins un est coché
@@ -165,17 +166,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 } else {
                     // Nouveau médicament
-                    title.textContent = "Nouveau médicament";
+                    title.textContent = "Ajouter un médicament";
                     form.action = "{{ route('medicaments.store') }}";
                     methodInput.value = "POST";
-                    idInput.value = "";
-                    nomInput.value = "";
-                    dosageInput.value = "";
+                    idInput.value = '';
+                    nomInput.value = '';
+                    dosageInput.value = '';
                     dailyInput.checked = false;
                     matinInput.checked = false;
                     midiInput.checked = false;
                     soirInput.checked = false;
-                    deleteBtn.style.display = "none";
+                    deleteBtn.style.display = 'none';
                     priseHoraires.style.display = 'none';
                 }
 
@@ -189,12 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
 
-        // Supprimer
+        // Supprimer médicament
         deleteBtn?.addEventListener('click', () => {
-            const id = idInput.value;
-            if (!id) return;
+            const medId = idInput.value;
+            if (!medId) return;
             if (confirm("Voulez-vous vraiment supprimer ce médicament ?")) {
-                fetch(`/medicaments/${id}`, {
+                fetch(`/medicaments/${medId}`, {
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -205,7 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Boutons Oui / Non pour afficher les horaires
-        btnOui?.addEventListener('click', () => priseHoraires.style.display = 'block');
+        btnOui?.addEventListener('click', () => {
+            priseHoraires.style.display = 'block';
+        });
         btnNon?.addEventListener('click', () => {
             priseHoraires.style.display = 'none';
             matinInput.checked = false;
@@ -213,8 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             soirInput.checked = false;
         });
     })();
-
-                  
+        
         
 
 
@@ -249,11 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     title.textContent = "Modifier le contact";
                     form.action = `/contacts/${id}`;
                     methodInput.value = 'PUT';
+                    idInput.value = id;
                     
                     nomInput.value = btn.dataset.nom;
                     telInput.value = btn.dataset.telephone;
                     lienInput.value = btn.dataset.lien ?? '';
-                    prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true" || btn.dataset.prioritaire === "t";
+                    prioritaireInput.checked = btn.dataset.prioritaire == 1 || btn.dataset.prioritaire == 'true';
                     deleteBtn.style.display = 'inline-block';
                 } else {
                     // Ajouter un contact
@@ -292,8 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     })();
-
-
+    
             
 
     // ===============================

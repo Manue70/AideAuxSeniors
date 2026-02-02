@@ -108,12 +108,6 @@ Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])
 
 
 
-
-/*
-|--------------------------------------------------------------------------
-| Zone protégée : utilisateurs connectés
-|--------------------------------------------------------------------------
-*/
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard
