@@ -249,17 +249,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     title.textContent = "Modifier le contact";
                     form.action = `/contacts/${id}`;
                     methodInput.value = 'PUT';
-                    idInput.value = id;
+                    
                     nomInput.value = btn.dataset.nom;
                     telInput.value = btn.dataset.telephone;
-                    lienInput.value = btn.dataset.lien;
+                    lienInput.value = btn.dataset.lien ?? '';
                     prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true" || btn.dataset.prioritaire === "t";
                     deleteBtn.style.display = 'inline-block';
                 } else {
                     // Ajouter un contact
                     title.textContent = "Ajouter un contact";
                     form.action = "{{ route('contacts.store') }}";
-                    methodInput.value = 'POST';
+                    methodInput.value = '';
                     idInput.value = '';
                     nomInput.value = '';
                     telInput.value = '';

@@ -15,7 +15,11 @@
                 <tr>
                     <th>Nom</th>
                     <th>Téléphone</th>
+                    <th>Lien</th>
+
                     <th>Actions</th>
+                    
+
                 </tr>
             </thead>
 
@@ -29,11 +33,18 @@
                                 ⭐
                             @endif
                         </td>
+                        
                         <td>
                             <a href="tel:{{ $contact->telephone }}" class="contact-link">
                                 {{ $contact->telephone }}
                             </a>
                         </td>
+                        <td>
+                            <a href="tel:{{ $contact->lien }}" class="contact-lien">
+                                {{ $contact->lien }}
+                            </a>
+                        </td>
+
                         <td>
                             <button class="btn btn-primary btn-edit-contact"
                                     data-id="{{ $contact->id }}"
