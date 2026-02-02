@@ -72,8 +72,8 @@ class ContactController extends Controller
     // Supprimer
     public function destroy(Contact $contact)
     {
-        $this->authorize('delete', $contact);
-        $this->authorize('update', $contact);
+        //$this->authorize('delete', $contact);
+        //$this->authorize('update', $contact);
 
         $contact->delete();
 

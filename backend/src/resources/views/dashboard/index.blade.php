@@ -71,20 +71,23 @@
                 </form>
 
                 <!-- Bouton Voir / Modifier qui ouvre la modale -->
-                
-                    <button 
-                        class="btn btn-primary btn-open-medicament"
-                        data-id="{{ $reminder->medication->id ?? '' }}"
-                        data-nom="{{ $reminder->medication->nom ?? '' }}"
-                        data-dosage="{{ $reminder->medication->dosage ?? '' }}"
-                        data-is-daily="{{ $reminder->medication?->is_daily ? 1 : 0 }}"
-                        data-matin="{{ $reminder->medication?->matin ? 'oui' : 'non' }}"
-                        data-midi="{{ $reminder->medication?->midi ? 'oui' : 'non' }}"
-                        data-soir="{{ $reminder->medication?->soir ? 'oui' : 'non' }}"
-                    >
-                           Voir / Modifier
-                    </button>
-                
+                <form id="medication-form" method="POST">
+                @csrf
+                    <input type="hidden" name="_method" id="form-method">
+                        <button 
+                            class="btn btn-primary btn-open-medicament"
+                            data-id="{{ $reminder->medication->id ?? '' }}"
+                            data-nom="{{ $reminder->medication->nom ?? '' }}"
+                            data-dosage="{{ $reminder->medication->dosage ?? '' }}"
+                            data-is-daily="{{ $reminder->medication?->is_daily ? 1 : 0 }}"
+                            data-matin="{{ $reminder->medication?->matin ? 'oui' : 'non' }}"
+                            data-midi="{{ $reminder->medication?->midi ? 'oui' : 'non' }}"
+                            data-soir="{{ $reminder->medication?->soir ? 'oui' : 'non' }}"
+                        >
+                            Voir / Modifier
+                        </button>
+                </form>
+    
             </div>
         @endforeach
 

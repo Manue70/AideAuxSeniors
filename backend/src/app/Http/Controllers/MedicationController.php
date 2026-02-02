@@ -26,7 +26,7 @@ class MedicationController extends Controller
             'user_id' => $userId,
             'nom'     => $request->nom,
             'dosage'  => $request->dosage,
-            'is_daily' =>  => $request->has('is_daily'),
+            'is_daily' => $request->has('is_daily'),
         ]);
 
         // Créer les rappels
