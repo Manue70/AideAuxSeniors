@@ -67,18 +67,20 @@ class MedicationController extends Controller
             'is_daily'=> 'nullable',
         ]);
 
+        // Supprimer les anciens rappels
+        Reminder::where('user_id', auth()->id())
+            ->where('type', 'médicament')
+            ->where('message', 'like', "%{$medicament->nom}%")
+            ->delete();
+
+
         $medicament->update([
             'nom' => $request->nom,
             'dosage' => $request->dosage,
             'is_daily' => $request->has('is_daily'),
 
 
-            // Supprimer les anciens rappels
-            Reminder::where('user_id', auth()->id())
-                ->where('type', 'médicament')
-                ->where('message', 'like', "%{$medicament->nom}%")
-                ->delete();
-
+            
         ]);
 
 

@@ -41,11 +41,8 @@
                         </td>
                         <td>
 
-                            @if($contact->lien)
-                                <a href="{{ $contact->lien }}" class="contact-lien" target="_blank">{{ $contact->lien }}</a>
-                            @else
-                                -
-                            @endif
+                        <td>{{ $contact->lien }}</td>
+
                             
                         </td>
 

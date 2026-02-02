@@ -122,7 +122,7 @@
             <h3>Contacts d'urgence</h3>
 
             @if($contactUrgent)
-                <p>{{ $contactUrgent->nom }} — {{ $contactUrgent->telephone }}</p>
+                <p>{{ $contactUrgent->nom }} — {{ $contactUrgent->telephone }} — {{ $contactUrgent->lien }}  </p>
 
                 <a href="tel:{{ $contactUrgent->telephone }}" class="btn-primary">
                     APPELER
