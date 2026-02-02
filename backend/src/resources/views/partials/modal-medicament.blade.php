@@ -3,11 +3,11 @@
         <span class="modal-close">&times;</span>
         <h3 id="modal-title">Nouveau médicament</h3>
 
-        <form id="medication-form" method="POST" action="{{ route('medicaments.store') }}">
+        <form id="medication-form" method="POST">
             @csrf
-            <input type="hidden" name="_method"  id="form-method">
-            <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
+            <input type="hidden" name="_method" id="form-method">
             <input type="hidden" name="medication_id" id="medication-id">
+            <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
 
             <!-- Nom -->
             <label for="nom">Nom :</label>
@@ -49,4 +49,3 @@
         </form>
     </div>
 </div>
-

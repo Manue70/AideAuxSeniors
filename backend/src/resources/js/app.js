@@ -129,27 +129,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const methodInput = document.getElementById('form-method');
         const title = document.getElementById('modal-title');
 
+        const btnOui = modal.querySelector('.btn-oui');
+        const btnNon = modal.querySelector('.btn-non');
+        const priseHoraires = modal.querySelector('.prise-horaires');
+
         modal.style.display = 'none';
 
         // Ouvre la modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
-                // Si le bouton contient des data (edit)
-                const medication = btn.dataset;
-                if (medication.id) {
+                const med = btn.dataset;
+
+                if (med.id) {
+                    // Modifier un médicament
                     title.textContent = "Modifier médicament";
-                    idInput.value = medication.id;
-                    nomInput.value = medication.nom;
-                    dosageInput.value = medication.dosage;
-                    dailyInput.checked = medication.isDaily === "1" || medication.is_daily === "1";
-                    matinInput.checked = medication.matin === "oui";
-                    midiInput.checked = medication.midi === "oui";
-                    soirInput.checked = medication.soir === "oui";
+                    idInput.value = med.id;
+                    nomInput.value = med.nom;
+                    dosageInput.value = med.dosage;
+                    dailyInput.checked = med.isDaily === "1" || med.is_daily === "1";
+                    matinInput.checked = med.matin === "oui";
+                    midiInput.checked = med.midi === "oui";
+                    soirInput.checked = med.soir === "oui";
+
                     methodInput.value = "PUT";
-                    form.action = `/medicaments/${medication.id}`;
+                    form.action = `/medicaments/${med.id}`;
                     deleteBtn.style.display = "inline-block";
+
+                    // Affiche les horaires si au moins un est coché
+                    if (matinInput.checked || midiInput.checked || soirInput.checked) {
+                        priseHoraires.style.display = 'block';
+                    } else {
+                        priseHoraires.style.display = 'none';
+                    }
+
                 } else {
+                    // Nouveau médicament
                     title.textContent = "Nouveau médicament";
                     form.action = "{{ route('medicaments.store') }}";
                     methodInput.value = "";
@@ -161,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     midiInput.checked = false;
                     soirInput.checked = false;
                     deleteBtn.style.display = "none";
+                    priseHoraires.style.display = 'none';
                 }
 
                 modal.style.display = 'flex';
@@ -189,22 +205,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Boutons Oui / Non pour afficher les horaires
-        const btnOui = modal.querySelector('.btn-oui');
-        const btnNon = modal.querySelector('.btn-non');
-        const priseHoraires = modal.querySelector('.prise-horaires');
-
-        btnOui?.addEventListener('click', () => {
-            priseHoraires.style.display = 'block';
-        });
-
+        btnOui?.addEventListener('click', () => priseHoraires.style.display = 'block');
         btnNon?.addEventListener('click', () => {
             priseHoraires.style.display = 'none';
             matinInput.checked = false;
             midiInput.checked = false;
             soirInput.checked = false;
         });
-
     })();
+
+                  
+        
 
 
 
@@ -220,51 +231,70 @@ document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('contact-form');
         const title = document.getElementById('modal-title');
         const methodInput = document.getElementById('form-method');
+        const deleteBtn = document.getElementById('btn-delete-contact');
 
+        const idInput = document.getElementById('contact-id');
         const nomInput = document.getElementById('contact-nom');
         const telInput = document.getElementById('contact-telephone');
         const lienInput = document.getElementById('contact-lien');
         const prioritaireInput = document.getElementById('contact-prioritaire');
 
-        // Ouvrir la modale pour ajouter
+        // Ouvrir la modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
-
                 if (btn.classList.contains('btn-edit-contact')) {
-                    // Éditer un contact
+                    // Modifier un contact
                     const id = btn.dataset.id;
                     title.textContent = "Modifier le contact";
                     form.action = `/contacts/${id}`;
                     methodInput.value = 'PUT';
+                    idInput.value = id;
                     nomInput.value = btn.dataset.nom;
                     telInput.value = btn.dataset.telephone;
                     lienInput.value = btn.dataset.lien;
-                    prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true" ||    btn.dataset.prioritaire === "t"; 
+                    prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true" || btn.dataset.prioritaire === "t";
+                    deleteBtn.style.display = 'inline-block';
                 } else {
                     // Ajouter un contact
                     title.textContent = "Ajouter un contact";
                     form.action = "{{ route('contacts.store') }}";
-                    methodInput.value = '';
+                    methodInput.value = 'POST';
+                    idInput.value = '';
                     nomInput.value = '';
                     telInput.value = '';
                     lienInput.value = '';
                     prioritaireInput.checked = false;
+                    deleteBtn.style.display = 'none';
                 }
-
                 modal.style.display = 'flex';
             });
         });
 
         // Fermer la modale
         closeBtns.forEach(btn => btn.addEventListener('click', () => modal.style.display = 'none'));
-
         modal.addEventListener('click', e => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
+
+        // Supprimer contact
+        deleteBtn.addEventListener('click', () => {
+            const id = idInput.value;
+            if (!id) return;
+            if (confirm("Voulez-vous vraiment supprimer ce contact ?")) {
+                fetch(`/contacts/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json'
+                    }
+                }).then(() => location.reload());
+            }
+        });
     })();
 
-        
+
+            
 
     // ===============================
     // Notifications (page parametres)

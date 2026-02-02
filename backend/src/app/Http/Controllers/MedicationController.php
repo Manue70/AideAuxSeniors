@@ -70,9 +70,17 @@ class MedicationController extends Controller
         $medicament->update([
             'nom' => $request->nom,
             'dosage' => $request->dosage,
+            'is_daily' => $request->has('is_daily'),
+
+
+            // Supprimer les anciens rappels
+            Reminder::where('user_id', auth()->id())
+                ->where('type', 'médicament')
+                ->where('message', 'like', "%{$medicament->nom}%")
+                ->delete();
+
         ]);
 
-        // Optionnel : gérer la mise à jour des rappels si besoin
 
         return redirect()->back()->with('success', 'Médicament mis à jour !');
     }
