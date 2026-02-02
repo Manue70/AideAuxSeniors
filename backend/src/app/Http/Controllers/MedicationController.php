@@ -39,12 +39,14 @@ class MedicationController extends Controller
         foreach (['matin','midi','soir'] as $moment) {
             if ($request->input($moment) === 'oui') {
                 Reminder::create([
-                    'user_id'      => $userId,
-                    'type'         => 'médicament',
-                    'message'      => "Prendre {$medication->nom} ({$medication->dosage})",
-                    'heure'        => $heures[$moment],
-                    'est_effectue' => false,
-                    'is_daily'     => $request->has('is_daily'),
+                    'user_id'       => $userId,
+                    'medication_id'=> $medication->id,   
+                    'type'          => 'médicament',
+                    'message'       => "Prendre {$medication->nom} ({$medication->dosage})",
+                    'heure'         => $heures[$moment],
+                    'est_effectue'  => false,
+                    'is_daily'      => $request->has('is_daily'),
+                                    
                 ]);
             }
         }

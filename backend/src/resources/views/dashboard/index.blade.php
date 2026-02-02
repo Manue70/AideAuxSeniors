@@ -55,12 +55,6 @@
         <!-- Carte Médicaments -->
         @foreach($reminders as $reminder)
 
-        {{ $reminder->id }} /
-        {{ $reminder->medication_id }}
-
-        @endforeach
-
-
             @php
                 $med = $reminder->medication; // null si pas de médicament lié
             @endphp

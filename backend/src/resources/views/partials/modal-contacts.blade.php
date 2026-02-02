@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label>
-                    <input type="checkbox" name="prioritaire" id="contact-prioritaire">
+                    <input type="checkbox" name="prioritaire" id="contact-prioritaire"  value="1">
                     Contact prioritaire
                 </label>
             </div>

@@ -39,12 +39,8 @@
                                 {{ $contact->telephone }}
                             </a>
                         </td>
-                        <td>
 
                         <td>{{ $contact->lien }}</td>
-
-                            
-                        </td>
 
                         <td>
                             <button class="btn btn-primary btn-edit-contact"
