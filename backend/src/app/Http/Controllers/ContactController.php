@@ -43,7 +43,7 @@ class ContactController extends Controller
     // Page édition
     public function edit(Contact $contact)
     {
-        $this->authorize('update', $contact); // si tu veux vérifier que c'est bien le user
+        $this->authorize('update', $contact); 
         return view('pages.edit-contact', compact('contact'));
     }
 

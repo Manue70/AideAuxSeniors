@@ -78,33 +78,7 @@ Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])
   
 
 
-//*Routes CONTACTS
 
-// Liste des contacts (GET)
-Route::get('/contacts', [ContactController::class, 'index'])
-    ->name('contacts.index')
-    ->middleware('auth');
-
-// Formulaire création (GET)
-Route::get('/contacts/create', [ContactController::class, 'create'])
-    ->name('contacts.create')
-    ->middleware('auth');
-
-// Enregistrement (POST)
-Route::post('/contacts', [ContactController::class, 'store'])
-    ->name('contacts.store')
-    ->middleware('auth');
-
-
-// Mise à jour
-Route::put('/contacts/{contact}', [ContactController::class, 'update'])
-    ->name('contacts.update')
-    ->middleware('auth');
-
-// Supprimer
-Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])
-    ->name('contacts.destroy')
-    ->middleware('auth');
 
 
 
@@ -115,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard/reminder/{id}', [DashboardController::class, 'markDone'])
         ->name('dashboard.markDone');
 
+    //routes contacts
+    Route::resource('contacts', ContactController::class)->middleware('auth');
 
 
     // Création d’un médicament (POST)

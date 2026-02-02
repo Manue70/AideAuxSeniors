@@ -110,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================
     // MODALE MEDICAMENTS
     // =====================
-     (() => {
+     
+    (() => {
         const modal = document.getElementById('modal-medicament');
         if (!modal) return;
 
@@ -135,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.style.display = 'none';
 
-        // Ouvrir la modale
+        // Ouvrir modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
@@ -157,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     methodInput.value = "PUT";
                     deleteBtn.style.display = "inline-block";
 
-                    // Affiche les horaires si au moins un est coché
                     if (matinInput.checked || midiInput.checked || soirInput.checked) {
                         priseHoraires.style.display = 'block';
                     } else {
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Boutons Oui / Non pour afficher les horaires
+        // Boutons Oui / Non
         btnOui?.addEventListener('click', () => {
             priseHoraires.style.display = 'block';
         });
@@ -216,9 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
             soirInput.checked = false;
         });
     })();
-        
-        
-
 
 
     // =====================
@@ -231,7 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const openBtns = document.querySelectorAll('.btn-open-contact, .btn-edit-contact');
         const closeBtns = modal.querySelectorAll('.modal-close, .btn-close-contact');
         const form = document.getElementById('contact-form');
-        const title = document.getElementById('modal-title');
         const methodInput = document.getElementById('form-method');
         const deleteBtn = document.getElementById('btn-delete-contact');
 
@@ -241,25 +237,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const lienInput = document.getElementById('contact-lien');
         const prioritaireInput = document.getElementById('contact-prioritaire');
 
-        // Ouvrir la modale
+        // Ouvrir modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
                 if (btn.classList.contains('btn-edit-contact')) {
-                    // Modifier un contact
+                    // Modifier contact
                     const id = btn.dataset.id;
                     title.textContent = "Modifier le contact";
                     form.action = `/contacts/${id}`;
                     methodInput.value = 'PUT';
                     idInput.value = id;
-                    
                     nomInput.value = btn.dataset.nom;
                     telInput.value = btn.dataset.telephone;
                     lienInput.value = btn.dataset.lien ?? '';
-                    prioritaireInput.checked = btn.dataset.prioritaire == 1 || btn.dataset.prioritaire == 'true';
+                    prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true";
                     deleteBtn.style.display = 'inline-block';
                 } else {
-                    // Ajouter un contact
+                    // Ajouter contact
                     title.textContent = "Ajouter un contact";
                     form.action = "{{ route('contacts.store') }}";
                     methodInput.value = '';
@@ -274,13 +269,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Fermer la modale
+        // Fermer modale
         closeBtns.forEach(btn => btn.addEventListener('click', () => modal.style.display = 'none'));
         modal.addEventListener('click', e => {
             if (!modal.querySelector('.modal-content').contains(e.target)) modal.style.display = 'none';
         });
 
-        // Supprimer contact
+        // Supprimer
         deleteBtn.addEventListener('click', () => {
             const id = idInput.value;
             if (!id) return;
@@ -295,8 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     })();
-    
-            
+
 
     // ===============================
     // Notifications (page parametres)

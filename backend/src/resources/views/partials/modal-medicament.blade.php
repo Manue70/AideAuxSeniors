@@ -7,7 +7,7 @@
         <form id="medication-form" method="POST">
             @csrf
             <input type="hidden" name="_method" id="form-method">
-            <input type="hidden" name="id" id="medication-id">
+            <input type="hidden" id="medication-id" name="id">
 
             <div class="form-group">
                 <label>Nom</label>
