@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Nouveau médicament
                     title.textContent = "Nouveau médicament";
                     form.action = "{{ route('medicaments.store') }}";
-                    methodInput.value = "";
+                    methodInput.value = "POST";
                     idInput.value = "";
                     nomInput.value = "";
                     dosageInput.value = "";

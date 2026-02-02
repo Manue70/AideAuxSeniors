@@ -50,7 +50,7 @@ class ContactController extends Controller
     // Mise à jour
     public function update(Request $request, Contact $contact)
     {
-        $this->authorize('update', $contact);
+        //$this->authorize('update', $contact);
 
         $request->validate([
             'nom' => 'required|string|max:255',
@@ -72,8 +72,8 @@ class ContactController extends Controller
     // Supprimer
     public function destroy(Contact $contact)
     {
+        
         //$this->authorize('delete', $contact);
-        //$this->authorize('update', $contact);
 
         $contact->delete();
 
@@ -87,3 +87,4 @@ class ContactController extends Controller
 
 
 
+        

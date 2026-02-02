@@ -53,10 +53,9 @@
         @endforeach
 
         <!-- Carte Médicaments -->
-        @foreach($reminders as $reminder) 
+        @foreach($reminders as $reminder)
             @php
-                // Sécurisation de l'objet medication
-                $med = $reminder->medication ?? null;
+                $med = $reminder->medication; // null si pas de médicament lié
             @endphp
 
             <div class="card">
@@ -70,26 +69,32 @@
                     <button type="submit" class="btn-primary">FAIT</button>
                 </form>
 
-                <!-- Bouton Voir / Modifier qui ouvre la modale -->
-                <form id="medication-form" method="POST">
-                @csrf
-                    <input type="hidden" name="_method" id="form-method">
-                        <button 
-                            class="btn btn-primary btn-open-medicament"
-                            data-id="{{ $reminder->medication->id ?? '' }}"
-                            data-nom="{{ $reminder->medication->nom ?? '' }}"
-                            data-dosage="{{ $reminder->medication->dosage ?? '' }}"
-                            data-is-daily="{{ $reminder->medication?->is_daily ? 1 : 0 }}"
-                            data-matin="{{ $reminder->medication?->matin ? 'oui' : 'non' }}"
-                            data-midi="{{ $reminder->medication?->midi ? 'oui' : 'non' }}"
-                            data-soir="{{ $reminder->medication?->soir ? 'oui' : 'non' }}"
-                        >
-                            Voir / Modifier
-                        </button>
-                </form>
-    
+                @if($med)
+                    <!-- Bouton Voir / Modifier qui ouvre la modale -->
+                    <button 
+                        class="btn btn-primary btn-open-medicament"
+                        data-id="{{ $med->id }}"
+                        data-nom="{{ $med->nom }}"
+                        data-dosage="{{ $med->dosage }}"
+                        data-is-daily="{{ $med->is_daily ? 1 : 0 }}"
+                        data-matin="{{ $med->matin ? 'oui' : 'non' }}"
+                        data-midi="{{ $med->midi ? 'oui' : 'non' }}"
+                        data-soir="{{ $med->soir ? 'oui' : 'non' }}"
+                    >
+                        Voir / Modifier
+                    </button>
+                @else
+                    <!-- Nouveau médicament -->
+                    <button 
+                        class="btn btn-success btn-open-medicament"
+                        data-id=""
+                    >
+                        Ajouter un médicament
+                    </button>
+                @endif
             </div>
         @endforeach
+
 
        
 
