@@ -30,7 +30,7 @@ class DashboardController extends Controller
             'contactUrgent' => $contactUrgent,
         ]);
 
-
+    }
     public function markDone($id)
     {
         $reminder = Reminder::where('user_id', auth()->id())
