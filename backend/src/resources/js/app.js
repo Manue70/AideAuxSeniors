@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('modal-contact');
         if (!modal) return;
 
-        const openBtns = document.querySelectorAll('.btn-open-contact');
+        const openBtns = document.querySelectorAll('.btn-open-contact, .btn-edit-contact');
         const closeBtns = modal.querySelectorAll('.modal-close, .btn-close-contact');
         const form = document.getElementById('contact-form');
         const title = document.getElementById('modal-title');

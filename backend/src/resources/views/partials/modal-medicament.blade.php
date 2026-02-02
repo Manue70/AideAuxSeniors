@@ -5,7 +5,7 @@
 
         <form id="medication-form" method="POST" action="{{ route('medicaments.store') }}">
             @csrf
-            <input type="hidden" name="_method" value="POST" id="form-method">
+            <input type="hidden" name="_method"  id="form-method">
             <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
             <input type="hidden" name="medication_id" id="medication-id">
 

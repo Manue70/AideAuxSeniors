@@ -8,7 +8,7 @@
             @csrf
 
             <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
-            <input type="hidden" name="_method" id="form-method" value="POST">
+            <input type="hidden" name="_method" id="form-method" >
 
             <div class="form-group">
                 <label>Nom</label>
