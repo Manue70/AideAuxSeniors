@@ -114,14 +114,17 @@
                 Modifier
             </a>
 
-            <form method="POST" action="{{ route('contacts.destroy', $contact) }}" style="display:inline;">
+           @if($contactUrgent)
+            <form method="POST" action="{{ route('contacts.destroy', $contactUrgent) }}" style="display:inline;">
                 @csrf
                 @method('DELETE')
+
                 <button type="submit" class="btn btn-danger"
                     onclick="return confirm('Voulez-vous vraiment supprimer ce contact ?')">
-                        Supprimer
+                    Supprimer
                 </button>
             </form>
+            @endif
 
         </div>
 
