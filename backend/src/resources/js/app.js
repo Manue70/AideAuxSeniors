@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     title.textContent = "Nouveau médicament";
                     form.action = "{{ route('medicaments.store') }}";
-                    methodInput.value = "POST";
+                    methodInput.value = "";
                     idInput.value = "";
                     nomInput.value = "";
                     dosageInput.value = "";
@@ -187,6 +187,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).then(() => location.reload());
             }
         });
+
+        // Boutons Oui / Non pour afficher les horaires
+        const btnOui = modal.querySelector('.btn-oui');
+        const btnNon = modal.querySelector('.btn-non');
+        const priseHoraires = modal.querySelector('.prise-horaires');
+
+        btnOui?.addEventListener('click', () => {
+            priseHoraires.style.display = 'block';
+        });
+
+        btnNon?.addEventListener('click', () => {
+            priseHoraires.style.display = 'none';
+            matinInput.checked = false;
+            midiInput.checked = false;
+            soirInput.checked = false;
+        });
+
     })();
 
 
@@ -223,12 +240,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     nomInput.value = btn.dataset.nom;
                     telInput.value = btn.dataset.telephone;
                     lienInput.value = btn.dataset.lien;
-                    prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true";
+                    prioritaireInput.checked = btn.dataset.prioritaire === "1" || btn.dataset.prioritaire === "true" ||    btn.dataset.prioritaire === "t"; 
                 } else {
                     // Ajouter un contact
                     title.textContent = "Ajouter un contact";
                     form.action = "{{ route('contacts.store') }}";
-                    methodInput.value = 'POST';
+                    methodInput.value = '';
                     nomInput.value = '';
                     telInput.value = '';
                     lienInput.value = '';

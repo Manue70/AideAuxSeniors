@@ -73,6 +73,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $this->authorize('delete', $contact);
+        $this->authorize('update', $contact);
 
         $contact->delete();
 
