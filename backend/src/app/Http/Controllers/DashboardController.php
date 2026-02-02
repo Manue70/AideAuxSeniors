@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reminder;
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\Medication;
 
 
 class DashboardController extends Controller
@@ -21,10 +22,14 @@ class DashboardController extends Controller
             ->orderByDesc('prioritaire')
             ->first();
 
+        $medicaments = Medication::where('user_id', auth()->id())->get();
 
+        return view('dashboard.index', [
+            'reminders'     => $reminders,
+            'medicaments'   => $medicaments,
+            'contactUrgent' => $contactUrgent,
+        ]);
 
-        return view('dashboard.index', compact('reminders'), compact('contactUrgent') );
-    }
 
     public function markDone($id)
     {
