@@ -10,9 +10,12 @@ class Contact extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nom',
         'telephone',
-        'user_id',
+        'lien',
+        'prioritaire',
+
     ];
 
     // Relation inverse
