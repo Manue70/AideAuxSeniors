@@ -2,7 +2,7 @@
     <div class="modal-content">
         <span class="modal-close">&times;</span>
 
-        <h2 id="modal-title">Nouveau médicament</h2>
+        <h2 id="modal-title">Médicament</h2>
 
         <form method="POST" id="medication-form">
             @csrf

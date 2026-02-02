@@ -53,48 +53,27 @@
         @endforeach
 
         <!-- Carte Médicaments -->
-        @foreach($reminders as $reminder)
+        <h3>Médicaments</h3>
 
-            @php
-                $med = $reminder->medication; // null si pas de médicament lié
-            @endphp
+        @foreach($medicaments as $med)
+        <div class="card">
+            <strong>{{ $med->nom }}</strong> – {{ $med->dosage }}
 
-            <div class="card">
-                <h3>Médicaments</h3>
-                <p>{{ $reminder->message }} – {{ $reminder->heure }}</p>
-
-                <!-- Bouton FAIT -->
-                <form action="{{ route('dashboard.markDone', $reminder->id) }}" method="POST" style="display:inline-block;">
-                    @csrf
-                    <input type="hidden" name="task" value="medicament_matin">
-                    <button type="submit" class="btn-primary">FAIT</button>
-                </form>
-
-                @if($med)
-                    <!-- Bouton  Modifier qui ouvre la modale -->
-                    <button 
-                        class="btn btn-primary btn-open-medicament"
-                        data-id="{{ $med->id }}"
-                        data-nom="{{ $med->nom }}"
-                        data-dosage="{{ $med->dosage }}"
-                        data-is-daily="{{ $med->is_daily ? 1 : 0 }}"
-                        data-matin="{{ $med->matin ? 'oui' : 'non' }}"
-                        data-midi="{{ $med->midi ? 'oui' : 'non' }}"
-                        data-soir="{{ $med->soir ? 'oui' : 'non' }}"
-                    >
-                        Voir / Modifier
-                    </button>
-                @else
-                    <!-- Nouveau médicament -->
-                    <button 
-                        class="btn btn-success btn-open-medicament"
-                        data-id=""
-                    >
-                        Ajouter un médicament
-                    </button>
-                @endif
-            </div>
+            <button class="btn btn-primary btn-open-medicament"
+                data-id="{{ $med->id }}"
+                data-nom="{{ $med->nom }}"
+                data-dosage="{{ $med->dosage }}"
+                data-daily="{{ $med->is_daily }}"
+            >
+                Modifier
+            </button>
+        </div>
         @endforeach
+
+        <button class="btn btn-success btn-open-medicament" data-id="">
+            Ajouter un médicament
+        </button>
+
 
 
        
