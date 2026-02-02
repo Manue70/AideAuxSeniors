@@ -41,6 +41,7 @@
 
             <div class="info-buttons" style="margin-top:1rem;">
                 <button type="submit" class="btn btn-primary" id="btn-save-medication">Enregistrer</button>
+                
                 <button type="button" class="btn btn-secondary btn-close-medication">Annuler</button>
                 <button type="button" class="btn btn-danger" id="delete-medication" style="display:none;">Supprimer</button>
             </div>

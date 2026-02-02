@@ -54,6 +54,13 @@
 
         <!-- Carte Médicaments -->
         @foreach($reminders as $reminder)
+
+        {{ $reminder->id }} /
+        {{ $reminder->medication_id }}
+
+        @endforeach
+
+
             @php
                 $med = $reminder->medication; // null si pas de médicament lié
             @endphp
@@ -70,7 +77,7 @@
                 </form>
 
                 @if($med)
-                    <!-- Bouton Voir / Modifier qui ouvre la modale -->
+                    <!-- Bouton  Modifier qui ouvre la modale -->
                     <button 
                         class="btn btn-primary btn-open-medicament"
                         data-id="{{ $med->id }}"
