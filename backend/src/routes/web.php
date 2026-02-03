@@ -187,10 +187,7 @@ Route::middleware(['auth'])->group(function () {
         Route::view('/info-legales', 'pages.info-legales')->name('info-legales');
         Route::view('/cookies', 'pages.cookies')->name('cookies');
 
-        // Pages accessibles à tous (public)
-        Route::view('/home', 'pages.home')->name('home');
-        Route::view('/login', 'pages.login')->name('info-legales');
-        Route::view('/register', 'pages.register')->name('cookies');
+       
 
     });
 });
