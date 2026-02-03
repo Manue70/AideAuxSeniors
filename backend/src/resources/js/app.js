@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================
     // MODALE MEDICAMENTS
     // =====================
-     
     (() => {
         const modal = document.getElementById('modal-medicament');
         if (!modal) return;
@@ -136,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.style.display = 'none';
 
-        // Ouvre la modale
         openBtns.forEach(btn => {
             btn.addEventListener('click', e => {
                 e.preventDefault();
@@ -157,13 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     midiInput.checked = med.midi === "oui";
                     soirInput.checked = med.soir === "oui";
 
-                    // Affiche les horaires si au moins un est coché
                     priseHoraires.style.display = (matinInput.checked || midiInput.checked || soirInput.checked) ? 'block' : 'none';
-
                 } else {
                     // Ajouter
                     title.textContent = "Nouveau médicament";
-                    form.action = "/medicaments";
+                    form.action = "{{ route('medicaments.store') }}"; // Laravel route
                     methodInput.value = "POST";
                     deleteBtn.style.display = "none";
 
@@ -202,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Boutons Oui / Non pour afficher les horaires
+        // Oui / Non
         btnOui?.addEventListener('click', () => priseHoraires.style.display = 'block');
         btnNon?.addEventListener('click', () => {
             priseHoraires.style.display = 'none';
