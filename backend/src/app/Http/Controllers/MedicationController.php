@@ -37,7 +37,7 @@ class MedicationController extends Controller
         ];
 
         foreach (['matin','midi','soir'] as $moment) {
-            if  ($request->has($moment)) {
+            if  ($request->has($moment)){
                 Reminder::create([
                     'user_id'       => $userId,
                     'medication_id'=> $medication->id,   

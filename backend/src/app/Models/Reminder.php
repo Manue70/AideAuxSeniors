@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Reminder extends Model
 {
     use HasFactory;
-    protected $fillable = ['message', 'type', 'heure', 'est_effectue', 'user_id' , 'is_daily'];
+    protected $fillable = ['user_id', 'medication_id',  'message', 'type', 'heure', 'est_effectue', 'is_daily'];
 
     public function user(): BelongsTo
     {
