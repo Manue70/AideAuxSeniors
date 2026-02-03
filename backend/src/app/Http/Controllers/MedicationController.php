@@ -80,8 +80,6 @@ class MedicationController extends Controller
             'nom' => $request->nom,
             'dosage' => $request->dosage,
             'is_daily' => $request->has('is_daily'),
-
-
             
         ]);
 
