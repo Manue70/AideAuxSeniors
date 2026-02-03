@@ -166,28 +166,7 @@ Route::middleware(['auth'])->group(function () {
             return redirect()->route('dashboard');
         })->name('onboarding.complete');
 
-    });
 
-    // ============================
-    // ROUTES UTILISATEURS CONNECTES
-    // ============================
     
-    // Pages accessibles seulement si connecté et onboarding terminé
-    Route::middleware(['auth', 'check.onboarding'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-        Route::resource('rappels', ReminderController::class);
-        Route::resource('contacts', ContactController::class);
-        Route::resource('medicaments', MedicationController::class);
-        Route::resource('assitant', AssistantController::class);
-    
-        Route::view('/parametres', 'pages.parametres')->name('parametres');
-        Route::view('/assistance', 'pages.assistance')->name('assistance'); 
-        Route::view('/confidentialite', 'pages.confidentialite')->name('confidentialite');
-        Route::view('/info-legales', 'pages.info-legales')->name('info-legales');
-        Route::view('/cookies', 'pages.cookies')->name('cookies');
-
-       
-
     });
 });
