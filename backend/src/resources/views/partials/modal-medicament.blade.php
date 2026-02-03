@@ -4,11 +4,11 @@
 
         <h2 id="modal-title">Médicament</h2>
 
-        <form method="POST" id="medication-form">
+        <form method="POST" id="medication-form"action="{{ route('medicaments.store') }}" >
             @csrf
             <input type="hidden" name="_method" id="form-method">
             <input type="hidden" name="medication_id" id="medication-id">
-            <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
+            <input type="hidden" name="redirect_after" value="{{ route ('rappels') }}">
 
             <div class="form-group">
                 <label>Nom</label>
