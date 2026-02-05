@@ -66,11 +66,12 @@
             >
                 Modifier
             </button>
-            <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
+
+            <form action="{{ route('medicaments.update', $med->id) }}" method="POST">
                 @csrf
-                <input type="hidden" name="task" value="hydration">
                 <button type="submit" class="btn-primary">FAIT</button>
             </form>
+
         </div>
         @endforeach
 

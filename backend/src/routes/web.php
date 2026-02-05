@@ -62,11 +62,12 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->prefix('onboarding')->group(function () {
-    Route::get('/1', fn() => view('onboarding.page1'))->name('onboarding.1');
-    Route::get('/2', fn() => view('onboarding.page2'))->name('onboarding.2');
-    Route::get('/3', fn() => view('onboarding.page3'))->name('onboarding.3');
-    Route::get('/4', fn() => view('onboarding.page4'))->name('onboarding.4');
-    Route::get('/5', fn() => view('onboarding.page5'))->name('onboarding.5');
+    Route::get('/1', [OnboardingController::class, 'page1'])->name('onboarding.1');
+    Route::get('/2', [OnboardingController::class, 'page2'])->name('onboarding.2');
+    Route::get('/3', [OnboardingController::class, 'page3'])->name('onboarding.3');
+    Route::get('/4', [OnboardingController::class, 'page4'])->name('onboarding.4');
+    Route::get('/5', [OnboardingController::class, 'page5'])->name('onboarding.5');
+
 
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
 
@@ -103,6 +104,8 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
     // Médicaments
     Route::resource('medicaments', MedicationController::class)
         ->only(['store','update','destroy']);
+    Route::post('/dashboard/medicaments/{medicament}/done', [MedicationController::class, 'markDone'])->name('medicaments.markDone');
+
 
     // Pages protégées supplémentaires
     Route::get('/assistance', fn() => view('pages.assistance'))->name('assistance');
