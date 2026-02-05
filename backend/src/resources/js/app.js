@@ -171,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     midiInput.checked = false;
                     soirInput.checked = false;
                     priseHoraires.style.display = 'none';
+
+                    const redirectInput = form.querySelector('input[name="redirect_after"]');
+                    if (redirectInput) redirectInput.value = window.location.href;
                 }
 
                 modal.style.display = 'flex';

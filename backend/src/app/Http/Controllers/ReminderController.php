@@ -85,6 +85,11 @@ class ReminderController extends Controller
 
             Notification::send($user, new ReminderCreated($reminder));
         }
+        // ✅ Mettre à jour la session onboarding si on vient d'une page onboarding
+        if ($request->has('redirect_after') && str_contains($request->redirect_after, '/onboarding/')) {
+            $pageNumber = (int) last(explode('/', $request->redirect_after));
+            session(['onboarding_last_page' => $pageNumber]);
+        }
     
          $redirect = $request->redirect_after ?? route('rappels');
 

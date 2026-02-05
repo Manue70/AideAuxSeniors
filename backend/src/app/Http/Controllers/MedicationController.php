@@ -51,6 +51,13 @@ class MedicationController extends Controller
             }
         }
 
+        
+        // ✅ Mettre à jour la session onboarding si on vient d'une page onboarding
+        if ($request->has('redirect_after') && str_contains($request->redirect_after, '/onboarding/')) {
+            $pageNumber = (int) last(explode('/', $request->redirect_after));
+            session(['onboarding_last_page' => $pageNumber]);
+        }
+
         $redirect = $request->redirect_after ?? url()->previous();
 
         return redirect($redirect)->with('success', 'Médicament et rappels ajoutés !');
@@ -85,6 +92,12 @@ class MedicationController extends Controller
             
         ]);
 
+        // ✅ Mettre à jour la session onboarding si on vient d'une page onboarding
+        if ($request->has('redirect_after') && str_contains($request->redirect_after, '/onboarding/')) {
+            $pageNumber = (int) last(explode('/', $request->redirect_after));
+            session(['onboarding_last_page' => $pageNumber]);
+        }
+
 
         return redirect()->back()->with('success', 'Médicament mis à jour !');
     }
@@ -92,7 +105,17 @@ class MedicationController extends Controller
     public function destroy(Medication $medicament)
     {
         $medicament = Medication::findOrFail($id);
+        // supprimer rappels liés
+        Reminder::where('medication_id', $medicament->id)->delete();
+
+        // supprimer médicament
         $medicament->delete();
+
+        // ✅ Mettre à jour la session onboarding si on vient d'une page onboarding
+        if ($request->has('redirect_after') && str_contains($request->redirect_after, '/onboarding/')) {
+            $pageNumber = (int) last(explode('/', $request->redirect_after));
+            session(['onboarding_last_page' => $pageNumber]);
+        }
 
     return redirect()->back()->with('success', 'Médicament supprimé !');
 }
