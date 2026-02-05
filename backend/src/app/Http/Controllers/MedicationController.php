@@ -13,9 +13,9 @@ class MedicationController extends Controller
         $request->validate([
             'nom'    => 'required|string|max:255',
             'dosage' => 'required|string|max:255',
-            'matin'  => 'nullable|in:oui,non',
-            'midi'   => 'nullable|in:oui,non',
-            'soir'   => 'nullable|in:oui,non',
+            'matin'  => 'nullable',
+            'midi'   => 'nullable',
+            'soir'   => 'nullable',
             'is_daily'=> 'nullable',
         ]);
 
@@ -58,14 +58,16 @@ class MedicationController extends Controller
 
 
     
-    public function update(Request $request, Medication $medicament)
+    public function update(Request $request, $id)
     {
+        $medicament = Medication::findOrFail($id);
+
         $request->validate([
             'nom'    => 'required|string|max:255',
             'dosage' => 'required|string|max:255',
-            'matin'  => 'nullable|in:oui,non',
-            'midi'   => 'nullable|in:oui,non',
-            'soir'   => 'nullable|in:oui,non',
+            'matin'  => 'nullable',
+            'midi'   => 'nullable',
+            'soir'   => 'nullable|',
             'is_daily'=> 'nullable',
         ]);
 
@@ -89,8 +91,10 @@ class MedicationController extends Controller
 
     public function destroy(Medication $medicament)
     {
+        $medicament = Medication::findOrFail($id);
         $medicament->delete();
-        return redirect()->back()->with('success', 'Médicament supprimé !');
-    }
+
+    return redirect()->back()->with('success', 'Médicament supprimé !');
+}
 
 }

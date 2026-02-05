@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     idInput.value = med.id;
                     nomInput.value = med.nom;
                     dosageInput.value = med.dosage;
-                    dailyInput.checked = med.is_daily === "1" || med.is_daily === "true";
+                    dailyInput.checked = med.daily === "1";
                     matinInput.checked = med.matin === "oui";
                     midiInput.checked = med.midi === "oui";
                     soirInput.checked = med.soir === "oui";
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     // Ajouter
                     title.textContent = "Nouveau médicament";
-                    form.action = "{{ route('medicaments.store') }}"; // Laravel route
+                    form.action = form.dataset.storeUrl;
                     methodInput.value = "POST";
                     deleteBtn.style.display = "none";
 
