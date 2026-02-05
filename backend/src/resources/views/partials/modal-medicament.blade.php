@@ -4,7 +4,8 @@
 
         <h2 id="modal-title">Médicament</h2>
 
-        <form method="POST" id="medication-form"action="{{ route('medicaments.store') }}" >
+        <form method="POST" id="medication-form"  data-store-url="{{ route('medicaments.store') }}"
+      action="{{ route('medicaments.store') }}">  >
             @csrf
             <input type="hidden" name="_method" id="form-method" value="POST">
             <input type="hidden" name="medication_id" id="medication-id">
