@@ -118,15 +118,16 @@ class MedicationController extends Controller
         }
 
     return redirect()->back()->with('success', 'Médicament supprimé !');
-}
+    }
 
-}
 
-public function markDone(Medication $medicament)
-{
-    // Marquer tous les rappels liés comme effectués (ou seulement un type)
-    Reminder::where('medication_id', $medicament->id)
-        ->update(['est_effectue' => true]);
 
-    return redirect()->back()->with('success', 'Médicament marqué comme fait !');
+    public function markDone(Medication $medicament)
+    {
+        // Marquer tous les rappels liés comme effectués (ou seulement un type)
+        Reminder::where('medication_id', $medicament->id)
+            ->update(['est_effectue' => true]);
+
+     return redirect()->back()->with('success', 'Médicament marqué comme fait !');
+    }
 }

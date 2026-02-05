@@ -11,6 +11,8 @@
             <input type="hidden" name="medication_id" id="medication-id">
 
             <input type="hidden" name="redirect_after" value="{{ url()->current() }}">
+            <input type="hidden" name="from_onboarding" value="1">
+
 
             <div class="form-group">
                 <label>Nom</label>

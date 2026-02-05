@@ -39,6 +39,7 @@
 
             <!-- Champ caché pour redirection -->
             <input type="hidden" name="redirect_after" id="redirect_after" value="{{ url()->current() }}">
+            <input type="hidden" name="from_onboarding" value="1">
 
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>
