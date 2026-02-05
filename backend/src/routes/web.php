@@ -15,6 +15,8 @@ use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\ConfidentialiteController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OnboardingController;
+
 
 /*
 |--------------------------------------------------------------------------
