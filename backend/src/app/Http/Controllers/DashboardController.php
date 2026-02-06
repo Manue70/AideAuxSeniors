@@ -32,21 +32,22 @@ class DashboardController extends Controller
             ->orderBy('heure')
             ->get();
 
+        // Grouper par moment (Matin / Midi / Soir)
+        $otherRemindersGrouped = $this->groupByMoment($otherReminders);
+        $hydrationRemindersGrouped = $this->groupByMoment($hydrationReminders);
+
         $contactUrgent = Contact::where('user_id', auth()->id())
             ->orderByDesc('prioritaire')
             ->first();
 
         $medicaments = Medication::where('user_id', auth()->id())->get();
 
-        // Tri par moment de la journée
-        $otherRemindersByMoment = $this->groupByMoment($otherReminders);
-
         return view('dashboard.index', [
-            'medicationReminders'       => $medicationReminders,
-            'hydrationReminders'        => $hydrationReminders,
-            'otherRemindersGrouped'            => $otherRemindersByMoment,
-            'medicaments'               => $medicaments,
-            'contactUrgent'             => $contactUrgent,
+            'medicationReminders'      => $medicationReminders,
+            'hydrationRemindersGrouped' => $hydrationRemindersGrouped,
+            'otherRemindersGrouped'    => $otherRemindersGrouped,
+            'medicaments'              => $medicaments,
+            'contactUrgent'            => $contactUrgent,
         ]);
     }
 
@@ -62,7 +63,7 @@ class DashboardController extends Controller
         return redirect()->back()->with('success', 'Rappel validé');
     }
 
-    // Méthode privée pour trier les rappels par moment de la journée
+    // Fonction privée pour grouper par moment de la journée
     private function groupByMoment($reminders)
     {
         $groups = [
@@ -72,7 +73,7 @@ class DashboardController extends Controller
         ];
 
         foreach ($reminders as $reminder) {
-            $heure = intval(explode(':', $reminder->heure)[0]); // récupère l'heure
+            $heure = intval(explode(':', $reminder->heure)[0]);
             if ($heure >= 5 && $heure < 12) {
                 $groups['Matin'][] = $reminder;
             } elseif ($heure >= 12 && $heure < 18) {
