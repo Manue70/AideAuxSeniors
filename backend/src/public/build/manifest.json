@@ -27,7 +27,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-Dzh3EShL.css",
+    "file": "assets/dashboard-CoSYuLXH.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "name": "dashboard",
@@ -81,7 +81,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-BlSm-Vu_.js",
+    "file": "assets/app-BhFwSem1.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -89,7 +89,7 @@
       "assets/app-DX8xotWS.css",
       "assets/login-page-CzHTE-_r.css",
       "assets/onboarding-_prW6Th2.css",
-      "assets/dashboard-Dzh3EShL.css",
+      "assets/dashboard-CoSYuLXH.css",
       "assets/info-pages-WJJegPTg.css",
       "assets/reminders-D9Yl55bO.css",
       "assets/assistance-jQOcTABd.css",

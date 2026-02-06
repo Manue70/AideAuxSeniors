@@ -29,8 +29,8 @@ body.bleu .dashboard-content {
 /* Conteneur des cartes : flexible et responsive */
 .dashboard-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap:  30px;
     justify-content: center;
     margin-top: 30px;
 }

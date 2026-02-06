@@ -40,21 +40,37 @@
                 </span>
             </h3>
 
-            @foreach(['Matin','Midi','Soir'] as $moment)
-                @if(count($otherRemindersGrouped[$moment]) > 0)
+            @php
+                $moments = ['Matin', 'Midi', 'Soir'];
+                $hasAnyReminder = false;
+            @endphp
+
+            @foreach($moments as $moment)
+                @if(isset($otherRemindersGrouped[$moment]) && count($otherRemindersGrouped[$moment]) > 0)
+                    @php $hasAnyReminder = true; @endphp
                     <h4>{{ $moment }}</h4>
+
                     @foreach($otherRemindersGrouped[$moment] as $reminder)
                         <p>{{ $reminder->heure }} – {{ $reminder->message }}</p>
-                        <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="task" value="autre">
-                            <button type="submit" class="btn-primary">FAIT</button>
-                        </form>
-                        <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
+
+                        <div class="dashboard-card-buttons">
+                            <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST" style="display:inline-block; margin-right:10px;">
+                                @csrf
+                                <input type="hidden" name="task" value="autre">
+                                <button type="submit" class="btn-primary">FAIT</button>
+                            </form>
+
+                            <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
+                        </div>
                     @endforeach
                 @endif
             @endforeach
+
+            @unless($hasAnyReminder)
+                <p>Aucun rappel pour le moment.</p>
+            @endunless
         </div>
+
 
         <!-- Carte Médicaments -->
         <div class="card">
