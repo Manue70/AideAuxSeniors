@@ -3,113 +3,109 @@
 @tailwind utilities;
 
 
-/* ===========================
-   DASHBOARD CARDS - GENERAL
-   =========================== */
+/* =============================
+   Container global des cards
+   ============================= */
 .dashboard-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap; /* Permet aux cartes de passer à la ligne */
+    gap: 1rem;       /* Espace entre les cartes */
+    margin-top: 1rem; /* Espace sous le header */
+    justify-content: flex-start; /* Aligne les cartes à gauche */
 }
 
-/* Card */
+/* =============================
+   Chaque card
+   ============================= */
 .dashboard-cards .card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    padding: 1rem 1.5rem;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+
+    width: 100%; /* Full width mobile */
 }
 
-.dashboard-cards .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+@media (min-width: 768px) { /* Tablette */
+    .dashboard-cards .card {
+        width: 48%; /* Deux cartes par ligne */
+    }
 }
 
-/* Card title + badge */
+@media (min-width: 1024px) { /* Desktop */
+    .dashboard-cards .card {
+        width: 32%; /* Trois cartes par ligne */
+    }
+}
+
+/* =============================
+   Header de la card et badges
+   ============================= */
 .dashboard-cards .card h3 {
+    font-size: 1.125rem; /* 18px */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
-    color: #333;
 }
 
-.dashboard-cards .card .badge {
-    background-color: #007bff;
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: bold;
-    padding: 0.2rem 0.5rem;
-    border-radius: 50%;
+.dashboard-cards .badge {
+    background-color: #3b82f6; /* Bleu Tailwind */
+    color: white;
+    font-size: 0.75rem; /* 12px */
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px; /* Badge rond */
 }
 
-/* Subtitles for moment (Matin/Midi/Soir) */
-.dashboard-cards .card h4 {
-    font-size: 0.95rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.3rem;
-    color: #555;
-}
-
-/* Paragraphs inside card */
+/* =============================
+   Paragraphes dans les cards
+   ============================= */
 .dashboard-cards .card p {
-    font-size: 0.9rem;
-    margin: 0.2rem 0;
-    color: #444;
+    color: #374151; /* gris foncé */
+    margin-bottom: 0.5rem;
 }
 
-/* Buttons */
-.dashboard-cards .card .btn,
-.dashboard-cards .card button,
-.dashboard-cards .card input[type="submit"] {
-    margin-top: 0.4rem;
-    margin-right: 0.4rem;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.85rem;
-    border-radius: 6px;
+/* =============================
+   Boutons dans les cards
+   ============================= */
+.dashboard-cards .card button {
+    background-color: #3b82f6; /* Bleu Tailwind */
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.375rem;
     border: none;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    font-size: 0.875rem; /* 14px */
+    margin-right: 0.5rem;
 }
 
-.dashboard-cards .card .btn-primary {
-    background-color: #007bff;
-    color: #fff;
+.dashboard-cards .card button:hover {
+    background-color: #2563eb; /* Bleu foncé au hover */
 }
 
-.dashboard-cards .card .btn-primary:hover {
-    background-color: #0056b3;
+/* =============================
+   Liens boutons primaires
+   ============================= */
+.dashboard-cards .card a.btn-primary {
+    display: inline-block;
+    background-color: #e5e7eb; /* gris clair */
+    color: #111827; /* gris foncé */
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    margin-right: 0.5rem;
 }
 
-.dashboard-cards .card .btn-success {
-    background-color: #28a745;
-    color: #fff;
+.dashboard-cards .card a.btn-primary:hover {
+    background-color: #d1d5db; /* gris plus foncé au hover */
 }
 
-.dashboard-cards .card .btn-success:hover {
-    background-color: #1e7e34;
-}
-
-.dashboard-cards .card .btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.dashboard-cards .card .btn-danger:hover {
-    background-color: #b02a37;
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-    .dashboard-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .dashboard-greeting h2 {
-        font-size: 1.3rem;
-    }
+/* =============================
+   Spécial Hydratation
+   ============================= */
+.dashboard-cards .card.hydration-card p {
+    font-weight: 500;
+    color: #2563eb; /* Bleu foncé */
 }
