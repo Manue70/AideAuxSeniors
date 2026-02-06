@@ -37,17 +37,20 @@ class MedicationController extends Controller
         ];
 
         foreach (['matin','midi','soir'] as $moment) {
+            $hasHoraire = $request->boolean('matin')
+           || $request->boolean('midi')
+           || $request->boolean('soir');
+
             if  ($request->boolean($moment)){
-                Reminder::create([
-                    'user_id'       => $userId,
-                    'medication_id'=> $medication->id,   
-                    'type'          => 'médicament',
-                    'message'       => "Prendre {$medication->nom} ({$medication->dosage})",
-                    'heure'         => $heures[$moment],
-                    'est_effectue'  => false,
-                    'is_daily'      => $request->has('is_daily'),
-                                    
-                ]);
+                 Reminder::create([
+                    'user_id' => $userId,
+                    'medication_id' => $medication->id,
+                    'type' => 'médicament',
+                    'message' => "Prendre {$medication->nom} ({$medication->dosage})",
+                    'heure' => '08:00:00',
+                    'est_effectue' => false,
+                    'is_daily' => true,
+                ]);  
             }
         }
 
@@ -101,24 +104,19 @@ class MedicationController extends Controller
 
         return redirect()->back()->with('success', 'Médicament mis à jour !');
     }
-
     public function destroy(Medication $medicament)
     {
-        $medicament = Medication::findOrFail($id);
         // supprimer rappels liés
         Reminder::where('medication_id', $medicament->id)->delete();
 
         // supprimer médicament
         $medicament->delete();
 
-        // ✅ Mettre à jour la session onboarding si on vient d'une page onboarding
-        if ($request->has('redirect_after') && str_contains($request->redirect_after, '/onboarding/')) {
-            $pageNumber = (int) last(explode('/', $request->redirect_after));
-            session(['onboarding_last_page' => $pageNumber]);
-        }
-
-    return redirect()->back()->with('success', 'Médicament supprimé !');
+        return response()->json(['success' => true]);
     }
+
+    
+    
 
 
 
