@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (confirm("Voulez-vous vraiment supprimer ce médicament ?")) {
                 fetch(`/medicaments/${id}`, {
                     method: 'DELETE',
+                    credentials: 'same-origin', 
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                         'Accept': 'application/json'
