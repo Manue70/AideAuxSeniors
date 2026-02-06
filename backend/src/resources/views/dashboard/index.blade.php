@@ -67,11 +67,6 @@
                 Modifier
             </button>
 
-            <form action="{{ route('medicaments.update', $med->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn-primary">FAIT</button>
-            </form>
-
         </div>
         @endforeach
 
