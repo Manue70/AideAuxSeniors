@@ -53,7 +53,7 @@
         @endforeach
 
         <!-- Carte Médicaments -->
-        @foreach($medicaments as $med)
+        @foreach($medicationReminders as $reminder)
         <div class="card">
             <h3>Médicaments</h3>
             <strong>{{ $med->nom }}</strong> – {{ $med->dosage }}
@@ -79,7 +79,7 @@
        
 
         <!-- Carte Hydratation -->
-        @foreach($reminders as $reminder)
+        @foreach($hydrationReminders as $reminder)
         <div class="card">
             <h3>Hydratation</h3>
             <p> {{ $reminder->message }} – {{ $reminder->heure }}Prendre 6 verres d'eau</p>
