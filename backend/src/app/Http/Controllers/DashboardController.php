@@ -44,7 +44,7 @@ class DashboardController extends Controller
         return view('dashboard.index', [
             'medicationReminders'       => $medicationReminders,
             'hydrationReminders'        => $hydrationReminders,
-            'otherReminders'            => $otherRemindersByMoment,
+            'otherRemindersGrouped'            => $otherRemindersByMoment,
             'medicaments'               => $medicaments,
             'contactUrgent'             => $contactUrgent,
         ]);
