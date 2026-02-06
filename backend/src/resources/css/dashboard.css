@@ -3,104 +3,113 @@
 @tailwind utilities;
 
 
-
-
-.dashboard-content {
-    padding: 30px 20px;
-    text-align: center;
-    min-height: calc(100vh - 140px);
-    font-size: 1.3rem;
-    line-height: 1.6;
-}
-
-/* Thèmes */
-body.clair .dashboard-content {
-    background-color: #c9f0c9;
-}
-
-body.bleu .dashboard-content {
-    background-color: #a0c8f0;
-}
-
-.dashboard-content h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Conteneur des cartes */
+/* ===========================
+   DASHBOARD CARDS - GENERAL
+   =========================== */
 .dashboard-cards {
     display: grid;
-    grid-template-columns: repeat(2, 420px); /* exactement 2 colonnes de 420px */
-    gap: 50px; /* espace entre les cartes */
-    justify-content: center; /* centre les colonnes */
-    padding: 0 20px; /* marge sur les côtés */
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
-/* Responsive tablette / mobile */
-@media (max-width: 900px) {
-    .dashboard-cards {
-        grid-template-columns: 1fr; /* 1 carte par ligne */
-        gap: 30px;
-    }
-}
-
-/* Cartes */
+/* Card */
 .dashboard-cards .card {
-    background-color:rgba(0, 128, 255, 0.3); /* #0080FF à 50% */;
-    border-radius: 16px;
-    padding: 30px;
-    width: 100%;      /* prend toute la largeur de sa colonne */
-    max-width: 500px; /* largeur max pour desktop */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 1rem 1.5rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
-
-/* Optionnel : effet au survol */
-.dashboard-cards .card:hover {
-    transform: translateY(-5px);
-}
-
-
-
 
 .dashboard-cards .card:hover {
-        transform: translateY(-5px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
-/* Titres et textes */
+/* Card title + badge */
 .dashboard-cards .card h3 {
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-
-.dashboard-cards .card p {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-/* Boutons */
-.dashboard-cards .card .btn-primary {
-    width: 160px;
-    height: 50px;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: #333;
+}
+
+.dashboard-cards .card .badge {
+    background-color: #007bff;
     color: #fff;
-    background-color: #4CAF50;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+}
+
+/* Subtitles for moment (Matin/Midi/Soir) */
+.dashboard-cards .card h4 {
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.3rem;
+    color: #555;
+}
+
+/* Paragraphs inside card */
+.dashboard-cards .card p {
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+    color: #444;
+}
+
+/* Buttons */
+.dashboard-cards .card .btn,
+.dashboard-cards .card button,
+.dashboard-cards .card input[type="submit"] {
+    margin-top: 0.4rem;
+    margin-right: 0.4rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.dashboard-cards .card .btn-primary {
+    background-color: #007bff;
+    color: #fff;
 }
 
 .dashboard-cards .card .btn-primary:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
+.dashboard-cards .card .btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
 
+.dashboard-cards .card .btn-success:hover {
+    background-color: #1e7e34;
+}
+
+.dashboard-cards .card .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.dashboard-cards .card .btn-danger:hover {
+    background-color: #b02a37;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-greeting h2 {
+        font-size: 1.3rem;
+    }
+}

@@ -4,14 +4,12 @@
 
 @section('content')
 <div class="dashboard-content {{ session('theme', 'clair') }}">
+
     @php
         $user = auth()->user();
         $prenom = $user ? ucfirst(explode(' ', $user->name)[0]) : 'invité';
-
-        // Heure locale Paris
         $heure = now()->setTimezone('Europe/Paris')->format('H');
 
-        // Définir greeting et emoji
         if ($heure >= 5 && $heure < 12) {
             $greeting = 'Bonjour';
             $emoji = '🌞';
@@ -31,110 +29,101 @@
         <h2>{{ $greeting }}, {{ $prenom }} {{ $emoji }}</h2>
         <p style="font-size:0.9rem; color:#555;">{{ $message }}</p>
     </div>
-        
 
     <div class="dashboard-cards">
-        <!-- Carte Rappels du jour -->
-        @foreach($reminders as $reminder) 
-        <div class="card">
-            <h3> Rappels du jour</h3>
-            <p> {{ $reminder->message }} – {{ $reminder->heure }} </p>
-            <form action="{{ route('dashboard.markDone',$reminder->id ) }}" method="POST">
-                @csrf
-                <input type="hidden" name="task" value="medicament_matin">
-                <button type="submit" class="btn-primary">FAIT</button>
-            </form>
 
-            
-            <a href="{{ route('rappels') }}" class="btn-primary">
-                VOIR
-            </a>
+        <!-- Carte Autres rappels -->
+        <div class="card">
+            <h3>Rappels du jour 
+                <span class="badge">
+                    {{ collect($otherRemindersGrouped)->sum(fn($group) => count($group)) }}
+                </span>
+            </h3>
+
+            @foreach(['Matin','Midi','Soir'] as $moment)
+                @if(count($otherRemindersGrouped[$moment]) > 0)
+                    <h4>{{ $moment }}</h4>
+                    @foreach($otherRemindersGrouped[$moment] as $reminder)
+                        <p>{{ $reminder->heure }} – {{ $reminder->message }}</p>
+                        <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="task" value="autre">
+                            <button type="submit" class="btn-primary">FAIT</button>
+                        </form>
+                        <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
+                    @endforeach
+                @endif
+            @endforeach
         </div>
-        @endforeach
 
         <!-- Carte Médicaments -->
-        @foreach($medicationReminders as $reminder)
         <div class="card">
-            <h3>Médicaments</h3>
-            <strong>{{ $med->nom }}</strong> – {{ $med->dosage }}
+            <h3>Médicaments <span class="badge">{{ $medicaments->count() }}</span></h3>
 
-            <button class="btn btn-primary btn-open-medicament"
-                data-id="{{ $med->id }}"
-                data-nom="{{ $med->nom }}"
-                data-dosage="{{ $med->dosage }}"
-                data-daily="{{ $med->is_daily }}"
-            >
-                Modifier
+            @foreach($medicaments as $med)
+                <strong>{{ $med->nom }}</strong> – {{ $med->dosage }}
+                <button class="btn btn-primary btn-open-medicament"
+                    data-id="{{ $med->id }}"
+                    data-nom="{{ $med->nom }}"
+                    data-dosage="{{ $med->dosage }}"
+                    data-daily="{{ $med->is_daily }}">
+                    Modifier
+                </button>
+            @endforeach
+
+            <button class="btn btn-success btn-open-medicament" data-id="">
+                Ajouter un médicament
             </button>
-
         </div>
-        @endforeach
-
-        <button class="btn btn-success btn-open-medicament" data-id="">
-            Ajouter un médicament
-        </button>
-
-
-
-       
 
         <!-- Carte Hydratation -->
-        @foreach($hydrationReminders as $reminder)
         <div class="card">
-            <h3>Hydratation</h3>
-            <p> {{ $reminder->message }} – {{ $reminder->heure }}Prendre 6 verres d'eau</p>
-            <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
-                @csrf
-                <input type="hidden" name="task" value="hydration">
-                <button type="submit" class="btn-primary">FAIT</button>
-            </form>
+            <h3>Hydratation <span class="badge">{{ collect($hydrationRemindersGrouped)->sum(fn($group) => count($group)) }}</span></h3>
 
-            
-            <a href="{{ route('rappels') }}" class="btn-primary">
-                VOIR
-            </a>
-
+            @foreach(['Matin','Midi','Soir'] as $moment)
+                @if(count($hydrationRemindersGrouped[$moment]) > 0)
+                    <h4>{{ $moment }}</h4>
+                    @foreach($hydrationRemindersGrouped[$moment] as $reminder)
+                        <p>{{ $reminder->heure }} – {{ $reminder->message }} – Prendre 6 verres d'eau</p>
+                        <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="task" value="hydration">
+                            <button type="submit" class="btn-primary">FAIT</button>
+                        </form>
+                        <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
+                    @endforeach
+                @endif
+            @endforeach
         </div>
-        @endforeach
 
         <!-- Carte Contacts d'urgence -->
         <div class="card">
             <h3>Contacts d'urgence</h3>
 
             @if($contactUrgent)
-                <p>{{ $contactUrgent->nom }} — {{ $contactUrgent->telephone }} — {{ $contactUrgent->lien }}  </p>
-
-                <a href="tel:{{ $contactUrgent->telephone }}" class="btn-primary">
-                    APPELER
-                </a>
+                <p>{{ $contactUrgent->nom }} — {{ $contactUrgent->telephone }} — {{ $contactUrgent->lien }}</p>
+                <a href="tel:{{ $contactUrgent->telephone }}" class="btn-primary">APPELER</a>
             @else
                 <p>Aucun contact enregistré</p>
             @endif
 
-            <a href="{{ route('contacts.index') }}" class="btn-primary">
-                Modifier
-            </a>
+            <a href="{{ route('contacts.index') }}" class="btn-primary">Modifier</a>
 
-           @if($contactUrgent)
-            <form method="POST" action="{{ route('contacts.destroy', $contactUrgent) }}" style="display:inline;">
-                @csrf
-                @method('DELETE')
-
-                <button type="submit" class="btn btn-danger"
-                    onclick="return confirm('Voulez-vous vraiment supprimer ce contact ?')">
-                    Supprimer
-                </button>
-            </form>
+            @if($contactUrgent)
+                <form method="POST" action="{{ route('contacts.destroy', $contactUrgent) }}" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Voulez-vous vraiment supprimer ce contact ?')">
+                        Supprimer
+                    </button>
+                </form>
             @endif
-
         </div>
 
-            
     </div>
-@endsection
+</div>
 
 @include('partials.modal-medicament')
-
 <script src="/js/medicament-modal.js"></script>
-
 

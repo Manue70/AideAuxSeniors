@@ -12,46 +12,42 @@ class DashboardController extends Controller
 {
    public function index()
     {
-        // Rappels médicaments
+        // Médicaments
         $medicationReminders = Reminder::where('user_id', auth()->id())
             ->where('type', 'médicament')
             ->where('est_effectue', false)
             ->orderBy('heure')
             ->get();
 
-        // Rappels hydratation
+        // Hydratation
         $hydrationReminders = Reminder::where('user_id', auth()->id())
             ->where('type', 'hydration')
             ->where('est_effectue', false)
             ->orderBy('heure')
             ->get();
 
-        // Contacts urgents
+        // Autres rappels (sport, réveil, rdv...)
+        $otherReminders = Reminder::where('user_id', auth()->id())
+            ->whereNotIn('type', ['médicament', 'hydration'])
+            ->where('est_effectue', false)
+            ->orderBy('heure')
+            ->get();
+
         $contactUrgent = Contact::where('user_id', auth()->id())
             ->orderByDesc('prioritaire')
             ->first();
 
-        // Médicaments
         $medicaments = Medication::where('user_id', auth()->id())->get();
-
-        Reminder::firstOrCreate([
-            'user_id' => auth()->id(),
-            'type' => 'hydration',
-            'heure' => '10:00:00',
-        ], [
-            'message' => "Boire de l'eau",
-            'est_effectue' => false,
-            'is_daily' => true,
-        ]);
-
 
         return view('dashboard.index', [
             'medicationReminders' => $medicationReminders,
             'hydrationReminders' => $hydrationReminders,
+            'otherReminders'     => $otherReminders,
             'medicaments'        => $medicaments,
             'contactUrgent'      => $contactUrgent,
         ]);
     }
+
 
     public function markDone($id)
     {
@@ -64,5 +60,27 @@ class DashboardController extends Controller
 
         return redirect()->back()->with('success', 'Rappel validé');
     }
+}
+
+private function groupByMoment($reminders)
+{
+    $groups = [
+        'Matin' => [],
+        'Midi'  => [],
+        'Soir'  => [],
+    ];
+
+    foreach ($reminders as $reminder) {
+        $heure = intval(explode(':', $reminder->heure)[0]); // récupère l'heure
+        if ($heure >= 5 && $heure < 12) {
+            $groups['Matin'][] = $reminder;
+        } elseif ($heure >= 12 && $heure < 18) {
+            $groups['Midi'][] = $reminder;
+        } else {
+            $groups['Soir'][] = $reminder;
+        }
+    }
+
+    return $groups;
 }
 
