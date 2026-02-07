@@ -5,7 +5,6 @@
 .dashboard-content {
     padding: 30px 20px;
     text-align: center;
-    min-height: 100%;
     font-size: 1.3rem;
     line-height: 1.6;
 }
@@ -93,4 +92,15 @@ body.bleu .dashboard-content {
     border-radius: 12px;
     font-size: 0.9rem;
     margin-left: 8px;
+}
+
+body {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+main {
+    flex: 1 !important;
+    display: block !important;
 }

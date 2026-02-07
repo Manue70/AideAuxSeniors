@@ -11,6 +11,8 @@
 @import "./login-page.css" ;
 @import "./onboarding.css" ;
 @import "./reminders.css" ;
+
+
 *,
 *::before,
 *::after {
@@ -31,7 +33,7 @@ body {
     min-height: 100vh;
 }
 
-main content {
+main {
     flex: 1;
 }
 /* HERO */

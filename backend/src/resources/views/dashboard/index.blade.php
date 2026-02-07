@@ -60,7 +60,10 @@
                                 <button type="submit" class="btn-primary">FAIT</button>
                             </form>
 
-                            <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
+                            <button class="btn-primary btn-open-reminder">
+                                VOIR
+                            </button>
+
                         </div>
                     @endforeach
                 @endif

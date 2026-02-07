@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-DX8xotWS.css",
+    "file": "assets/app-DE1fabju.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -27,7 +27,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-CiQDUIQB.css",
+    "file": "assets/dashboard-VYrY7usq.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "name": "dashboard",
@@ -81,15 +81,15 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Dig3Ymsx.js",
+    "file": "assets/app-ChDp6GJ3.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-DX8xotWS.css",
+      "assets/app-DE1fabju.css",
       "assets/login-page-CzHTE-_r.css",
       "assets/onboarding-_prW6Th2.css",
-      "assets/dashboard-CiQDUIQB.css",
+      "assets/dashboard-VYrY7usq.css",
       "assets/info-pages-WJJegPTg.css",
       "assets/reminders-D9Yl55bO.css",
       "assets/assistance-jQOcTABd.css",
