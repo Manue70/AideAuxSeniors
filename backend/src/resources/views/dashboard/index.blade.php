@@ -147,7 +147,7 @@
 @include('partials.modal-hydration')
 @include('partials.modal-reminder')
 
-<script src="/js/hydration-modal.js"></script>
+<script src="/js/hydratation-modal.js"></script>
 <script src="/js/medicament-modal.js"></script>
 <script src="/js/reminder-modal.js"></script>
 
