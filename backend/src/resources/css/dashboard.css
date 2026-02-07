@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dashboard général */
 .dashboard-content {
     padding: 30px 20px;
+    text-align: center;
     min-height: calc(100vh - 140px);
     font-size: 1.3rem;
     line-height: 1.6;
-    text-align: center;
 }
 
 /* Thèmes */
@@ -20,19 +19,26 @@ body.bleu .dashboard-content {
     background-color: #a0c8f0;
 }
 
-/* Greeting */
 .dashboard-content h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
 }
 
-/* Conteneur des cartes : flexible et responsive */
+/* Conteneur des cartes */
 .dashboard-cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap:  30px;
+    grid-template-columns: repeat(2, 320px); /* cartes plus larges */
+    gap: 40px 60px;
     justify-content: center;
     margin-top: 30px;
+}
+
+/* Responsive mobile */
+@media (max-width: 600px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 }
 
 /* Cartes */
@@ -40,11 +46,11 @@ body.bleu .dashboard-content {
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 16px;
     padding: 30px;
+    width: 100%;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
 }
 
 /* Titres et textes */
@@ -53,30 +59,13 @@ body.bleu .dashboard-content {
     font-size: 1.5rem;
 }
 
-.dashboard-cards .card h4 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-}
-
 .dashboard-cards .card p {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 1.2rem;
 }
 
-/* Badge compteur */
-.dashboard-cards .card .badge {
-    background-color: #ff5a5f;
-    color: white;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    margin-left: 8px;
-}
-
 /* Boutons */
-.dashboard-cards .card .btn-primary,
-.dashboard-cards .card .btn-success {
+.dashboard-cards .card .btn-primary {
     width: 160px;
     height: 50px;
     font-size: 1.2rem;
@@ -90,18 +79,18 @@ body.bleu .dashboard-content {
     border: none;
     cursor: pointer;
     transition: background 0.3s;
-    margin-bottom: 10px;
 }
 
-.dashboard-cards .card .btn-primary:hover,
-.dashboard-cards .card .btn-success:hover {
+.dashboard-cards .card .btn-primary:hover {
     background-color: #45a049;
 }
 
-/* Responsive mobile */
-@media (max-width: 768px) {
-    .dashboard-cards {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+/* Badge compteur */
+.dashboard-cards .card .badge {
+    background-color: #ff5a5f;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin-left: 8px;
 }
