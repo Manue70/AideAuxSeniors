@@ -119,6 +119,7 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
     })->name('notifications.update');
 
     Route::get('/rappels', [ReminderController::class, 'index'])->name('rappels');
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 
 });
 
