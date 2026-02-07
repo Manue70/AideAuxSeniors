@@ -45,7 +45,7 @@
     ]
   },
   "resources/css/info-pages.css": {
-    "file": "assets/info-pages-D2f5nnB8.css",
+    "file": "assets/info-pages-CfoHfh3p.css",
     "src": "resources/css/info-pages.css",
     "isEntry": true,
     "name": "info-pages",
@@ -81,7 +81,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Bh7I0I1g.js",
+    "file": "assets/app-BffMl9z5.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -90,7 +90,7 @@
       "assets/login-page-CzHTE-_r.css",
       "assets/onboarding-_prW6Th2.css",
       "assets/dashboard-CMKxcuwI.css",
-      "assets/info-pages-D2f5nnB8.css",
+      "assets/info-pages-CfoHfh3p.css",
       "assets/reminders-D9Yl55bO.css",
       "assets/assistance-jQOcTABd.css",
       "assets/admin-CFg4adx1.css",
