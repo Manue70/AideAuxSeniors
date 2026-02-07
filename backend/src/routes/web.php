@@ -94,24 +94,7 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
     Route::post('/dashboard/reminder/{id}', [DashboardController::class, 'markDone'])
         ->name('dashboard.markDone');
 
-    // Rappels
-    Route::get('/rappels', [ReminderController::class, 'index'])->name('rappels');
-    Route::post('/rappels', [ReminderController::class, 'store'])->name('rappels.store');
-    Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])->name('rappels.toggle');
-    Route::post('/rappels/clear-done', [ReminderController::class, 'clearDone'])->name('rappels.clearDone');
-
-    // Contacts
-    Route::resource('contacts', ContactController::class);
-
-    // Médicaments
-    Route::resource('medicaments', MedicationController::class)
-        ->only(['store','update','destroy']);
-    Route::post('/dashboard/medicaments/{medicament}/done', [MedicationController::class, 'markDone'])->name('medicaments.markDone');
-
-    //Hydratation
-    Route::get('/hydratation', [HydratationController::class, 'index'])->name('hydratation.index');
-    Route::post('/hydratation', [HydratationController::class, 'store'])->name('hydratation.store');
-
+    
 
     // Pages protégées supplémentaires
     Route::get('/assistance', fn() => view('pages.assistance'))->name('assistance');
@@ -133,6 +116,30 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
         return back()->with('success', 'Notifications mises à jour');
     })->name('notifications.update');
 
+});
+
+
+// Routes POST modales → hors onboarding
+Route::middleware('auth')->group(function () {
+
+    // Rappels
+    Route::post('/rappels', [ReminderController::class, 'store'])->name('rappels.store');
+    Route::post('/rappels/{id}/toggle', [ReminderController::class, 'toggle'])->name('rappels.toggle');
+    Route::post('/rappels/clear-done', [ReminderController::class, 'clearDone'])->name('rappels.clearDone');
+
+    // Médicaments
+    Route::post('/medicaments', [MedicationController::class, 'store'])->name('medicaments.store');
+    Route::put('/medicaments/{medicament}', [MedicationController::class, 'update'])->name('medicaments.update');
+    Route::delete('/medicaments/{medicament}', [MedicationController::class, 'destroy'])->name('medicaments.destroy');
+    Route::post('/dashboard/medicaments/{medicament}/done', [MedicationController::class, 'markDone'])->name('medicaments.markDone');
+
+    // Contacts
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+    Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
+    // Hydratation
+    Route::post('/hydratation', [HydratationController::class, 'store'])->name('hydratation.store');
 });
 
 /*
