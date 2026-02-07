@@ -156,9 +156,7 @@
 
 {{-- Scripts modales via Vite --}}
 @vite([
-    'resources/js/medicament-modal.js',
-    'resources/js/hydratation-modal.js',
-    'resources/js/reminder-modal.js'
+    'resources/js/app.js',
 ])
 @endsection
 
