@@ -107,6 +107,9 @@
                             <button type="submit" class="btn-primary">FAIT</button>
                         </form>
                         <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
+                        <button class="btn btn-success btn-open-hydration">
+                                Ajouter hydratation
+                        </button>
                     @endforeach
                 @endif
             @endforeach
@@ -141,5 +144,11 @@
 </div>
 
 @include('partials.modal-medicament')
+@include('partials.modal-hydration')
+@include('partials.modal-reminder')
+
+<script src="/js/hydration-modal.js"></script>
 <script src="/js/medicament-modal.js"></script>
+<script src="/js/reminder-modal.js"></script>
+
 
