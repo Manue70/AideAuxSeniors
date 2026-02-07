@@ -18,7 +18,7 @@
     
 
         <div class="onboarding-continue">
-            <a href="{{ route('onboarding.2') }}" class="btn btn-primary">
+            <a href="{{ route('onboarding.profile') }}" class="btn btn-primary">
              Continuer
             </a>
         </div>

@@ -4,7 +4,7 @@
 
 @section('content')
 
-@php $step = 4; @endphp
+@php $step = 5; @endphp
 @include('partials.progress')
 
 <div class="onboarding-content">

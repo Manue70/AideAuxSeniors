@@ -4,4 +4,5 @@
     <div class="progress-bar @if($step >= 3) active @endif"></div>
     <div class="progress-bar @if($step >= 4) active @endif"></div>
     <div class="progress-bar @if($step >= 5) active @endif"></div>
+    <div class="progress-bar @if($step >= 6) active @endif"></div>
 </div>

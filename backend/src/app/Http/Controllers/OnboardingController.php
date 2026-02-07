@@ -14,10 +14,11 @@ class OnboardingController extends Controller
 
     // Pages onboarding avec séquence
     public function page1() { return $this->checkCompletedAndRender('onboarding.page1', 1); }
-    public function page2() { return $this->checkCompletedAndRender('onboarding.page2', 2); }
-    public function page3() { return $this->checkCompletedAndRender('onboarding.page3', 3); }
-    public function page4() { return $this->checkCompletedAndRender('onboarding.page4', 4); }
-    public function page5() { return $this->checkCompletedAndRender('onboarding.page5', 5); }
+    public function profile() { return $this->checkCompletedAndRender('onboarding.profile', 2); }
+    public function page2() { return $this->checkCompletedAndRender('onboarding.page2', 3); }
+    public function page3() { return $this->checkCompletedAndRender('onboarding.page3', 4); }
+    public function page4() { return $this->checkCompletedAndRender('onboarding.page4', 5); }
+    public function page5() { return $this->checkCompletedAndRender('onboarding.page5', 6); }
 
     /**
      * Vérifie si l'onboarding est terminé et force la séquence
@@ -59,4 +60,26 @@ class OnboardingController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Votre onboarding est terminé !');
     }
+
+    public function storeProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'birthdate' => 'nullable|date',
+        ]);
+
+        $user = Auth::user();
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'birthdate' => $request->birthdate,
+        ]);
+
+        
+        return redirect()->route('onboarding.page2');
+    }
+
+
 }

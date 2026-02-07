@@ -22,5 +22,10 @@ class CheckOnboarding
         return $next($request);
     }
 
+    if (!$user->birthdate) {
+        return redirect()->route('onboarding.profile');
+    }
+
+
 
 }
