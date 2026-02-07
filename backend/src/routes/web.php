@@ -102,6 +102,8 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
     Route::get('/confidentialite', fn() => view('pages.confidentialite'))->name('confidentialite');
     Route::get('/info-legales', fn() => view('pages.info-legales'))->name('info-legales');
     Route::get('/cookies', fn() => view('pages.cookies'))->name('cookies');
+    Route::get('/rappels', fn() => view('pages.rappels'))->name('info-legales');
+
 
     // Profil
     Route::get('/profil', [ProfileController::class, 'edit'])->name('profile.edit');
