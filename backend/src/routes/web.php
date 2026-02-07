@@ -102,7 +102,7 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
     Route::get('/confidentialite', fn() => view('pages.confidentialite'))->name('confidentialite');
     Route::get('/info-legales', fn() => view('pages.info-legales'))->name('info-legales');
     Route::get('/cookies', fn() => view('pages.cookies'))->name('cookies');
-    Route::get('/rappels', fn() => view('pages.rappels'))->name('info-legales');
+    
 
 
     // Profil
@@ -117,6 +117,8 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
     Route::post('/notifications/update', function () {
         return back()->with('success', 'Notifications mises à jour');
     })->name('notifications.update');
+
+    Route::get('/rappels', [ReminderController::class, 'index'])->name('rappels');
 
 });
 
