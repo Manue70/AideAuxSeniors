@@ -108,6 +108,10 @@ Route::middleware(['auth','check.onboarding'])->group(function () {
         ->only(['store','update','destroy']);
     Route::post('/dashboard/medicaments/{medicament}/done', [MedicationController::class, 'markDone'])->name('medicaments.markDone');
 
+    //Hydratation
+    Route::get('/hydratation', [HydratationController::class, 'index'])->name('hydratation.index');
+    Route::post('/hydratation', [HydratationController::class, 'store'])->name('hydratation.store');
+
 
     // Pages protégées supplémentaires
     Route::get('/assistance', fn() => view('pages.assistance'))->name('assistance');

@@ -116,7 +116,7 @@
                 @endif
             @endforeach
 
-            <button class="btn btn-success btn-open-hydratation">
+            <button class="btn btn-success btn-open-hydration">
                 Ajouter un rappel hydratation
             </button>
         </div>

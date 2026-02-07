@@ -680,15 +680,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ====================
     // MODALE hydratation
     // ====================
-    document.querySelectorAll('.btn-open-hydratation').forEach(btn => {
+    document.querySelectorAll('.btn-open-hydration').forEach(btn => {
         btn.addEventListener('click', () => {
-            const modal = document.getElementById('modal-hydratation'); // <-- correspond à l'HTML
+            const modal = document.getElementById('modal-hydration'); // <-- correspond à l'HTML
             if(modal) modal.style.display = 'flex'; // <-- pour garder le flex centré
         });
     });
 
     // fermer la modale
-    document.querySelectorAll('#modal-hydratation .modal-close').forEach(span => {
+    document.querySelectorAll('#modal-hydration .modal-close').forEach(span => {
         span.addEventListener('click', () => {
             span.closest('.modal').style.display = 'none';
         });
@@ -696,7 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // fermer si clic en dehors
     window.addEventListener('click', e => {
-        const modal = document.getElementById('modal-hydratation');
+        const modal = document.getElementById('modal-hydration');
         if (e.target === modal) modal.style.display = 'none';
     });
 
