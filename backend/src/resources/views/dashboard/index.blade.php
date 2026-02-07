@@ -3,8 +3,7 @@
 @section('title', 'Dashboard SeniorAide')
 
 @section('content')
-<div class="dashboard-content {{ session('theme', 'clair') }}">
-
+<main class="dashboard-content {{ session('theme', 'clair') }}">
     @php
         $user = auth()->user();
         $prenom = $user ? ucfirst(explode(' ', $user->name)[0]) : 'invité';
@@ -35,9 +34,7 @@
         <!-- Carte Autres rappels -->
         <div class="card">
             <h3>Rappels du jour 
-                <span class="badge">
-                    {{ collect($otherRemindersGrouped)->sum(fn($group) => count($group)) }}
-                </span>
+                <span class="badge">{{ collect($otherRemindersGrouped)->sum(fn($group) => count($group)) }}</span>
             </h3>
 
             @php
@@ -51,19 +48,24 @@
                     <h4>{{ $moment }}</h4>
 
                     @foreach($otherRemindersGrouped[$moment] as $reminder)
-                        <p>{{ $reminder->heure }} – {{ $reminder->message }}</p>
+                        <p>{{ substr($reminder->heure,0,5) }} – {{ $reminder->message }}</p>
 
                         <div class="dashboard-card-buttons">
-                            <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST" style="display:inline-block; margin-right:10px;">
+                            <form action="{{ route('dashboard.markDone', $reminder->id) }}" method="POST" style="display:inline-block; margin-right:10px;">
                                 @csrf
                                 <input type="hidden" name="task" value="autre">
                                 <button type="submit" class="btn-primary">FAIT</button>
                             </form>
 
-                            <button class="btn-primary btn-open-reminder">
-                                VOIR
-                            </button>
+                            <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
 
+                            <button class="btn-primary btn-open-reminder"
+                                data-id="{{ $reminder->id }}"
+                                data-type="{{ $reminder->type }}"
+                                data-message="{{ $reminder->message }}"
+                                data-heure="{{ $reminder->heure }}">
+                                Modifier
+                            </button>
                         </div>
                     @endforeach
                 @endif
@@ -74,20 +76,21 @@
             @endunless
         </div>
 
-
         <!-- Carte Médicaments -->
         <div class="card">
             <h3>Médicaments <span class="badge">{{ $medicaments->count() }}</span></h3>
 
             @foreach($medicaments as $med)
-                <strong>{{ $med->nom }}</strong> – {{ $med->dosage }}
-                <button class="btn btn-primary btn-open-medicament"
-                    data-id="{{ $med->id }}"
-                    data-nom="{{ $med->nom }}"
-                    data-dosage="{{ $med->dosage }}"
-                    data-daily="{{ $med->is_daily }}">
-                    Modifier
-                </button>
+                <div style="margin-bottom:10px;">
+                    <strong>{{ $med->nom }}</strong> – {{ $med->dosage }}
+                    <button class="btn btn-primary btn-open-medicament"
+                        data-id="{{ $med->id }}"
+                        data-nom="{{ $med->nom }}"
+                        data-dosage="{{ $med->dosage }}"
+                        data-daily="{{ $med->is_daily }}">
+                        Modifier
+                    </button>
+                </div>
             @endforeach
 
             <button class="btn btn-success btn-open-medicament" data-id="">
@@ -100,22 +103,22 @@
             <h3>Hydratation <span class="badge">{{ collect($hydrationRemindersGrouped)->sum(fn($group) => count($group)) }}</span></h3>
 
             @foreach(['Matin','Midi','Soir'] as $moment)
-                @if(count($hydrationRemindersGrouped[$moment]) > 0)
+                @if(isset($hydrationRemindersGrouped[$moment]) && count($hydrationRemindersGrouped[$moment]) > 0)
                     <h4>{{ $moment }}</h4>
                     @foreach($hydrationRemindersGrouped[$moment] as $reminder)
-                        <p>{{ $reminder->heure }} – {{ $reminder->message }} – Prendre 6 verres d'eau</p>
-                        <form action="{{ route('dashboard.markDone',$reminder->id) }}" method="POST">
+                        <p>{{ substr($reminder->heure,0,5) }} – {{ $reminder->message }} – Prendre 6 verres d'eau</p>
+                        <form action="{{ route('dashboard.markDone', $reminder->id) }}" method="POST">
                             @csrf
                             <input type="hidden" name="task" value="hydration">
                             <button type="submit" class="btn-primary">FAIT</button>
                         </form>
-                        <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
-                        <button class="btn btn-success btn-open-hydratation">
-                                Ajouter hydratation
-                        </button>
                     @endforeach
                 @endif
             @endforeach
+
+            <button class="btn btn-success btn-open-hydratation">
+                Ajouter un rappel hydratation
+            </button>
         </div>
 
         <!-- Carte Contacts d'urgence -->
@@ -144,14 +147,20 @@
         </div>
 
     </div>
-</div>
+</main>
 
+{{-- Modales --}}
 @include('partials.modal-medicament')
 @include('partials.modal-hydratation')
 @include('partials.modal-reminder')
 
-<script src="/js/hydratation-modal.js"></script>
-<script src="/js/medicament-modal.js"></script>
-<script src="/js/reminder-modal.js"></script>
+{{-- Scripts modales via Vite --}}
+@vite([
+    'resources/js/medicament-modal.js',
+    'resources/js/hydratation-modal.js',
+    'resources/js/reminder-modal.js'
+])
+@endsection
+
 
 
