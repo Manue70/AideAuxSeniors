@@ -91,6 +91,6 @@
 
 @include('partials.modal-medicament')
 @include('partials.modal-reminder')
-
+@vite('resources/css/info-pages.css')
 @endsection
 

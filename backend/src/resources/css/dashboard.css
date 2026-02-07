@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 .dashboard-content {
+        width: 100%;
     padding: 30px 20px;
     text-align: center;
     font-size: 1.3rem;
@@ -94,13 +95,3 @@ body.bleu .dashboard-content {
     margin-left: 8px;
 }
 
-body {
-    min-height: 100vh !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-main {
-    flex: 1 !important;
-    display: block !important;
-}

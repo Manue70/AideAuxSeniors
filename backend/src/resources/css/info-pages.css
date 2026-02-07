@@ -20,6 +20,11 @@
     text-align: center;
 }
 
+/* contenu dashboard */
+.dashboard-content {
+    flex: 1;
+}
+
 
 /* TITRE */
 .info-title {
