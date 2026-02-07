@@ -110,7 +110,7 @@
                             <button type="submit" class="btn-primary">FAIT</button>
                         </form>
                         <a href="{{ route('rappels') }}" class="btn-primary">VOIR</a>
-                        <button class="btn btn-success btn-open-hydration">
+                        <button class="btn btn-success btn-open-hydratation">
                                 Ajouter hydratation
                         </button>
                     @endforeach

@@ -684,10 +684,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     (() => {
 
-        const modal = document.getElementById('modal-hydration');
+        const modal = document.getElementById('modal-hydratation');
         if (!modal) return;
 
-        const openBtn = document.querySelector('.btn-open-hydration');
+        const openBtn = document.querySelector('.btn-open-hydratation');
         const closeBtn = modal.querySelector('.modal-close');
 
         openBtn?.addEventListener('click', () => {
