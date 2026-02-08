@@ -81,12 +81,12 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-iKQMLCpV.js",
+    "file": "assets/app-BQU5CgRp.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-Bz3JV6aE.css",
+      "assets/app-CNuNfkde.css",
       "assets/app-DE1fabju.css",
       "assets/login-page-CzHTE-_r.css",
       "assets/onboarding-_prW6Th2.css",

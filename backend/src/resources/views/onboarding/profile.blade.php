@@ -23,17 +23,18 @@
 
         <div class="form-group">
             <label for="name">Nom complet</label>
+             <div class="form-group">
+                <label for="name">Nom complet</label>
+                <span class="input-icon">👤</span>
+                <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value="{{ old('name', auth()->user()->name) }}"
+                    required
+                    @error('name') class="has-error" @enderror
+                >
 
-            <div class="input-wrapper">
-                    <span class="input-icon">👤</span>
-                    <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value="{{ old('email', auth()->user()->email) }}"
-                        required
-                    >
-            </div>
              
             
             
@@ -102,6 +103,7 @@
             <label>Date de naissance</label>
 
             <div class="date-wrapper">
+                <span class="input-icon">🎂</span>
                 <select name="birth_day" required>
                     <option value="">Jour</option>
                     @for ($i = 1; $i <= 31; $i++)

@@ -3,118 +3,101 @@
 /* =============================== */
 
 .onboarding-profile {
+    min-height: calc(100vh - 140px);
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 20px;
+    justify-content: center;
+    padding: 40px 20px;
 }
 
-.onboarding-profile input:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
-}
-
-
-/* Carte formulaire */
-.onboarding-profile .profile-form {
-    width: 100%;
-    max-width: 520px;
-    padding: 30px;
-    border-radius: 16px;
+/* Container large */
+.onboarding-profile .onboarding-content {
+    width: 75%;
+    max-width: 1000px;
     background: rgba(255, 255, 255, 0.95);
+    border-radius: 18px;
+    padding: 40px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* Header */
 .onboarding-profile .onboarding-header {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .onboarding-profile h1 {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
 .onboarding-profile p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #555;
 }
 
 /* Champs */
 .onboarding-profile .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 22px;
+    margin-bottom: 26px;
 }
 
 .onboarding-profile label {
-    font-size: 1rem;
-    margin-bottom: 6px;
-    font-weight: 600;
-}
-
-.onboarding-profile input {
-    font-size: 1.1rem;
-    padding: 14px;
-    border-radius: 10px;
-    border: 2px solid #ccc;
-    outline: none;
-    transition: border-color 0.2s ease;
-}
-
-/* Focus rassurant */
-.onboarding-profile input:focus {
-    border-color: #4CAF50;
-}
-
-/* Bouton */
-.onboarding-profile .form-actions {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.onboarding-profile .btn-large {
-    font-size: 1.2rem;
-    padding: 14px 40px;
-    border-radius: 30px;
-}
-
-.onboarding-content {
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 25px;
-}
-
-.form-group {
-    margin-bottom: 22px;
-}
-
-.form-group label {
     display: block;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
+.onboarding-profile input,
+.onboarding-profile select {
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid #ccc;
+    outline: none;
+}
 
+.onboarding-profile input:focus,
+.onboarding-profile select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
+}
+
+/* Date */
+.date-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+/* Bouton */
+.form-actions {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.btn-large {
+    font-size: 1.3rem;
+    padding: 16px 50px;
+    border-radius: 40px;
+}
+
+/* Erreurs douces */
 .form-error {
+    margin-top: 8px;
+    padding: 10px 14px;
+    background-color: #fff3cd;
+    color: #856404;
+    border-radius: 10px;
+    font-size: 1rem;
     display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 6px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    background-color: #fff3cd;   /* jaune doux */
-    color: #856404;              /* texte chaud */
+    gap: 8px;
 }
 
 .error-icon {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
-/* Bordure champ en erreur */
 .has-error {
     border-color: #f0ad4e !important;
     background-color: #fffdf5;
@@ -124,35 +107,29 @@
 /* THEMES                          */
 /* =============================== */
 
-/* Thème clair */
 body.clair .onboarding-profile {
     background-color: rgba(136, 231, 136, 0.35);
 }
 
-/* Thème bleu */
 body.bleu .onboarding-profile {
     background-color: rgba(0, 128, 255, 0.25);
 }
 
-
-@media (max-width: 600px) {
-    .onboarding-content {
-        padding: 15px;
+/* Mobile */
+@media (max-width: 768px) {
+    .onboarding-profile .onboarding-content {
+        width: 95%;
+        padding: 25px;
     }
 
     .date-wrapper {
         grid-template-columns: 1fr;
     }
 
-    .form-group label {
-        font-size: 1.2rem;
-    }
-
-    .input-wrapper input,
-    .date-wrapper select {
+    .onboarding-profile label {
         font-size: 1.3rem;
-        padding: 16px;
     }
 }
+
 
 
