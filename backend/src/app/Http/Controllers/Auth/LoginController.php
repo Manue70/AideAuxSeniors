@@ -40,7 +40,7 @@ class LoginController extends Controller
 
             // Si onboarding pas terminé → redirige vers la première page de l’onboarding
             if (!$user->onboarding_completed) {
-                return redirect()->route('onboarding.1');
+                return redirect()->route('onboarding.page1');
             }
 
             // Sinon → dashboard
