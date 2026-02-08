@@ -39,6 +39,6 @@ class RegisterController extends Controller
         // Connexion automatique
         Auth::login($user);
 
-        return redirect()->route('onboarding.1');
+        return redirect()->route('onboarding.page1');
     }
 }
