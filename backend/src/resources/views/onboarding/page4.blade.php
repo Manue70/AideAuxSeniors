@@ -24,13 +24,13 @@
 
 
         <!-- Bouton Non : fait comme Continuer -->
-        <a href="{{ route('onboarding.3') }}" class="btn btn-secondary">
+        <a href="{{ route('onboarding.page5') }}" class="btn btn-secondary">
             Non
         </a>
     </div>
 
     <div class="onboarding-continue">
-        <a href="{{ route('onboarding.5') }}" class="btn btn-primary">
+        <a href="{{ route('onboarding.page5') }}" class="btn btn-primary">
             Continuer
         </a>
     </div>

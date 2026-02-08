@@ -24,7 +24,7 @@
 
 
         <!-- Bouton Non : fait comme Continuer -->
-        <a href="{{ route('onboarding.3') }}" class="btn btn-secondary">
+        <a href="{{ route('onboarding.page3') }}" class="btn btn-secondary">
             Non
         </a>
     </div>

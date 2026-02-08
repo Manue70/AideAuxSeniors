@@ -21,7 +21,7 @@
         <button class="btn btn-primary btn-open-medicament">Oui</button>
 
         <!-- Bouton Non : redirige vers page 4 -->
-        <a href="{{ route('onboarding.4') }}" class="btn btn-secondary">Non</a>
+        <a href="{{ route('onboarding.page4') }}" class="btn btn-secondary">Non</a>
     </div>
       
     <div class="onboarding-continue">
