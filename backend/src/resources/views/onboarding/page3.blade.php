@@ -25,7 +25,7 @@
     </div>
       
     <div class="onboarding-continue">
-        <a href="{{ route('onboarding.4') }}" class="btn btn-primary">
+        <a href="{{ route('onboarding.page4') }}" class="btn btn-primary">
             Continuer
         </a>
     </div>
