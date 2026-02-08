@@ -101,9 +101,9 @@
 
         <div class="form-group">
             <label>Date de naissance</label>
+            <span class="input-icon">🎂</span>
 
             <div class="date-wrapper">
-                <span class="input-icon">🎂</span>
                 <select name="birth_day" required>
                     <option value="">Jour</option>
                     @for ($i = 1; $i <= 31; $i++)

@@ -64,12 +64,12 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->prefix('onboarding')->group(function () {
-    Route::get('/1', [OnboardingController::class, 'page1'])->name('onboarding.1');
+    Route::get('/1', [OnboardingController::class, 'page1'])->name('onboarding.page1');
     Route::get('/profile', [OnboardingController::class, 'profile'])->name('onboarding.profile');        
-    Route::get('/2', [OnboardingController::class, 'page2'])->name('onboarding.2');
-    Route::get('/3', [OnboardingController::class, 'page3'])->name('onboarding.3');
-    Route::get('/4', [OnboardingController::class, 'page4'])->name('onboarding.4');
-    Route::get('/5', [OnboardingController::class, 'page5'])->name('onboarding.5');
+    Route::get('/2', [OnboardingController::class, 'page2'])->name('onboarding.page2');
+    Route::get('/3', [OnboardingController::class, 'page3'])->name('onboarding.page3');
+    Route::get('/4', [OnboardingController::class, 'page4'])->name('onboarding.page4');
+    Route::get('/5', [OnboardingController::class, 'page5'])->name('onboarding.page5');
 
     Route::middleware('auth')->post('/onboarding/profile', [OnboardingController::class, 'storeProfile'])
     ->name('onboarding.profile.store');
