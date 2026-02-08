@@ -12,27 +12,36 @@ class CheckOnboarding
     {
         $user = Auth::user();
 
-        // Si l'utilisateur n'est pas connecté → laisse passer
+        // Pas connecté → laisser passer
         if (!$user) {
             return $next($request);
         }
 
-        // Autorise toutes les routes onboarding et logout pour éviter la boucle
-        if ($request->is('onboarding*') || $request->is('logout')) {
+        // Routes à exclure pour éviter les boucles
+        $excludedRoutes = [
+            'logout',
+            'onboarding.1',
+            'onboarding.profile',
+            'onboarding.complete'
+        ];
+
+        // Laisser passer si la route actuelle est dans la liste
+        if (in_array($request->route()->getName(), $excludedRoutes)) {
             return $next($request);
         }
 
-        // Si onboarding pas terminé → redirige vers la page 1
-        if (!$user->onboarding_completed) {
-            return redirect()->route('onboarding.1')
-                ->with('warning', 'Vous devez terminer l’onboarding pour accéder à cette page.');
+        // Si onboarding complet → laisser passer
+        if ($user->onboarding_completed) {
+            return $next($request);
         }
 
-        // Vérifie si profile incomplet → redirige vers profile
+        // Si profile incomplet → rediriger vers profile
         if (!$user->name || !$user->email || !$user->birthdate) {
             return redirect()->route('onboarding.profile');
         }
 
-        return $next($request);
+        // Sinon, rediriger vers la première page du onboarding
+        return redirect()->route('onboarding.1')
+            ->with('warning', 'Vous devez terminer l’onboarding pour accéder à cette page.');
     }
 }
